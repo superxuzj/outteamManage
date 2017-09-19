@@ -23,6 +23,7 @@ public class IndexController {
 		System.out.println(page.getTotal());
 		model.addAttribute("page", page);
 		model.addAttribute("hello", "sdfds");
+		System.out.println("1");
 		return "hello";
 	}
 }
