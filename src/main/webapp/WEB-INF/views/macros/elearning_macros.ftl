@@ -5,5 +5,5 @@
 
 <!--===========================For static start============================================== -->
 
-<#macro s>outteamstatic</#macro>
+<#macro s>/outteamstatic</#macro>
 

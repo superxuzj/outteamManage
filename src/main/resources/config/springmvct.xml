@@ -25,10 +25,17 @@
 
 	<!-- 扩充注解驱动，可以将请求参数绑定到控制器参数 url查询参数的某个变量 可以直接映射到Controller方法的输入参数 -->
 	<mvc:annotation-driven />
+	
+	<!-- Freemarker -->
+	<bean id="blockDirective" class="com.boliangshenghe.outteam.common.freemarker.BlockDirective"/>
+	<bean id="extendsDirective" class="com.boliangshenghe.outteam.common.freemarker.ExtendsDirective"/>
+	<bean id="overrideDirective" class="com.boliangshenghe.outteam.common.freemarker.OverrideDirective"/>
+	<bean id="superDirective" class="com.boliangshenghe.outteam.common.freemarker.SuperDirective"/>
+	
   <!-- 配置ViewResolver。 可以用多个ViewResolver 使用order属性排序 InternalResourceViewResolver放在最后 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="viewClass" value="com.boliangshenghe.outteam.common.freemarker.view.HTMLFreeMarkerView" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".ftl" />
 		<property name="requestContextAttribute" value="rc"></property>
@@ -56,6 +63,15 @@
 				
 				<prop key="auto_import">/macros/elearning_macros.ftl as ps</prop>
 			</props>
+		</property>
+		 <property name="freemarkerVariables">
+			<map>
+				<entry key="extends" value-ref="extendsDirective"></entry>
+                <entry key="override" value-ref="overrideDirective"></entry>
+                <entry key="block" value-ref="blockDirective"></entry>
+                <entry key="super" value-ref="superDirective"></entry>
+			</map>
+			
 		</property>
 	</bean>
 

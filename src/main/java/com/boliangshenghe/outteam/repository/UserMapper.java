@@ -2,8 +2,10 @@ package com.boliangshenghe.outteam.repository;
 
 import java.util.List;
 
-import com.boliangshenghe.outteam.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.boliangshenghe.outteam.entity.User;
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

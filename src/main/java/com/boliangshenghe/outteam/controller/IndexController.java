@@ -15,6 +15,10 @@ public class IndexController {
 	
 	@Autowired
 	public UserService userService;
+	@RequestMapping("/")
+	public String index(){
+		return "index";
+	}
 	
 	@RequestMapping("/page")
 	public String hello(User user,Model model,@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
