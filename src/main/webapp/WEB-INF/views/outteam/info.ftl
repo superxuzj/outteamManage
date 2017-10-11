@@ -19,10 +19,10 @@
 			您的位置：
 			<li><a href="/">首页</a>
 			</li>
-			<li><i class="fa fa-laptop"></i>出队管理</li>
-			<li><i class="fa fa-laptop"></i>出队详情</li>
-			<!-- <li><i class="fa fa-laptop"></i>Dashboard</li>
-						<li><i class="fa fa-laptop"></i>Dashb省道oard</li> -->
+			<li>出队管理</li>
+			<li>出队详情</li>
+			<!-- <li>Dashboard</li>
+						<li>Dashb省道oard</li> -->
 		</ol>
 	</div>
 </div>

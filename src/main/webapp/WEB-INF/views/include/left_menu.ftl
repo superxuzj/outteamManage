@@ -20,7 +20,7 @@
                           <span>出队管理</span>
                       </a>
                   </li>
-                  <li class="active">
+                  <li class="active" >
                       <a class="" href="/gov">
                           <i class="icon_house_alt"></i>
                           <span>单位管理</span>
@@ -59,8 +59,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">我的信息</a></li>                          
-                          <li><a class="" href="form_validation.html">我的出队</a></li>
+                          <li><a class="" href="/person">我的信息</a></li>                          
+                          <li><a class="" href="/personteam">我的出队</a></li>
                       </ul>
                   </li>  
                   
