@@ -81,7 +81,7 @@
     <script src="<@ps.s/>/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="<@ps.s/>/js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="<@ps.s/>/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="<@ps.s/>/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="<@ps.s/>/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="<@ps.s/>/js/calendar-custom.js"></script>
@@ -105,6 +105,7 @@
 	<script src="<@ps.s/>/js/sparklines.js"></script>	
 	<script src="<@ps.s/>/js/charts.js"></script>
 	<script src="<@ps.s/>/js/jquery.slimscroll.min.js"></script>
+	<script src="<@ps.s/>/layer/layer.js"></script>
   <script>
 
       //knob

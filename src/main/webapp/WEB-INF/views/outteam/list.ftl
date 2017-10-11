@@ -4,6 +4,8 @@
 <style>
 .form-group{
 border-bottom:0px !important;
+padding-bottom:1px !important;
+margin-bottom:1px !important;
 }
 </style>
 <div class="row">

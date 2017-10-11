@@ -5,9 +5,10 @@
 }
 .personpanel{
 	margin-left:60px;
+	margin-right:-20px;
 }
-.col-13lable{
-
+.aleft{
+	margin-left:750px;
 }
 </style>
  </@override> <@override name="body">
@@ -95,25 +96,25 @@
                            <input type="text" class="form-control" id="mobile" placeholder=" ">
                        </div>
                    </div>
-                   <div class="form-group form-group col-lg-6">
+                   <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">到达时间</label>
                        <div class="col-lg-9">
                            <input type="text" class="form-control" id="mobile" placeholder=" ">
                        </div>
                    </div>
-                   <div class="form-group form-group col-lg-6">
+                   <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">总结</label>
                        <div class="col-lg-9">
                           <input type="text" class="form-control" id="mobile" placeholder=" ">
                        </div>
                    </div>
                    
-                   
                    <div class="form-group">
                        <div class="col-sm-11">
                       <section class="panel personpanel">
                           <header class="panel-heading">
-                              Basic Table
+                                                                   出队队员列表 
+                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="choosePerson()" title="">添加队员</a>
                           </header>
                           <table class="table">
                               <thead>
@@ -149,9 +150,8 @@
                   </div>
                    </div>
                    
-                   
                    <div class="form-group">
-                       <div class="col-lg-offset-2 col-lg-9">
+                       <div class="col-lg-offset-5 col-lg-7">
                            <button type="submit" class="btn btn-primary">Save</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
@@ -162,5 +162,18 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+function choosePerson(){
+	
+   	 layer.open({
+			type: 2,
+		    area: ['750px', '561px'],
+		    fix: false, //不固定
+		    title: "队员列表",
+		    maxmin: true,
+		    content: '/outteam/personlist'
+		}); 
+}
+</script>
 
 </@override> <@extends name="/base/base.ftl"/>
