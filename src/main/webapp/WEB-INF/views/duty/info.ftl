@@ -84,7 +84,7 @@
                               <tr>
                                   <td>1</td>
                                   <td>地震局</td>
-                                  <td>北京</td>
+                                  <td>天津</td>
                                   <td>部门</td>
                               </tr>
                               </tbody>
