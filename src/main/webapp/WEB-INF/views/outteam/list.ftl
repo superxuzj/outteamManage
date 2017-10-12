@@ -57,7 +57,9 @@ margin-bottom:1px !important;
                       </section>
 
                   </div>
-              
+             	 <div class="col-lg-12">
+					<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
+				</div>
                   <div class="col-lg-12">
                       <section class="panel">
                           <table class="table table-striped table-advance table-hover">
@@ -66,6 +68,7 @@ margin-bottom:1px !important;
                                  <th>eqinfo_id</th>
                                  <th>地震名称</th>
                                  <th>单位名称</th>
+                                 <th>是否受灾省局</th>
                                  <th>出队类型</th>
                                  <th>人数</th>
                                  <th>航班</th>
@@ -77,7 +80,9 @@ margin-bottom:1px !important;
                                  <td>Angeline Mcclain</td>
                                  <td>2004-07-06</td>
                                  <td>dale@chief.info</td>
+                                 <td>否</td>
                                  <td>Rosser</td>
+                                 
                                  <td>176-026-5992</td>
                                  <td>Rosser</td>
                                  <td>176-026-5992</td>
@@ -100,6 +105,7 @@ margin-bottom:1px !important;
                                  <td>Sung Carlson</td>
                                  <td>2011-01-10</td>
                                  <td>ione.gisela@high.org</td>
+                                 <td>否</td>
                                  <td>Robert Lee</td>
                                  <td>724-639-4784</td>
                                  <td>Rosser</td>
@@ -123,6 +129,7 @@ margin-bottom:1px !important;
                                  <td>Bryon Osborne</td>
                                  <td>2006-10-29</td>
                                  <td>sol.raleigh@language.edu</td>
+                                 <td>否</td>
                                  <td>York</td>
                                  <td>180-456-0056</td>
                                  <td>Rosser</td>
@@ -146,6 +153,7 @@ margin-bottom:1px !important;
                                  <td>Dalia Marquez</td>
                                  <td>2011-12-15</td>
                                  <td>angeline.frieda@thick.com</td>
+                                 <td>否</td>
                                  <td>Alton</td>
                                  <td>690-601-1922</td>
                                  <td>Rosser</td>
@@ -169,6 +177,7 @@ margin-bottom:1px !important;
                                  <td>Selina Fitzgerald</td>
                                  <td>2003-01-06</td>
                                  <td>moshe.mikel@parcelpart.info</td>
+                                 <td>否</td>
                                  <td>Waelder</td>
                                  <td>922-810-0915</td>
                                  <td>Rosser</td>

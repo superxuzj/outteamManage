@@ -20,6 +20,14 @@
                           <span>出队管理</span>
                       </a>
                   </li>
+                  
+                  <li>
+                      <a class="" href="/leave">
+                          <i class="icon_genius"></i>
+                          <span>撤离管理</span>
+                      </a>
+                  </li>
+                  
                   <li class="active" >
                       <a class="" href="/gov">
                           <i class="icon_house_alt"></i>
@@ -34,9 +42,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">预案管理</a></li>
-                          <li><a class="" href="form_component.html">轮值管理 </a></li> 
-                          <li><a class="" href="form_validation.html">响应等级</a></li>
+                          <li><a class="" href="/plan">预案管理</a></li>
+                          <li><a class="" href="/duty">轮值管理 </a></li> 
+                          <li><a class="" href="/respond">响应等级</a></li>
                       </ul>
                   </li>
                   

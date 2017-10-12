@@ -50,7 +50,9 @@
 		</section>
 
 	</div>
-
+	<div class="col-lg-12">
+		<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
+	</div>
 	<div class="col-lg-12">
 		<section class="panel">
 			<table class="table table-striped table-advance table-hover">

@@ -152,7 +152,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="submit" class="btn btn-primary">Save</button>
+                           <button type="submit" class="btn btn-primary">审批</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
                    </div>
