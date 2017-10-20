@@ -24,6 +24,28 @@
 	</div>
 </div>
 <div class="row">
+<div class="col-lg-12">
+		<section class="panel">
+			<div class="panel-body">
+				<form class="form-horizontal" action="/user/uploadword" role="form" enctype="multipart/form-data" method="post" >
+					<div class="form-group col-lg-4">
+						<label for="exampleInputFile"></label>
+						<div class="col-lg-9">
+								<div class="input-append">  
+                                      <input type="file" name="file" id="exampleInputFile">
+								</div> 
+						</div>
+					</div>
+					<div class="form-group col-lg-3">
+						<div class="col-lg-offset-2 col-lg-10">
+							 <input type="submit" class="btn btn-primary submittijioa" value="提交">
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+
+	</div>
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">

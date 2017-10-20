@@ -4,40 +4,34 @@
               <ul class="sidebar-menu">  
              	 <li>
                       <a class="" href="/">
-                          <i class="social_deviantart"></i>
                           <span>首页</span>
                       </a>
                   </li>              
                   <li>
                       <a class="" href="/earthquake">
-                          <i class="icon_desktop"></i>
                           <span>地震事件管理</span>
                       </a>
                   </li>
                   <li>
                       <a class="" href="/outteam">
-                          <i class="icon_genius"></i>
                           <span>出队管理</span>
                       </a>
                   </li>
                   
                   <li>
                       <a class="" href="/leave">
-                          <i class="icon_genius"></i>
                           <span>撤离管理</span>
                       </a>
                   </li>
                   
                   <li class="active" >
                       <a class="" href="/gov">
-                          <i class="icon_house_alt"></i>
                           <span>单位管理</span>
                       </a>
                   </li>
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
-                          <i class="social_dribbble_square"></i>
                           <span>预案管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
@@ -50,7 +44,6 @@
                   
 				  <li class="sub-menu">
                       <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
                           <span>用户管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
@@ -62,7 +55,6 @@
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
-                          <i class="social_share_square"></i>
                           <span>个人出队</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
@@ -74,7 +66,6 @@
                   
                    <li>
                       <a class="" href="index.html">
-                          <i class="icon_piechart"></i>
                           <span>统计分析</span>
                       </a>
                   </li>

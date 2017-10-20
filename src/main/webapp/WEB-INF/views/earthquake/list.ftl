@@ -58,32 +58,36 @@ margin-bottom:1px !important;
 
                   </div>
               <div class="col-lg-12">
-					<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
+					<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
 				</div>
                   <div class="col-lg-12">
                       <section class="panel">
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr>
-                                 <th>eqinfo_id</th>
+                                 <th>event_id</th>
                                  <th>名称</th>
-                                 <th>地点</th>
+                                 <th>区域</th>
+                                 <th>省份</th>
                                  <th>位置</th>
-                                 <th>等级</th>
+                                 <th>震级</th>
                                  <th>日期</th>
                                  <th>响应等级</th>
                                  <th>状态</th>
                                  <th>操作</th>
                               </tr>
+                              
+                              <#list page.list as earthquake>
                               <tr>
-                                 <td>Angeline Mcclain</td>
-                                 <td>2004-07-06</td>
-                                 <td>dale@chief.info</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
+                                 <td>${earthquake.eventid }</td>
+                                 <td>${earthquake.eqname }</td>
+                                 <td>${earthquake.area }</td>
+                                 <td>${earthquake.province }</td>
+                                 <td>${earthquake.location }</td>
+                                 <td>${earthquake.magnitude }</td>
+                                 <td>${earthquake.eqdate }</td>
+                                 <td>${earthquake.responseid }</td>
+                                 <td>${earthquake.state }</td>
                                  <td>
                                   <div class="btn-group">
                                       <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
@@ -98,98 +102,7 @@ margin-bottom:1px !important;
                                   </div>
                                   </td>
                               </tr>
-                              <tr>
-                                 <td>Sung Carlson</td>
-                                 <td>2011-01-10</td>
-                                 <td>ione.gisela@high.org</td>
-                                 <td>Robert Lee</td>
-                                 <td>724-639-4784</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Bryon Osborne</td>
-                                 <td>2006-10-29</td>
-                                 <td>sol.raleigh@language.edu</td>
-                                 <td>York</td>
-                                 <td>180-456-0056</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Dalia Marquez</td>
-                                 <td>2011-12-15</td>
-                                 <td>angeline.frieda@thick.com</td>
-                                 <td>Alton</td>
-                                 <td>690-601-1922</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Selina Fitzgerald</td>
-                                 <td>2003-01-06</td>
-                                 <td>moshe.mikel@parcelpart.info</td>
-                                 <td>Waelder</td>
-                                 <td>922-810-0915</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
+                             </#list>
                            </tbody>
                            		
                         </table>
@@ -198,5 +111,9 @@ margin-bottom:1px !important;
                   </div>
               </div>
 
-
+<script type="text/javascript">
+	function add(){
+		window.location.href = "/earthquake/goadd";
+	}
+</script>
 </@override> <@extends name="/base/base.ftl"/>

@@ -2,10 +2,8 @@ package com.boliangshenghe.outteam.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.boliangshenghe.outteam.entity.User;
-@Mapper
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -20,7 +18,4 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     List<User> selectUserList(User record);
-    
-    Integer selectUserListCount(User record);
-    
 }

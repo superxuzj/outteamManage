@@ -5,25 +5,28 @@ import java.util.Date;
 public class User {
     private Integer id;
 
+    private Integer roleid;
+
     private String name;
+
+    private String username;
 
     private String phone;
 
     private String password;
 
-    private String department;
+    private String sex;
 
-    private String type;
+    private String idcard;
 
-    private Integer operatorId;
+    private Integer cid;
 
-    private String operatorName;
+    private String company;
 
-    private Date operatorTime;
+    private String profession;
 
-    private Integer start;
-    
-    private Integer limit;
+    private Date createtime;
+
     public Integer getId() {
         return id;
     }
@@ -32,12 +35,28 @@ public class User {
         this.id = id;
     }
 
+    public Integer getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(Integer roleid) {
+        this.roleid = roleid;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPhone() {
@@ -56,59 +75,51 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getDepartment() {
-        return department;
+    public String getSex() {
+        return sex;
     }
 
-    public void setDepartment(String department) {
-        this.department = department == null ? null : department.trim();
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public String getType() {
-        return type;
+    public String getIdcard() {
+        return idcard;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setIdcard(String idcard) {
+        this.idcard = idcard == null ? null : idcard.trim();
     }
 
-    public Integer getOperatorId() {
-        return operatorId;
+    public Integer getCid() {
+        return cid;
     }
 
-    public void setOperatorId(Integer operatorId) {
-        this.operatorId = operatorId;
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 
-    public String getOperatorName() {
-        return operatorName;
+    public String getCompany() {
+        return company;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName == null ? null : operatorName.trim();
+    public void setCompany(String company) {
+        this.company = company == null ? null : company.trim();
     }
 
-    public Date getOperatorTime() {
-        return operatorTime;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setOperatorTime(Date operatorTime) {
-        this.operatorTime = operatorTime;
+    public void setProfession(String profession) {
+        this.profession = profession == null ? null : profession.trim();
     }
 
-	public Integer getStart() {
-		return start;
-	}
+    public Date getCreatetime() {
+        return createtime;
+    }
 
-	public void setStart(Integer start) {
-		this.start = start;
-	}
-
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
 }

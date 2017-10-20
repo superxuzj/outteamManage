@@ -1,8 +1,6 @@
 package com.boliangshenghe.outteam.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +20,6 @@ public class UserService {
         return userMapper.insertSelective(user);
     }
 	
-    public Integer selectUserListCount(User record){
-    	return userMapper.selectUserListCount(record);
-    }
-    
     public User selectByPrimaryKey(Integer id){
     	return userMapper.selectByPrimaryKey(id);
     }
@@ -39,7 +33,6 @@ public class UserService {
     }
     
     public PageBean<User> getUserByPage(User record,Integer pageNo,Integer size) {
-        
         PageHelper.startPage(pageNo,10);
         List<User> list = this.userMapper.selectUserList(record);
         return new PageBean<User>(list);

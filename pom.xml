@@ -212,6 +212,11 @@
 	        <version>3.7.5</version>
     	</dependency>
 		
+		<dependency>
+		   <groupId>org.apache.poi</groupId>
+		   <artifactId>poi-scratchpad</artifactId>
+		   <version>3.2-FINAL</version>
+		</dependency>
   </dependencies>
   <build>
     <finalName>outteamManage</finalName>

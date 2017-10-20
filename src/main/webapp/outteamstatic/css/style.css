@@ -489,7 +489,7 @@ ul.sidebar-menu li.active a i {
 /*main content*/
 
 #main-content {
-    margin-left: 180px;
+    margin-left: 173px;
 }
 
 .header, .footer {
@@ -523,8 +523,8 @@ ul.sidebar-menu li.active a i {
 }
 .wrapper {
     display: inline-block;
-    margin-top: 68px;
-    padding: 12px;
+    margin-top: 63px;
+    padding: 15px;
     width: 100%;
 }
 

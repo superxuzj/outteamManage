@@ -3,17 +3,21 @@
 <mapper namespace="com.boliangshenghe.outteam.repository.UserMapper" >
   <resultMap id="BaseResultMap" type="com.boliangshenghe.outteam.entity.User" >
     <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
-    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
-    <result column="TYPE" property="type" jdbcType="VARCHAR" />
-    <result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
-    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
-    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="roleid" property="roleid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, NAME, PHONE, PASSWORD, DEPARTMENT, TYPE, OPERATOR_ID, OPERATOR_NAME, OPERATOR_TIME
+    ID, roleid, name, username, phone, password, sex, idcard, cid, company, profession, 
+    createtime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,14 +30,14 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.User" >
-    insert into t_user (ID, NAME, PHONE, 
-      PASSWORD, DEPARTMENT, TYPE, 
-      OPERATOR_ID, OPERATOR_NAME, OPERATOR_TIME
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{operatorId,jdbcType=INTEGER}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}
-      )
+    insert into t_user (ID, roleid, name, 
+      username, phone, password, 
+      sex, idcard, cid, company, 
+      profession, createtime)
+    values (#{id,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.User" >
     insert into t_user
@@ -41,37 +45,52 @@
       <if test="id != null" >
         ID,
       </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
       <if test="name != null" >
-        NAME,
+        name,
+      </if>
+      <if test="username != null" >
+        username,
       </if>
       <if test="phone != null" >
-        PHONE,
+        phone,
       </if>
       <if test="password != null" >
-        PASSWORD,
+        password,
       </if>
-      <if test="department != null" >
-        DEPARTMENT,
+      <if test="sex != null" >
+        sex,
       </if>
-      <if test="type != null" >
-        TYPE,
+      <if test="idcard != null" >
+        idcard,
       </if>
-      <if test="operatorId != null" >
-        OPERATOR_ID,
+      <if test="cid != null" >
+        cid,
       </if>
-      <if test="operatorName != null" >
-        OPERATOR_NAME,
+      <if test="company != null" >
+        company,
       </if>
-      <if test="operatorTime != null" >
-        OPERATOR_TIME,
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="createtime != null" >
+        createtime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -79,67 +98,83 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="department != null" >
-        #{department,jdbcType=VARCHAR},
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="operatorId != null" >
-        #{operatorId,jdbcType=INTEGER},
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
       </if>
-      <if test="operatorName != null" >
-        #{operatorName,jdbcType=VARCHAR},
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
       </if>
-      <if test="operatorTime != null" >
-        #{operatorTime,jdbcType=TIMESTAMP},
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.boliangshenghe.outteam.entity.User" >
     update t_user
     <set >
+      <if test="roleid != null" >
+        roleid = #{roleid,jdbcType=INTEGER},
+      </if>
       <if test="name != null" >
-        NAME = #{name,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
-        PHONE = #{phone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        PASSWORD = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="department != null" >
-        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
-        TYPE = #{type,jdbcType=VARCHAR},
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="operatorId != null" >
-        OPERATOR_ID = #{operatorId,jdbcType=INTEGER},
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
       </if>
-      <if test="operatorName != null" >
-        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
       </if>
-      <if test="operatorTime != null" >
-        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.outteam.entity.User" >
     update t_user
-    set NAME = #{name,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      DEPARTMENT = #{department,jdbcType=VARCHAR},
-      TYPE = #{type,jdbcType=VARCHAR},
-      OPERATOR_ID = #{operatorId,jdbcType=INTEGER},
-      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
-      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    set roleid = #{roleid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="selectUserList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.User">
+  <!-- 新加   -->
+   <select id="selectUserList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.User">
    	    select 
     <include refid="Base_Column_List" />
     from t_user
@@ -147,34 +182,15 @@
         <if test="name != null">
             AND NAME like '%${name}%' 
         </if>
-        <if test="type != null">
-            AND TYPE = #{type,jdbcType=VARCHAR}
-        </if>
         <if test="phone != null">
             AND PHONE = #{phone,jdbcType=VARCHAR}
         </if>
         <if test="password != null">
             AND PASSWORD = #{password,jdbcType=VARCHAR}
         </if>
-        AND TYPE !='99'
     </where>
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
-   	</select>
-   	<select id="selectUserListCount" resultType="int" parameterType="com.boliangshenghe.outteam.entity.User">
-   	    select 
-    count(0)
-    from t_user
-    <where>
-         <if test="name != null">
-            AND NAME = #{name,jdbcType=VARCHAR}
-        </if>
-        <if test="phone != null">
-            AND PHONE = #{phone,jdbcType=VARCHAR}
-        </if>
-         AND TYPE !='99'
-    </where>
-   	    
    	</select>
 </mapper>
