@@ -209,4 +209,33 @@
       operatetime = #{operatetime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 新加   -->
+   <select id="selectOutteamList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_outteam
+    <where>
+        <if test="eqid != null">
+            AND eqid = #{eqid,jdbcType=INTEGER}
+        </if>
+    </where>
+   	    <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+   	</select>
+   	
+   	<!-- 新加   -->
+   <select id="selectOutteamCount" resultType="java.lang.Integer"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
+   	    select 
+    count(1)
+    from t_outteam
+    <where>
+        <if test="eqid != null">
+            AND eqid = #{eqid,jdbcType=INTEGER}
+        </if>
+    </where>
+   	</select>
+   	
 </mapper>
+

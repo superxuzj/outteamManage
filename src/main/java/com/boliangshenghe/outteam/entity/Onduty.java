@@ -5,6 +5,8 @@ import java.util.Date;
 public class Onduty {
     private Integer id;
 
+    private Integer yid;
+
     private String yearm;
 
     private Integer cid;
@@ -15,12 +17,41 @@ public class Onduty {
 
     private Date createtime;
 
+    private Integer start;
+    
+    private Integer limit;
+    
+    public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+   
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getYid() {
+        return yid;
+    }
+
+    public void setYid(Integer yid) {
+        this.yid = yid;
     }
 
     public String getYearm() {

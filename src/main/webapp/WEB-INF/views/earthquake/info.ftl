@@ -21,25 +21,37 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">ID</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
+                           <input type="text" class="form-control" name="id" value="${earthquake.id}"/>
                        </div>
                    </div>
-                   <div class="form-group">
+                  <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="eqname" value="${earthquake.eqname}"/>
                        </div>
                    </div>
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">地点省市</label>
+                       <label class="col-lg-2 control-label">地震唯一标识码</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="eventid" value="${earthquake.eventid}" />
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label class="col-lg-2 control-label">区域</label>
+                       <div class="col-lg-6">
+                           <input type="text" class="form-control" name="area" value="${earthquake.area}"/>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label class="col-lg-2 control-label">省市</label>
+                       <div class="col-lg-6">
+                           <input type="text" class="form-control" name="province" value="${earthquake.province}"/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">位置</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="c-name" placeholder=" ">
+                           <input type="text" class="form-control" name="location" value="${earthquake.location}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -55,13 +67,13 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">经度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="occupation" placeholder=" ">
+                           <input type="text" class="form-control" name="longitude" value="${earthquake.longitude}"/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">纬度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="email" placeholder=" ">
+                           <input type="text" class="form-control" name="latitude" value="${earthquake.latitude}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -101,8 +113,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger">返回</button>
                        </div>
                    </div>
                </form>

@@ -30,8 +30,18 @@ public class Earthquake {
     private String state;
 
     private Integer responseid;
+    
+    private String responseName;//这个属性还没做处理 等待完成
 
-    private Date createtime;
+    public String getResponseName() {
+		return responseName;
+	}
+
+	public void setResponseName(String responseName) {
+		this.responseName = responseName;
+	}
+
+	private Date createtime;
 
     private String creator;
     

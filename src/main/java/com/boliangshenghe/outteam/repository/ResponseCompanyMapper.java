@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.repository;
 
+import java.util.List;
+
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 
 public interface ResponseCompanyMapper {
@@ -14,4 +16,6 @@ public interface ResponseCompanyMapper {
     int updateByPrimaryKeySelective(ResponseCompany record);
 
     int updateByPrimaryKey(ResponseCompany record);
+    
+    List<ResponseCompany> selectResponseCompanyList(ResponseCompany record);
 }

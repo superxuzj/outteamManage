@@ -10,21 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("/duty")
-public class DutyController {
+@RequestMapping("/onduty")
+public class OndutyController {
 	
 	@RequestMapping
 	public String defaultIndex(){
-		return "redirect:/duty/list";
+		return "redirect:/onduty/list";
 	}
 	
 	@RequestMapping("list")
 	public String index(){
-		return "duty/list";
+		return "onduty/list";
 	}
 	
 	@RequestMapping("info")
 	public String info(){
-		return "duty/info";
+		return "onduty/info";
+	}
+	
+	/**
+	 * 跳转到新增页面
+	 * @return
+	 */
+	@RequestMapping("goadd")
+	public String goadd(){
+		return "onduty/add";
 	}
 }

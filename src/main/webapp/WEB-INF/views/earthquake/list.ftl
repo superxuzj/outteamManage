@@ -93,9 +93,9 @@ margin-bottom:1px !important;
                                       <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                                       	操作<span class="caret"></span></a>
                                       <ul class="dropdown-menu">
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">详情</a></li>
+                                        <li><a href="/earthquake/info?id=${earthquake.id }" title="详情">详情</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="/earthquake/info" title="Bootstrap 3 themes generator">修改</a></li>
+                                        <li><a href="/earthquake/goadd?id=${earthquake.id }" title="修改">修改</a></li>
                                         <li class="divider"></li>
                                         <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
                                       </ul>

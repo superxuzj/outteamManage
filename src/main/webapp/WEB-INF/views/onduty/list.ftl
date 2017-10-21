@@ -12,14 +12,14 @@
 			您的位置：
 			<li><a href="/">首页</a>
 			</li>
-			<li>单位管理</li>
+			<li>轮值管理</li>
 			<!-- <li>Dashboard</li>
 						<li>Dashb省道oard</li> -->
 		</ol>
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-12">
+	<!--<div class="col-lg-12">
 		<section class="panel">
 			<div class="panel-body">
 				<form class="form-horizontal" role="form">
@@ -48,10 +48,9 @@
 				</form>
 			</div>
 		</section>
-
-	</div>
+	</div>-->
 	<div class="col-lg-12">
-		<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
+		<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
 	</div>
 	<div class="col-lg-12">
 		<section class="panel">
@@ -59,16 +58,27 @@
 				<tbody>
 					<tr>
 						<th>ID</th>
-						<th>名称</th>
-						<th>省份</th>
-						<th>类型</th>
+						<th>年月</th>
+						<th>状态</th>
 						<th>操作</th>
 					</tr>
 					<tr>
-						<td>Angeline Mcclain</td>
-						<td>2004-07-06</td>
-						<td>dale@chief.info</td>
-						<td>Rosser</td>
+						<td>12</td>
+						<td>预案a</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -76,11 +86,11 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/gov/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/onduty/info"
+										title="Bootstrap 3 themes generator">设置单位</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/gov/info"
+									<li><a href="/onduty/info"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -90,10 +100,22 @@
 							</div></td>
 					</tr>
 					<tr>
-						<td>Sung Carlson</td>
-						<td>2011-01-10</td>
-						<td>ione.gisela@high.org</td>
-						<td>Robert Lee</td>
+						<td>12</td>
+						<td>预案a</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -101,11 +123,11 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/gov/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/onduty/info"
+										title="Bootstrap 3 themes generator">设置单位</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/gov/info"
+									<li><a href="/onduty/info"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -115,10 +137,22 @@
 							</div></td>
 					</tr>
 					<tr>
-						<td>Bryon Osborne</td>
-						<td>2006-10-29</td>
-						<td>sol.raleigh@language.edu</td>
-						<td>York</td>
+						<td>12</td>
+						<td>预案a</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -126,11 +160,11 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/gov/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/onduty/info"
+										title="Bootstrap 3 themes generator">设置单位</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/gov/info"
+									<li><a href="/onduty/info"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -140,10 +174,22 @@
 							</div></td>
 					</tr>
 					<tr>
-						<td>Dalia Marquez</td>
-						<td>2011-12-15</td>
-						<td>angeline.frieda@thick.com</td>
-						<td>Alton</td>
+						<td>12</td>
+						<td>预案a</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -151,11 +197,11 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/gov/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/onduty/info"
+										title="Bootstrap 3 themes generator">设置单位</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/gov/info"
+									<li><a href="/onduty/info"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -165,10 +211,22 @@
 							</div></td>
 					</tr>
 					<tr>
-						<td>Selina Fitzgerald</td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
+						<td>12</td>
+						<td>预案a</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
+						<td>
+						<select class="form-control m-bot15">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -176,11 +234,11 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/gov/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/onduty/info"
+										title="Bootstrap 3 themes generator">设置单位</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/gov/info"
+									<li><a href="/onduty/info"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -196,6 +254,10 @@
 		这里是分页的页码
 	</div>
 </div>
-
+<script type="text/javascript">
+	function add(){
+		window.location.href = "/onduty/goadd";
+	}
+</script>
 
 </@override> <@extends name="/base/base.ftl"/>

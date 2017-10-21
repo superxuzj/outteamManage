@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.repository;
 
+import java.util.List;
+
 import com.boliangshenghe.outteam.entity.Onduty;
 
 public interface OndutyMapper {
@@ -14,4 +16,6 @@ public interface OndutyMapper {
     int updateByPrimaryKeySelective(Onduty record);
 
     int updateByPrimaryKey(Onduty record);
+    
+    List<Onduty> selectOndutyList(Onduty record);
 }

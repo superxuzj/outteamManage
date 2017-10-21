@@ -25,7 +25,7 @@
                   </li>
                   
                   <li class="active" >
-                      <a class="" href="/gov">
+                      <a class="" href="/company">
                           <span>单位管理</span>
                       </a>
                   </li>
@@ -37,7 +37,7 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="/plan">预案管理</a></li>
-                          <li><a class="" href="/duty">轮值管理 </a></li> 
+                          <li><a class="" href="/onduty">轮值管理 </a></li> 
                           <li><a class="" href="/respond">响应等级</a></li>
                       </ul>
                   </li>

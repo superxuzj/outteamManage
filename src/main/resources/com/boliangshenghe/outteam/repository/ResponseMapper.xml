@@ -79,4 +79,19 @@
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+   <!-- 新加   -->
+   <select id="selectResponseList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Response">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_response
+    <where>
+        <if test="name != null">
+            AND name = #{name,jdbcType=VARCHAR} 
+        </if>
+    </where>
+   	    <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+   	</select>
 </mapper>

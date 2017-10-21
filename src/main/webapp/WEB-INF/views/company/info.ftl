@@ -18,22 +18,23 @@
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form">                                                  
+                    <input type="hidden" class="form-control"  value="${company.id }" />
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">ID</label>
+                       <label class="col-lg-2 control-label">单位简码</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
+                           <input type="text" class="form-control" name="code" value="${company.code }" disabled/>
                        </div>
                    </div>
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">名称</label>
+                       <label class="col-lg-2 control-label">单位全称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="name" value="${company.name }" disabled/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">省份</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="province" value="${company.province }" disabled/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -49,8 +50,9 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger" onclick="history()">返回</button>
+                           
+                           <a href="javascript:history.go(-1)" title="删除">返回</a>
                        </div>
                    </div>
                </form>
@@ -59,5 +61,9 @@
 	</div>
 </div>
 
-
+<script type="text/javascript">
+	function history(){
+		window.location.go(-1);
+	}
+</script>
 </@override> <@extends name="/base/base.ftl"/>

@@ -53,11 +53,11 @@
                    </div>
                    
                    <div class="form-group">
-                       <div class="col-lg-offset-1 col-sm-8">
+                       <div class="col-lg-offset-1 col-sm-7">
                       <section class="panel personpanel">
                           <header class="panel-heading">
                                                                    轮值单位 
-                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="addGov()" title="">添加单位</a>
+                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="addCompany()" title="">添加单位</a>
                           </header>
                           <table class="table">
                               <thead>
@@ -105,5 +105,17 @@
 	</div>
 </div>
 
-
+<script type="text/javascript">
+function addCompany(){
+	
+   	 layer.open({
+			type: 2,
+		    area: ['750px', '561px'],
+		    fix: false, //不固定
+		    title: "队员列表",
+		    maxmin: true,
+		    content: '/company/all'
+		}); 
+}
+</script>
 </@override> <@extends name="/base/base.ftl"/>
