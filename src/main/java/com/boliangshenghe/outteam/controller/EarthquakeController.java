@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseController;
 import com.boliangshenghe.outteam.entity.Earthquake;
+import com.boliangshenghe.outteam.entity.Onduty;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.service.OndutyService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.ResponseCompanyService;
 import com.boliangshenghe.outteam.service.ResponseService;
@@ -41,6 +43,9 @@ public class EarthquakeController extends BaseController{
 	
 	@Autowired
 	private OutteamService outteamService;
+	
+	@Autowired
+	private OndutyService ondutyService;
 	
 	@Autowired
 	private ResponseCompanyService responseCompanyService;
@@ -78,6 +83,9 @@ public class EarthquakeController extends BaseController{
 			model.addAttribute("earthquake", earthquake);
 		}
 		
+		/**
+		 * 这段话是不是考虑放到base里面
+		 */
 		List<Response> responseList = responseService.selectResponseList(new Response());
 		model.addAttribute("responseList", responseList);
 		
@@ -149,17 +157,19 @@ public class EarthquakeController extends BaseController{
   			HttpServletResponse response,Integer id,Model model){
 		System.out.println(id);
 		Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
-		model.addAttribute("earthsource", earthquake.getProvince());
-		
-		model.addAttribute("responseName", earthquake.getResponseName());
+		model.addAttribute("earthsource", earthquake.getProvince());//震源省份
 		
 		ResponseCompany responseCompany = new ResponseCompany();
 		responseCompany.setRid(earthquake.getResponseid());//根据响应id查
 		List<ResponseCompany> rcList = responseCompanyService.selectResponseCompanyList(responseCompany);
-		model.addAttribute("rcList", rcList);
+		model.addAttribute("responseName", earthquake.getResponseName());
+		model.addAttribute("rcList", rcList);//响应等级出队单位
 		
-		
-		model.addAttribute("yearm", earthquake.getResponseName());//轮值年月
+		Onduty onduty = new Onduty();
+		onduty.setYearm("2017-10");
+		List<Onduty> dutyList = ondutyService.selectOndutyList(onduty);
+		model.addAttribute("yearm", "2017-10");//轮值年月
+		model.addAttribute("dutyList", dutyList);//轮值单位
 		
 		return "earthquake/addOrEdit";
 	}
