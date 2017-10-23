@@ -22,15 +22,53 @@ public class Result {
     private String arrPort;
     private String depTerminal;
     private String arrTerminal;
-    private Date depScheduled;
-    private Date arrScheduled;
-    private Date depEstimated;
-    private Date arrEstimated;
-    private Date depActual;
-    private Date arrActual;
+    private String depScheduled;
+    
+    private String arrScheduled;
+    private String depEstimated;
+    private String arrEstimated;
+    private String depActual;
+    private String arrActual;
     private String flightState;
     private String carousel;
     private String flightzj;
+    public String getDepScheduled() {
+		return depScheduled;
+	}
+	public void setDepScheduled(String depScheduled) {
+		this.depScheduled = depScheduled;
+	}
+	public String getArrScheduled() {
+		return arrScheduled;
+	}
+	public void setArrScheduled(String arrScheduled) {
+		this.arrScheduled = arrScheduled;
+	}
+	public String getDepEstimated() {
+		return depEstimated;
+	}
+	public void setDepEstimated(String depEstimated) {
+		this.depEstimated = depEstimated;
+	}
+	public String getArrEstimated() {
+		return arrEstimated;
+	}
+	public void setArrEstimated(String arrEstimated) {
+		this.arrEstimated = arrEstimated;
+	}
+	public String getDepActual() {
+		return depActual;
+	}
+	public void setDepActual(String depActual) {
+		this.depActual = depActual;
+	}
+	public String getArrActual() {
+		return arrActual;
+	}
+	public void setArrActual(String arrActual) {
+		this.arrActual = arrActual;
+	}
+	
     public void setFlightNo(String flightNo) {
          this.flightNo = flightNo;
      }
@@ -101,49 +139,7 @@ public class Result {
          return arrTerminal;
      }
 
-    public void setDepScheduled(Date depScheduled) {
-         this.depScheduled = depScheduled;
-     }
-     public Date getDepScheduled() {
-         return depScheduled;
-     }
-
-    public void setArrScheduled(Date arrScheduled) {
-         this.arrScheduled = arrScheduled;
-     }
-     public Date getArrScheduled() {
-         return arrScheduled;
-     }
-
-    public void setDepEstimated(Date depEstimated) {
-         this.depEstimated = depEstimated;
-     }
-     public Date getDepEstimated() {
-         return depEstimated;
-     }
-
-    public void setArrEstimated(Date arrEstimated) {
-         this.arrEstimated = arrEstimated;
-     }
-     public Date getArrEstimated() {
-         return arrEstimated;
-     }
-
-    public void setDepActual(Date depActual) {
-         this.depActual = depActual;
-     }
-     public Date getDepActual() {
-         return depActual;
-     }
-
-    public void setArrActual(Date arrActual) {
-         this.arrActual = arrActual;
-     }
-     public Date getArrActual() {
-         return arrActual;
-     }
-
-    public void setFlightState(String flightState) {
+     public void setFlightState(String flightState) {
          this.flightState = flightState;
      }
      public String getFlightState() {

@@ -12,11 +12,12 @@
     <result column="arrscheduled" property="arrscheduled" jdbcType="VARCHAR" />
     <result column="depactual" property="depactual" jdbcType="VARCHAR" />
     <result column="arractual" property="arractual" jdbcType="VARCHAR" />
-    <result column="depdate" property="depdate" jdbcType="TIMESTAMP" />
+    <result column="flightState" property="flightstate" jdbcType="VARCHAR" />
+    <result column="depdate" property="depdate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, flight, depcity, arrcity, depterminal, arrterminal, depscheduled, arrscheduled, 
-    depactual, arractual, depdate
+    depactual, arractual, flightState, depdate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,11 +33,13 @@
     insert into t_flight (id, flight, depcity, 
       arrcity, depterminal, arrterminal, 
       depscheduled, arrscheduled, depactual, 
-      arractual, depdate)
+      arractual, flightState, depdate
+      )
     values (#{id,jdbcType=INTEGER}, #{flight,jdbcType=VARCHAR}, #{depcity,jdbcType=VARCHAR}, 
       #{arrcity,jdbcType=VARCHAR}, #{depterminal,jdbcType=VARCHAR}, #{arrterminal,jdbcType=VARCHAR}, 
       #{depscheduled,jdbcType=VARCHAR}, #{arrscheduled,jdbcType=VARCHAR}, #{depactual,jdbcType=VARCHAR}, 
-      #{arractual,jdbcType=VARCHAR}, #{depdate,jdbcType=TIMESTAMP})
+      #{arractual,jdbcType=VARCHAR}, #{flightstate,jdbcType=VARCHAR}, #{depdate,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Flight" >
     insert into t_flight
@@ -70,6 +73,9 @@
       </if>
       <if test="arractual != null" >
         arractual,
+      </if>
+      <if test="flightstate != null" >
+        flightState,
       </if>
       <if test="depdate != null" >
         depdate,
@@ -106,8 +112,11 @@
       <if test="arractual != null" >
         #{arractual,jdbcType=VARCHAR},
       </if>
+      <if test="flightstate != null" >
+        #{flightstate,jdbcType=VARCHAR},
+      </if>
       <if test="depdate != null" >
-        #{depdate,jdbcType=TIMESTAMP},
+        #{depdate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -141,8 +150,11 @@
       <if test="arractual != null" >
         arractual = #{arractual,jdbcType=VARCHAR},
       </if>
+      <if test="flightstate != null" >
+        flightState = #{flightstate,jdbcType=VARCHAR},
+      </if>
       <if test="depdate != null" >
-        depdate = #{depdate,jdbcType=TIMESTAMP},
+        depdate = #{depdate,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -158,7 +170,8 @@
       arrscheduled = #{arrscheduled,jdbcType=VARCHAR},
       depactual = #{depactual,jdbcType=VARCHAR},
       arractual = #{arractual,jdbcType=VARCHAR},
-      depdate = #{depdate,jdbcType=TIMESTAMP}
+      flightState = #{flightstate,jdbcType=VARCHAR},
+      depdate = #{depdate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

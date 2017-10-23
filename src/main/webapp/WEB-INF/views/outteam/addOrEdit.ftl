@@ -75,7 +75,7 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发日期</label>
                        <div class="col-lg-9">
-                          <input class="form-control Wdate" type="text" id="d28" onclick="WdatePicker({minDate:'%y-%M-{%d+1}'})"/>
+                          <input class="form-control Wdate" type="text" name="depdate" id="depdate" onclick="WdatePicker({minDate:'%y-%M-%d'})"/>
 	                   
                        </div>
                    </div>
@@ -175,19 +175,26 @@ function save(){
 
 function getFliht(){
 	var flight = $("#flight").val();
+	var depdate = $("#depdate").val();
 	if(flight==""){
 		alert("请输入航班号！");
+		return false;
+	}
+	if(depdate==""){
+		alert("请选择出发日期！");
+		return false;
 	}
 	
 	$.ajax({ 
         type: "POST",
         url:"/outteam/flight",
         data:{  
-            "flight" : flight 
+            "flight" : flight,
+            "depdate":depdate
         },
-        async: false,
+        scriptCharset: 'utf-8',
         success: function(data) {
-        		alert(data);
+        		alert(data.data);
         }
 	});
 	

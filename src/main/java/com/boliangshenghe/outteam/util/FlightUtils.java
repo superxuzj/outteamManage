@@ -33,8 +33,8 @@ public class FlightUtils {
 		requestData.put("actionName", "起降时间查询");
 
 		JSONObject input = new JSONObject();
-		input.put("flightNo", "mu5314"); // 航班号
-		input.put("date", "2017-08-20"); // 航班时间
+		input.put("flightNo", flightNo); // 航班号
+		input.put("date", date); // 航班时间
 
 		requestData.put("input", input);
 
@@ -55,6 +55,7 @@ public class FlightUtils {
 			br.close();
 
 			return sb.toString();
+			//JSONObject(sb.toString())
 			//System.out.println("" + sb.toString()); // 打印成功返回结果，可用new
 													// JSONObject(sb.toString())构建返回结果对象
 		} else {

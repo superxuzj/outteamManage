@@ -1,29 +1,46 @@
 package com.boliangshenghe.outteam.entity;
 
-import java.util.Date;
 
 public class Flight {
     private Integer id;
 
     private String flight;
 
-    private String depcity;
+    private String depcity;//出发城市
 
-    private String arrcity;
+    private String arrcity;//到达城市
 
-    private String depterminal;
+    private String depterminal;//出发航站楼
 
-    private String arrterminal;
+    private String arrterminal;//到达航站楼
 
-    private String depscheduled;
+    private String depscheduled;//计划出发时间
 
-    private String arrscheduled;
+    private String arrscheduled;//计划到达时间
 
-    private String depactual;
+    private String depactual;//实际出发时间
 
-    private String arractual;
+    private String arractual;//实际到达时间
 
-    private Date depdate;
+	private String flightstate; //航班状态
+
+    private String depdate;//出发日期
+    
+    public String getFlightstate() {
+		return flightstate;
+	}
+
+	public void setFlightstate(String flightstate) {
+		this.flightstate = flightstate;
+	}
+
+	public String getDepdate() {
+		return depdate;
+	}
+
+	public void setDepdate(String depdate) {
+		this.depdate = depdate;
+	}
 
     public Integer getId() {
         return id;
@@ -105,11 +122,4 @@ public class Flight {
         this.arractual = arractual == null ? null : arractual.trim();
     }
 
-    public Date getDepdate() {
-        return depdate;
-    }
-
-    public void setDepdate(Date depdate) {
-        this.depdate = depdate;
-    }
 }

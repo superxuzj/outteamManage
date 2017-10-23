@@ -6,19 +6,26 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.User;
+import com.boliangshenghe.outteam.json.JsonFlight;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.UserService;
+import com.boliangshenghe.outteam.util.FlightUtils;
 
 /**
  * 出队管理
@@ -148,14 +155,32 @@ public class OutTeamController {
 	 * @param outteam
 	 * @param model
 	 * @return
+	 * @throws Exception 
 	 */
-	@RequestMapping("flight")
+	@RequestMapping(value="/flight",produces = "text/json;charset=UTF-8")
+	@ResponseBody
 	public String flight(HttpServletRequest request, 
-  			HttpServletResponse response,Outteam outteam,Model model){
+  			HttpServletResponse response,String depdate,String flight,Model model) throws Exception{
+		response.setContentType("text/json;charset=utf-8"); 
+		System.out.println(depdate);
+		/*String content = FlightUtils.makeRequest(flight, depdate);
+		if(content.indexOf("output")==-1){//查询失败，返回失败信息
+			return content;
+		}
 		
-		outteamService.addDetail(outteam);
+		JSONObject jsonObj = JSONObject.parseObject(content);
+		System.out.println(jsonObj.toString());
+		JsonFlight jsonFlight = JSON.toJavaObject(jsonObj, JsonFlight.class);*/
 		
-		System.out.println(outteam.getChooses());
-		return "redirect:/outteam/list";
+		JSONObject retudate = new JSONObject();
+		retudate.put("date", "111");
+		retudate.put("data", "询");
+		
+		
+	
+		//2、使用JSONArray
+		String json = retudate.toString();
+		json =new String(json.getBytes(),"utf-8");
+		return json;
 	}
 }
