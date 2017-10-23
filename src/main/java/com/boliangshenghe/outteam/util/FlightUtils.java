@@ -9,6 +9,11 @@ import java.net.URL;
 import org.json.JSONObject;
 
 //13916381779
+/**
+ * 
+ * @author xuzj
+ *
+ */
 public class FlightUtils {
 
 	public static String makeRequest(String flightNo,String date) throws Exception {
