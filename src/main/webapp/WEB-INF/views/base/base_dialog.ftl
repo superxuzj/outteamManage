@@ -28,10 +28,11 @@
 	<link href="<@ps.s/>/css/xcharts.min.css" rel=" stylesheet">	
 	<link href="<@ps.s/>/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 	
-	<!-- javascripts -->
-    <script src="<@ps.s/>/js/jquery.js"></script>
+	<!-- javascripts 
+    <script src="<@ps.s/>/js/jquery.js"></script>-->
+     <script src="<@ps.s/>/js/jquery-1.8.3.min.js"></script>
 	<script src="<@ps.s/>/js/jquery-ui-1.10.4.min.js"></script>
-    <script src="<@ps.s/>/js/jquery-1.8.3.min.js"></script>
+   
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
       <script src="<@ps.s/>/js/html5shiv.js"></script>
@@ -86,53 +87,7 @@
 	<script src="<@ps.s/>/js/charts.js"></script>
 	<script src="<@ps.s/>/js/jquery.slimscroll.min.js"></script>
 	<script src="<@ps.s/>/layer/layer.js"></script>
-  <script>
-
-      //knob
-      $(function() {
-        $(".knob").knob({
-          'draw' : function () { 
-            $(this.i).val(this.cv + '%')
-          }
-        })
-      });
-
-      //carousel
-      $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          });
-      });
-
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-	  
-	  /* ---------- Map ---------- */
-	$(function(){
-	  $('#map').vectorMap({
-	    map: 'world_mill_en',
-	    series: {
-	      regions: [{
-	        values: gdpData,
-	        scale: ['#000', '#000'],
-	        normalizeFunction: 'polynomial'
-	      }]
-	    },
-		backgroundColor: '#eef3f7',
-	    onLabelShow: function(e, el, code){
-	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
-	    }
-	  });
-	});
-
-  </script>
+  
   </body>
 </html>
 

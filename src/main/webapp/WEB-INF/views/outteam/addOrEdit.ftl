@@ -71,19 +71,29 @@
                        	</#if>
                        </div>
                    </div>
+                  
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
+                       <label class="col-lg-3 control-label">出发日期</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="count" value="${outteam.count }">
+                          <input class="form-control Wdate" type="text" id="d28" onclick="WdatePicker({minDate:'%y-%M-{%d+1}'})"/>
+	                   
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">航班号</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="flight" value="${outteam.flight }">
+                           <input type="text" class="form-control" id="flight" name="flight" value="${outteam.flight }">
                        </div>
                        <a class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
                    </div>
+                   
+                    <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">人数</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="count" value="${outteam.count }">
+                       </div>
+                   </div>
+                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发地点</label>
                        <div class="col-lg-9">
@@ -131,7 +141,13 @@
                               </tr>
                               </thead>
                               <tbody id="usertbody">
-                             
+                                  <#list otdetailList as detail>
+                                  	<tr>
+										<td>${detail.name }</td>
+										<td>${detail.company }</td>
+										<td>${detail.phone }</td>
+									</tr>
+								   </#list>
                               </tbody>
                           </table>
                       </section>
@@ -158,7 +174,22 @@ function save(){
 }
 
 function getFliht(){
-	alert(1);
+	var flight = $("#flight").val();
+	if(flight==""){
+		alert("请输入航班号！");
+	}
+	
+	$.ajax({ 
+        type: "POST",
+        url:"/outteam/flight",
+        data:{  
+            "flight" : flight 
+        },
+        async: false,
+        success: function(data) {
+        		alert(data);
+        }
+	});
 	
 }
 function choosePerson(){
@@ -168,7 +199,7 @@ function choosePerson(){
 		    fix: false, //不固定
 		    title: "队员列表",
 		    maxmin: true,
-		    content: '/outteam/personlist?cid=${outteam.cid}'
+		    content: '/outteam/personlist?id=${outteam.id}'
 		}); 
 }
 </script>

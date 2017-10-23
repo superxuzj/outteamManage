@@ -12,32 +12,30 @@
 </style>
 <div class="row">
 	<div class="col-lg-12">
-		<section class="panel">
-			<table class="table table-striped table-advance table-hover">
-				<tbody>
-					<tr>
-						<th onclick="choose()" class="choose">全选</th>
-						<th>联系人</th>
-						<th>负责人</th>
-						<th>姓名</th>
-						<th>单位</th>
-						<th>电话</th>
-					</tr>
-					<#list userlist as user>
-					<tr>
-						<td><input name="allchoose" class="allchoose" type="checkbox" value="${user.id }"/></td>
-						<td><input name="contacts" class="contacts" type="checkbox" value="${user.id }" /></td>
-						<td><input name="leader" class="leader" type="checkbox" value="${user.id }"/></td>
-						<td class="test">${user.name }</td>
-						<td class="test">${user.company }</td>
-						<td class="test">${user.phone }</td>
-					</tr>
-					</#list>
-					
-				</tbody>
-
-			</table>
-		</section>
+	<section class="panel">
+		<table class="table table-striped table-advance table-hover">
+			<tbody>
+			<tr>
+				<th onclick="choose()" class="choose">全选</th>
+				<th>联系人</th>
+				<th>负责人</th>
+				<th>姓名</th>
+				<th>单位</th>
+				<th>电话</th>
+			</tr>
+			<#list userlist as user>
+			<tr>
+				<td><input class="allchoose" type="checkbox" value="${user.id }" <#if user.ischoose==1>checked</#if>/></td>
+				<td><input class="contacts" type="checkbox" value="${user.id }" <#if user.iscontact==1>checked</#if> /></td>
+				<td><input class="leader" type="checkbox" value="${user.id }" <#if user.islead==1>checked</#if> /></td>
+				<td class="test">${user.name }</td>
+				<td class="test">${user.company }</td>
+				<td class="test">${user.phone }</td>
+			</tr>
+			</#list>
+			</tbody>
+		</table>
+	</section>
 	</div>
 </div>
 <div class="row">
@@ -64,7 +62,7 @@ $(document).ready(function(){
     	    });
     	   	str+="</tr>";
 	    });
-	    parent.$('#usertbody').append(str);
+	    parent.$('#usertbody').html(str);
 	    
 		var chooses = chooseArr.join(',');//选择的人
 		parent.$('#chooses').val(chooses);

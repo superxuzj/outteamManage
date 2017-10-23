@@ -18,20 +18,16 @@
     <!-- font icon -->
     <link href="<@ps.s/>/css/elegant-icons-style.css" rel="stylesheet" />
     <link href="<@ps.s/>/css/font-awesome.min.css" rel="stylesheet" />    
-    <!-- full calendar css-->
-    <link href="<@ps.s/>/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="<@ps.s/>/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     <!-- easy pie chart-->
     <link href="<@ps.s/>/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <!-- owl carousel -->
     <link rel="stylesheet" href="<@ps.s/>/css/owl.carousel.css" type="text/css">
 	<link href="<@ps.s/>/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<link rel="stylesheet" href="<@ps.s/>/css/fullcalendar.css">
 	<link href="<@ps.s/>/css/widgets.css" rel="stylesheet">
     <link href="<@ps.s/>/css/style.css" rel="stylesheet">
     <link href="<@ps.s/>/css/style-responsive.css" rel="stylesheet" />
-	<link href="<@ps.s/>/css/xcharts.min.css" rel=" stylesheet">	
+	<link href="<@ps.s/>/css/xcharts.min.css" rel=" stylesheet">
 	<link href="<@ps.s/>/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
@@ -65,10 +61,10 @@
   </section>
   <!-- container section start -->
 
-    <!-- javascripts -->
-    <script src="<@ps.s/>/js/jquery.js"></script>
-	<script src="<@ps.s/>/js/jquery-ui-1.10.4.min.js"></script>
+    <!-- javascripts 
+    <script src="<@ps.s/>/js/jquery.js"></script>-->
     <script src="<@ps.s/>/js/jquery-1.8.3.min.js"></script>
+	<script src="<@ps.s/>/js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="<@ps.s/>/js/jquery-ui-1.9.2.custom.min.js"></script>
     <!-- bootstrap -->
     <script src="<@ps.s/>/js/bootstrap.min.js"></script>
@@ -80,11 +76,7 @@
     <script src="<@ps.s/>/js/jquery.sparkline.js" type="text/javascript"></script>
     <script src="<@ps.s/>/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="<@ps.s/>/js/owl.carousel.js" ></script>
-    <!-- jQuery full calendar -->
-    <script src="<@ps.s/>/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-	<script src="<@ps.s/>/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
-    <script src="<@ps.s/>/js/calendar-custom.js"></script>
 	<script src="<@ps.s/>/js/jquery.rateit.min.js"></script>
     <!-- custom select -->
     <script src="<@ps.s/>/js/jquery.customSelect.min.js" ></script>
@@ -106,55 +98,8 @@
 	<script src="<@ps.s/>/js/charts.js"></script>
 	<script src="<@ps.s/>/js/jquery.slimscroll.min.js"></script>
 	<script src="<@ps.s/>/layer/layer.js"></script>
-  <script>
-
-      //knob
-      $(function() {
-        $(".knob").knob({
-          'draw' : function () { 
-            $(this.i).val(this.cv + '%')
-          }
-        })
-      });
-
-      //carousel
-      $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          });
-      });
-
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-	  
-	  /* ---------- Map ---------- */
-	$(function(){
-	  $('#map').vectorMap({
-	    map: 'world_mill_en',
-	    series: {
-	      regions: [{
-	        values: gdpData,
-	        scale: ['#000', '#000'],
-	        normalizeFunction: 'polynomial'
-	      }]
-	    },
-		backgroundColor: '#eef3f7',
-	    onLabelShow: function(e, el, code){
-	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
-	    }
-	  });
-	});
-
-
-
-  </script>
+	
+	<script type="text/javascript" src="<@ps.s/>/js/My97DatePicker/WdatePicker.js"></script>
 
   </body>
 </html>

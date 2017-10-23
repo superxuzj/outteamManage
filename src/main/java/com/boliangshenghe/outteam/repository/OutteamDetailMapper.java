@@ -18,4 +18,6 @@ public interface OutteamDetailMapper {
     int updateByPrimaryKey(OutteamDetail record);
     
     List<OutteamDetail> selectOutteamDetailList(OutteamDetail record);
+    
+    int updateByOutteamDetail(OutteamDetail record);
 }

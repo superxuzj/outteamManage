@@ -26,10 +26,18 @@ public class User {
     private String profession;
 
     private Date createtime;
-
+    
     private Integer limit;
     
     private Integer start;
+    
+    private String iscontact;
+
+    private String ismeet;
+
+    private String islead;
+    
+    private String ischoose;
     
     public Integer getId() {
         return id;
@@ -141,5 +149,37 @@ public class User {
 
 	public void setStart(Integer start) {
 		this.start = start;
+	}
+
+	public String getIscontact() {
+		return iscontact;
+	}
+
+	public void setIscontact(String iscontact) {
+		this.iscontact = iscontact;
+	}
+
+	public String getIsmeet() {
+		return ismeet;
+	}
+
+	public void setIsmeet(String ismeet) {
+		this.ismeet = ismeet;
+	}
+
+	public String getIslead() {
+		return islead;
+	}
+
+	public void setIslead(String islead) {
+		this.islead = islead;
+	}
+
+	public String getIschoose() {
+		return ischoose;
+	}
+
+	public void setIschoose(String ischoose) {
+		this.ischoose = ischoose;
 	}
 }

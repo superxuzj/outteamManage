@@ -19,7 +19,7 @@ public class OutteamDetail {
 
     private String ismeet;
 
-    private String idlead;
+    private String islead;
 
     private Integer fid;
 
@@ -34,6 +34,8 @@ public class OutteamDetail {
     private Date createtime;
 
     private Date endtime;
+    
+    private String isdel;
     
     private Integer limit;
     
@@ -85,14 +87,6 @@ public class OutteamDetail {
 
     public void setIsmeet(String ismeet) {
         this.ismeet = ismeet == null ? null : ismeet.trim();
-    }
-
-    public String getIdlead() {
-        return idlead;
-    }
-
-    public void setIdlead(String idlead) {
-        this.idlead = idlead == null ? null : idlead.trim();
     }
 
     public Integer getFid() {
@@ -181,5 +175,21 @@ public class OutteamDetail {
 
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public String getIsdel() {
+		return isdel;
+	}
+
+	public void setIsdel(String isdel) {
+		this.isdel = isdel;
+	}
+
+	public String getIslead() {
+		return islead;
+	}
+
+	public void setIslead(String islead) {
+		this.islead = islead;
 	}
 }

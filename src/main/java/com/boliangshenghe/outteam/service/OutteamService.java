@@ -66,8 +66,13 @@ public class OutteamService {
     public void addDetail(Outteam outteam){
 	    //获取航班信息，插入航班表 获取航班表id
 			
-		//插入出队详情表
 		
+    	//插入出队详情表 -- 先删除上次保存的(根据单位id和eqid)，再插入
+    	OutteamDetail upd = new OutteamDetail();
+    	upd.setCid(outteam.getCid());
+    	upd.setEqid(outteam.getEqid());
+    	outteamDetailMapper.updateByOutteamDetail(upd);
+    	
 		String chooses = outteam.getChooses();
 		String[] choosesArr = chooses.split(",");
 		if(choosesArr!=null && choosesArr.length>0){
@@ -81,8 +86,9 @@ public class OutteamService {
 					outteamDetail.setIscontact("1");
 				}
 				if(isInclude(user.getId().toString(),outteam.getLeaders())){
-					outteamDetail.setIdlead("1");
+					outteamDetail.setIslead("1");
 				}
+				outteamDetail.setUserid(user.getId());
 				outteamDetail.setName(user.getName());
 				outteamDetail.setOtid(outteam.getId());
 				outteamDetail.setPhone(user.getPhone());
