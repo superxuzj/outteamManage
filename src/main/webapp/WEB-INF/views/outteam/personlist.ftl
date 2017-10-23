@@ -6,6 +6,9 @@
 .twobutton{
 	margin-left:250px;
 }
+.choose{
+	cursor: pointer;
+}
 </style>
 <div class="row">
 	<div class="col-lg-12">
@@ -13,83 +16,23 @@
 			<table class="table table-striped table-advance table-hover">
 				<tbody>
 					<tr>
-						<th>全选</th>
+						<th onclick="choose()" class="choose">全选</th>
 						<th>联系人</th>
+						<th>负责人</th>
 						<th>姓名</th>
 						<th>单位</th>
 						<th>电话</th>
 					</tr>
+					<#list userlist as user>
 					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>Angeline Mcclain</td>
-						<td>2004-07-06</td>
-						<td>dale@chief.info</td>
+						<td><input name="allchoose" class="allchoose" type="checkbox" value="${user.id }"/></td>
+						<td><input name="contacts" class="contacts" type="checkbox" value="${user.id }" /></td>
+						<td><input name="leader" class="leader" type="checkbox" value="${user.id }"/></td>
+						<td class="test">${user.name }</td>
+						<td class="test">${user.company }</td>
+						<td class="test">${user.phone }</td>
 					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2011-01-10</td>
-						<td>ione.gisela@high.org</td>
-						<td>Robert Lee</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2006-10-29</td>
-						<td>sol.raleigh@language.edu</td>
-						<td>York</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2011-12-15</td>
-						<td>angeline.frieda@thick.com</td>
-						<td>Alton</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
-						
-					</tr>
-					<tr>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td><input name="" type="checkbox" value="" /></td>
-						<td>2003-01-06</td>
-						<td>moshe.mikel@parcelpart.info</td>
-						<td>Waelder</td>
-						
-					</tr>
+					</#list>
 					
 				</tbody>
 
@@ -100,9 +43,65 @@
 <div class="row">
      <div class="form-group">
         <div class="col-lg-6 twobutton">
-            <button type="submit" class="btn btn-primary">确定</button>
-            <button type="button" class="btn btn-danger">取消</button>
+            <button type="button" class="btn btn-primary" id="confirm">确定</button>
+            <button type="button" class="btn btn-danger" id="cancle">取消</button>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){ 
+	var index = parent.layer.getFrameIndex(window.name);
+	$('#confirm').on('click', function(){
+		var chooseArr = new Array;
+		var str="";
+	    $(".allchoose:checked").each(function(i){
+	    	chooseArr[i] = $(this).val();
+	    	str+="<tr>";
+    	   	$(this).parent().parent().children("td.test").each(function(i,e){
+    	        str+=$(e).prop("outerHTML");
+    	    });
+    	   	str+="</tr>";
+	    });
+	    parent.$('#usertbody').append(str);
+	    
+		var chooses = chooseArr.join(',');//选择的人
+		parent.$('#chooses').val(chooses);
+	    
+	   
+	  
+	   var contactArr = new Array;
+	    $(".contacts:checked").each(function(i){
+	    	contactArr[i] = $(this).val();
+	    });
+		var contacts = contactArr.join(',');//联系人
+		parent.$('#contacts').val(contacts);
+		
+	    var leaderArr = new Array;
+	    $(".leader:checked").each(function(i){
+	    	leaderArr[i] = $(this).val();
+	    });
+		var leaders = leaderArr.join(',');//负责人
+		parent.$('#leaders').val(leaders);
+		
+		parent.layer.close(index);
+	});
+	
+	$('#cancle').on('click', function(){
+	    parent.layer.close(index);
+	});
+});
+
+function choose(){
+	$('.allchoose').each(function() {
+		if($(this).attr("checked")) { 
+			$(this).removeAttr("checked"); 
+		}else { 
+			$(this).attr("checked","true"); 
+		}  
+	});
+}
+
+</script>
 </@override> <@extends name="/base/base_dialog.ftl"/>

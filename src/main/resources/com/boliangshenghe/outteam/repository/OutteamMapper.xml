@@ -11,6 +11,7 @@
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="flight" property="flight" jdbcType="VARCHAR" />
     <result column="duty" property="duty" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
@@ -19,8 +20,8 @@
     <result column="operatetime" property="operatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, eqid, eqname, cid, company, outtype, state, count, fid, duty, summary, creator, 
-    createtime, operator, operatetime
+    ID, eqid, eqname, cid, company, outtype, state, count, fid, flight, duty, summary, 
+    creator, createtime, operator, operatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,15 +37,15 @@
     insert into t_outteam (ID, eqid, eqname, 
       cid, company, outtype, 
       state, count, fid, 
-      duty, summary, creator, 
-      createtime, operator, operatetime
-      )
+      flight, duty, summary, 
+      creator, createtime, operator, 
+      operatetime)
     values (#{id,jdbcType=INTEGER}, #{eqid,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, 
       #{cid,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{outtype,jdbcType=VARCHAR}, 
       #{state,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, 
-      #{duty,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP}
-      )
+      #{flight,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{operatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Outteam" >
     insert into t_outteam
@@ -75,6 +76,9 @@
       </if>
       <if test="fid != null" >
         fid,
+      </if>
+      <if test="flight != null" >
+        flight,
       </if>
       <if test="duty != null" >
         duty,
@@ -123,6 +127,9 @@
       <if test="fid != null" >
         #{fid,jdbcType=INTEGER},
       </if>
+      <if test="flight != null" >
+        #{flight,jdbcType=VARCHAR},
+      </if>
       <if test="duty != null" >
         #{duty,jdbcType=VARCHAR},
       </if>
@@ -170,6 +177,9 @@
       <if test="fid != null" >
         fid = #{fid,jdbcType=INTEGER},
       </if>
+      <if test="flight != null" >
+        flight = #{flight,jdbcType=VARCHAR},
+      </if>
       <if test="duty != null" >
         duty = #{duty,jdbcType=VARCHAR},
       </if>
@@ -201,6 +211,7 @@
       state = #{state,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
       fid = #{fid,jdbcType=INTEGER},
+      flight = #{flight,jdbcType=VARCHAR},
       duty = #{duty,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
@@ -210,7 +221,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-  <!-- 新加   -->
+   <!-- 新加   -->
    <select id="selectOutteamList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
    	    select 
     <include refid="Base_Column_List" />
@@ -236,6 +247,4 @@
         </if>
     </where>
    	</select>
-   	
 </mapper>
-

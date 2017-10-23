@@ -24,7 +24,7 @@
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" action="/earthquake/save" id="earthquakeForm" method="POST">                                                  
-                   <input type="hidden"  name="id" value="${earthquake.id}"/>
+                   <input type="hidden" id="hiddenid" name="id" value="${earthquake.id}"/>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
@@ -98,7 +98,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
-                          <select class="form-control m-bot15" name="responseid">
+                          <select class="form-control m-bot15" name="responseid" id="responseid">
 	                          <#list responseList as response>
 	                          	<option value="${response.id }" <#if response.id==earthquake.responseid>selected="selected"</#if> >
 	                          		${response.name }
@@ -110,7 +110,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="button" class="btn btn-primary" onclick="save(${earthquake.id})">保存</button>
+                           <button type="button" class="btn btn-primary" onclick="save()">保存</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
                    </div>
@@ -121,27 +121,49 @@
 </div>
 
 <script type="text/javascript">
-	function save(id){
-		$.ajax({  
-	         type : "POST",  //提交方式  
-	         url : "/earthquake/valCompany",//路径  
-	         data : {  
-	             "id" : id 
-	         },//数据，这里使用的是Json格式进行传输  
-	         success : function(result) {//返回数据根据结果进行相应的处理  
-	         	if(result=="success"){
-	         		layer.open({
+	function save(){
+		var rid=$("#responseid").val();
+		var id = $("#hiddenid").val();
+		//新增
+		if(id==null || id==''){
+			$.ajax({ 
+	            type: "POST",
+	            url:"/earthquake/savenew",
+	            data:$('#earthquakeForm').serialize(),// 你的formid
+	            async: false,
+	            success: function(data) {
+	            	$("#hiddenid").val(data);//返回的地震id赋值给id框
+	            	layer.open({
 	        			type: 2,
 	        		    area: ['750px', '561px'],
 	        		    fix: false, //不固定
 	        		    title: "出队列表",
 	        		    maxmin: true,
-	        		    content: '/earthquake/ruleoutteam?id='+id
+	        		    content: '/earthquake/ruleoutteam?id='+data+"&rid="+rid
 	        		}); 
-	         	}
-	         }
-	     });
-		
+	            }
+			});
+		}else{
+			$.ajax({  
+		         type : "POST",  //提交方式  
+		         url : "/earthquake/valCompany",//判断是否已经安排了出队
+		         data:$('#earthquakeForm').serialize(),// 你的formid
+		         success : function(result) {//返回数据根据结果进行相应的处理  
+		         	if(result=="success"){
+		         		layer.open({
+		        			type: 2,
+		        		    area: ['750px', '561px'],
+		        		    fix: false, //不固定
+		        		    title: "出队列表",
+		        		    maxmin: true,
+		        		    content: '/earthquake/ruleoutteam?id='+id+"&rid="+rid
+		        		}); 
+		         	}else{
+		         		window.location.url="/earthquake/list";
+		         	}
+		         }
+		     });
+		}
 		
 		// $("#earthquakeForm").submit();
 	}

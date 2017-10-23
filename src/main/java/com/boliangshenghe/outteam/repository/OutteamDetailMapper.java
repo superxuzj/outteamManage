@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.repository;
 
+import java.util.List;
+
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 
 public interface OutteamDetailMapper {
@@ -14,4 +16,6 @@ public interface OutteamDetailMapper {
     int updateByPrimaryKeySelective(OutteamDetail record);
 
     int updateByPrimaryKey(OutteamDetail record);
+    
+    List<OutteamDetail> selectOutteamDetailList(OutteamDetail record);
 }

@@ -13,13 +13,15 @@ public class Outteam {
 
     private String company;
 
-    private String outtype;
+    private String outtype;//1 震源省份 2 响应等级 3 轮值 4 自己申请
 
-    private String state;
+    private String state;//状态 1 通知 2 出队 3 结束
 
     private Integer count;
 
     private Integer fid;
+    
+    private String flight;
 
     private String duty;
 
@@ -32,8 +34,14 @@ public class Outteam {
     private String operator;
 
     private Date operatetime;
+    
+    private String chooses;
+    
+    private String contacts;
+    
+    private String leaders;
 
- private Integer start;
+    private Integer start;
     
     private Integer limit;
     
@@ -171,4 +179,36 @@ public class Outteam {
     public void setOperatetime(Date operatetime) {
         this.operatetime = operatetime;
     }
+
+	public String getFlight() {
+		return flight;
+	}
+
+	public void setFlight(String flight) {
+		this.flight = flight;
+	}
+
+	public String getChooses() {
+		return chooses;
+	}
+
+	public void setChooses(String chooses) {
+		this.chooses = chooses;
+	}
+
+	public String getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+
+	public String getLeaders() {
+		return leaders;
+	}
+
+	public void setLeaders(String leaders) {
+		this.leaders = leaders;
+	}
 }

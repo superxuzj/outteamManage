@@ -31,52 +31,42 @@
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form">                                                  
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">地震eqinfo_id</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
-                       </div>
-                   </div>
                    <div class="form-group col-lg-6" col-lg-6>
-                       <label class="col-lg-3 control-label">名称</label>
+                       <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname }" disabled>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位名称</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname }" disabled>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出队类型</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="c-name" placeholder=" ">
+                           ${outteam.outtype }
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">状态</label>
                        <div class="col-lg-9">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
+                           ${outteam.state }
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">人数</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="occupation" placeholder=" ">
+                           <input type="text" class="form-control" name="count" value="${outteam.count }" disabled>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">航班号</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="email" placeholder=" ">
+                           <input type="text" class="form-control" name="flight" value="${outteam.flight }" disabled>
                        </div>
-                       <a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">获取航班信息</a>
+                       <a class="btn btn-primary btn-sm" href="" title="获取航班信息">获取航班信息</a>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发地点</label>

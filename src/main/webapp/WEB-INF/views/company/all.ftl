@@ -48,8 +48,6 @@
 		var index = parent.layer.getFrameIndex(window.name);
 		$('#save').on('click', function(){
 			
-			
-			
 		    parent.$('#yearm').val('我被改变了');
 		    parent.layer.close(index);
 		});

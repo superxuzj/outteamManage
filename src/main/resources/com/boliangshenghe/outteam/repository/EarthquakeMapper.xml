@@ -5,6 +5,7 @@
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="eqname" property="eqname" jdbcType="VARCHAR" />
     <result column="eventid" property="eventid" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
     <result column="province" property="province" jdbcType="VARCHAR" />
     <result column="area" property="area" jdbcType="VARCHAR" />
     <result column="location" property="location" jdbcType="VARCHAR" />
@@ -20,8 +21,8 @@
     <result column="creator" property="creator" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, eqname, eventid, province, area, location, magnitude, longitude, latitude, eqdate, 
-    eqtime, depth, state, responseid, createtime, creator
+    ID, eqname, eventid, cid, province, area, location, magnitude, longitude, latitude, 
+    eqdate, eqtime, depth, state, responseid, createtime, creator
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,19 +36,22 @@
   </delete>
   <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.Earthquake" >
     insert into t_earthquake (ID, eqname, eventid, 
-      province, area, location, 
-      magnitude, longitude, latitude, 
-      eqdate, eqtime, depth, 
-      state, responseid, createtime, 
-      creator)
+      cid, province, area, 
+      location, magnitude, longitude, 
+      latitude, eqdate, eqtime, 
+      depth, state, responseid, 
+      createtime, creator)
     values (#{id,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, #{eventid,jdbcType=VARCHAR}, 
-      #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{magnitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
-      #{eqdate,jdbcType=TIMESTAMP}, #{eqtime,jdbcType=TIMESTAMP}, #{depth,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{responseid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{creator,jdbcType=VARCHAR})
+      #{cid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{magnitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{eqdate,jdbcType=TIMESTAMP}, #{eqtime,jdbcType=TIMESTAMP}, 
+      #{depth,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{responseid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Earthquake" >
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+  	</selectKey>
     insert into t_earthquake
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -58,6 +62,9 @@
       </if>
       <if test="eventid != null" >
         eventid,
+      </if>
+      <if test="cid != null" >
+        cid,
       </if>
       <if test="province != null" >
         province,
@@ -109,6 +116,9 @@
       <if test="eventid != null" >
         #{eventid,jdbcType=VARCHAR},
       </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
       <if test="province != null" >
         #{province,jdbcType=VARCHAR},
       </if>
@@ -159,6 +169,9 @@
       <if test="eventid != null" >
         eventid = #{eventid,jdbcType=VARCHAR},
       </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
       <if test="province != null" >
         province = #{province,jdbcType=VARCHAR},
       </if>
@@ -205,6 +218,7 @@
     update t_earthquake
     set eqname = #{eqname,jdbcType=VARCHAR},
       eventid = #{eventid,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
       province = #{province,jdbcType=VARCHAR},
       area = #{area,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
@@ -235,4 +249,5 @@
 			LIMIT #{start} ,#{limit}
 		</if>
    	</select>
+  
 </mapper>

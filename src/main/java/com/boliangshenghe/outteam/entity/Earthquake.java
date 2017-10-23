@@ -9,6 +9,8 @@ public class Earthquake {
 
     private String eventid;
 
+    private Integer cid;
+    
     private String province;
 
     private String area;
@@ -191,5 +193,13 @@ public class Earthquake {
 
 	public void setLimit(Integer limit) {
 		this.limit = limit;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
 }

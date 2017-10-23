@@ -188,6 +188,9 @@
         <if test="password != null">
             AND PASSWORD = #{password,jdbcType=VARCHAR}
         </if>
+         <if test="cid != null">
+            AND cid = #{cid,jdbcType=INTEGER}
+        </if>
     </where>
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}

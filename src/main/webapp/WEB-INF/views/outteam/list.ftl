@@ -65,138 +65,38 @@ margin-bottom:1px !important;
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr>
-                                 <th>eqinfo_id</th>
                                  <th>地震名称</th>
                                  <th>单位名称</th>
-                                 <th>是否受灾省局</th>
                                  <th>出队类型</th>
                                  <th>人数</th>
                                  <th>航班</th>
-                                 <th>出发地点</th>
                                  <th>状态</th>
                                  <th>操作</th>
                               </tr>
+                              <#list page.list as outteam>
                               <tr>
-                                 <td>Angeline Mcclain</td>
-                                 <td>2004-07-06</td>
-                                 <td>dale@chief.info</td>
-                                 <td>否</td>
-                                 <td>Rosser</td>
+                                 <td>${outteam.eqname }</td>
+                                 <td>${outteam.company }</td>
+                                 <td>${outteam.state }</td>
+                                 <td>${outteam.count }</td>
+                                 <td>${outteam.fid }</td>
+                                 <td>${outteam.state }</td>
                                  
-                                 <td>176-026-5992</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
                                  <td>
                                   <div class="btn-group">
                                       <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                                       	操作<span class="caret"></span></a>
                                       <ul class="dropdown-menu">
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">详情</a></li>
+                                        <li><a href="/outteam/info?id=${outteam.id }" title="详情">详情</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">修改</a></li>
+                                        <li><a href="/outteam/goadd?id=${outteam.id }" title="修改">修改</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
+                                        <li><a href="/outteam/del?id=${outteam.id }" title="结束">撤退</a></li>
                                       </ul>
                                   </div>
                                   </td>
                               </tr>
-                              <tr>
-                                 <td>Sung Carlson</td>
-                                 <td>2011-01-10</td>
-                                 <td>ione.gisela@high.org</td>
-                                 <td>否</td>
-                                 <td>Robert Lee</td>
-                                 <td>724-639-4784</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Bryon Osborne</td>
-                                 <td>2006-10-29</td>
-                                 <td>sol.raleigh@language.edu</td>
-                                 <td>否</td>
-                                 <td>York</td>
-                                 <td>180-456-0056</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Dalia Marquez</td>
-                                 <td>2011-12-15</td>
-                                 <td>angeline.frieda@thick.com</td>
-                                 <td>否</td>
-                                 <td>Alton</td>
-                                 <td>690-601-1922</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                 <td>Selina Fitzgerald</td>
-                                 <td>2003-01-06</td>
-                                 <td>moshe.mikel@parcelpart.info</td>
-                                 <td>否</td>
-                                 <td>Waelder</td>
-                                 <td>922-810-0915</td>
-                                 <td>Rosser</td>
-                                 <td>176-026-5992</td>
-                                 <td>开始</td>
-                                 <td>
-                                  <div class="btn-group">
-                                      <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
-                                      	操作<span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">详情</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/outteam/info" title="Bootstrap 3 themes generator">修改</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
-                                      </ul>
-                                  </div>
-                                  </td>
-                              </tr>
+                             </#list>
                            </tbody>
                            		
                         </table>
