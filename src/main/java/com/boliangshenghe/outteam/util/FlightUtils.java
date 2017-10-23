@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 //13916381779
 /**
- * 
+ * 航班信息
  * @author xuzj
  *
  */
