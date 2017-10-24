@@ -9,6 +9,10 @@ public class Flight {
     private String depcity;//出发城市
 
     private String arrcity;//到达城市
+    
+    private String arrport;//到达机场名称
+
+    private String depport;//出发机场名称
 
     private String depterminal;//出发航站楼
 
@@ -121,5 +125,21 @@ public class Flight {
     public void setArractual(String arractual) {
         this.arractual = arractual == null ? null : arractual.trim();
     }
+
+	public String getArrport() {
+		return arrport;
+	}
+
+	public void setArrport(String arrport) {
+		this.arrport = arrport;
+	}
+
+	public String getDepport() {
+		return depport;
+	}
+
+	public void setDepport(String depport) {
+		this.depport = depport;
+	}
 
 }

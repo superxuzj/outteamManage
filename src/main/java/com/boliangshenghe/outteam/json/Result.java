@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Result {
 
+	private Integer index;
     private String flightNo;
     private String rate;
     private String depCity;
@@ -159,5 +160,11 @@ public class Result {
      public String getFlightzj() {
          return flightzj;
      }
+	public Integer getIndex() {
+		return index;
+	}
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
 
 }

@@ -6,6 +6,8 @@
     <result column="flight" property="flight" jdbcType="VARCHAR" />
     <result column="depcity" property="depcity" jdbcType="VARCHAR" />
     <result column="arrcity" property="arrcity" jdbcType="VARCHAR" />
+    <result column="arrPort" property="arrport" jdbcType="VARCHAR" />
+    <result column="depPort" property="depport" jdbcType="VARCHAR" />
     <result column="depterminal" property="depterminal" jdbcType="VARCHAR" />
     <result column="arrterminal" property="arrterminal" jdbcType="VARCHAR" />
     <result column="depscheduled" property="depscheduled" jdbcType="VARCHAR" />
@@ -16,8 +18,8 @@
     <result column="depdate" property="depdate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, flight, depcity, arrcity, depterminal, arrterminal, depscheduled, arrscheduled, 
-    depactual, arractual, flightState, depdate
+    id, flight, depcity, arrcity, arrPort, depPort, depterminal, arrterminal, depscheduled, 
+    arrscheduled, depactual, arractual, flightState, depdate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,15 +33,15 @@
   </delete>
   <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.Flight" >
     insert into t_flight (id, flight, depcity, 
-      arrcity, depterminal, arrterminal, 
-      depscheduled, arrscheduled, depactual, 
-      arractual, flightState, depdate
-      )
+      arrcity, arrPort, depPort, 
+      depterminal, arrterminal, depscheduled, 
+      arrscheduled, depactual, arractual, 
+      flightState, depdate)
     values (#{id,jdbcType=INTEGER}, #{flight,jdbcType=VARCHAR}, #{depcity,jdbcType=VARCHAR}, 
-      #{arrcity,jdbcType=VARCHAR}, #{depterminal,jdbcType=VARCHAR}, #{arrterminal,jdbcType=VARCHAR}, 
-      #{depscheduled,jdbcType=VARCHAR}, #{arrscheduled,jdbcType=VARCHAR}, #{depactual,jdbcType=VARCHAR}, 
-      #{arractual,jdbcType=VARCHAR}, #{flightstate,jdbcType=VARCHAR}, #{depdate,jdbcType=VARCHAR}
-      )
+      #{arrcity,jdbcType=VARCHAR}, #{arrport,jdbcType=VARCHAR}, #{depport,jdbcType=VARCHAR}, 
+      #{depterminal,jdbcType=VARCHAR}, #{arrterminal,jdbcType=VARCHAR}, #{depscheduled,jdbcType=VARCHAR}, 
+      #{arrscheduled,jdbcType=VARCHAR}, #{depactual,jdbcType=VARCHAR}, #{arractual,jdbcType=VARCHAR}, 
+      #{flightstate,jdbcType=VARCHAR}, #{depdate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Flight" >
     insert into t_flight
@@ -55,6 +57,12 @@
       </if>
       <if test="arrcity != null" >
         arrcity,
+      </if>
+      <if test="arrport != null" >
+        arrPort,
+      </if>
+      <if test="depport != null" >
+        depPort,
       </if>
       <if test="depterminal != null" >
         depterminal,
@@ -94,6 +102,12 @@
       <if test="arrcity != null" >
         #{arrcity,jdbcType=VARCHAR},
       </if>
+      <if test="arrport != null" >
+        #{arrport,jdbcType=VARCHAR},
+      </if>
+      <if test="depport != null" >
+        #{depport,jdbcType=VARCHAR},
+      </if>
       <if test="depterminal != null" >
         #{depterminal,jdbcType=VARCHAR},
       </if>
@@ -132,6 +146,12 @@
       <if test="arrcity != null" >
         arrcity = #{arrcity,jdbcType=VARCHAR},
       </if>
+      <if test="arrport != null" >
+        arrPort = #{arrport,jdbcType=VARCHAR},
+      </if>
+      <if test="depport != null" >
+        depPort = #{depport,jdbcType=VARCHAR},
+      </if>
       <if test="depterminal != null" >
         depterminal = #{depterminal,jdbcType=VARCHAR},
       </if>
@@ -164,6 +184,8 @@
     set flight = #{flight,jdbcType=VARCHAR},
       depcity = #{depcity,jdbcType=VARCHAR},
       arrcity = #{arrcity,jdbcType=VARCHAR},
+      arrPort = #{arrport,jdbcType=VARCHAR},
+      depPort = #{depport,jdbcType=VARCHAR},
       depterminal = #{depterminal,jdbcType=VARCHAR},
       arrterminal = #{arrterminal,jdbcType=VARCHAR},
       depscheduled = #{depscheduled,jdbcType=VARCHAR},

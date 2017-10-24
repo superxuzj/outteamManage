@@ -87,35 +87,80 @@
                        <a class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
                    </div>
                    
-                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">出发城市</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="count" value="${outteam.count }">
+                           <input type="text" class="form-control" name="depcity" id="depcity" value="${outteam.depcity }"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">到达城市</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control"  name="arrcity" id="arrcity" value="${outteam.arrcity }"/>
+                       </div>
+                   </div>
+                    <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">出发机场</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depport" id="depport" value="${outteam.depport }"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">到达机场</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control"  name="arrport" id="arrport" value="${outteam.arrport }"/>
                        </div>
                    </div>
                    
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出发地点</label>
+                       <label class="col-lg-3 control-label">出发航站楼</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" />
+                           <input type="text" class="form-control" name="depterminal" id="depterminal" value="${outteam.depterminal }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">到达地点</label>
+                       <label class="col-lg-3 control-label">到达航站楼</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" />
+                           <input type="text" class="form-control"  name="arrterminal" id="arrterminal" value="${outteam.arrterminal }"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">计划出发时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depscheduled" id="depscheduled" value="${outteam.depscheduled }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出发时间</label>
+                       <label class="col-lg-3 control-label">计划到达时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control"/>
+                           <input type="text" class="form-control" name="arrscheduled" id="arrscheduled" value="${outteam.arrscheduled}"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">实际出发时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depactual" id="depactual" value="${outteam.depactual }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">到达时间</label>
+                       <label class="col-lg-3 control-label">实际到达时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" />
+                           <input type="text" class="form-control" name="arractual" id="arractual" value="${outteam.arractual}"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">航班状态</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="flightstate" id="flightstate" value="${outteam.flightstate}"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">人数</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="count" value="${outteam.count }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -194,7 +239,35 @@ function getFliht(){
         },
         scriptCharset: 'utf-8',
         success: function(data) {
-        		alert(data.data);
+        	if(data.depcity=="" || data.depcity==null){
+        		alert(data);
+        	}else{
+        		if(data.size>1){
+        			layer.open({
+        				type: 2,
+        			    area: ['750px', '361px'],
+        			    fix: false, //不固定
+        			    title: "该航班号有多趟航班，请根据实际情况选择！默认为第一个。",
+        			    maxmin: true,
+        			    content: '/outteam/flightlist?flight='+flight+"&depdate="+depdate
+        			}); 
+        		}else{
+            		$("#depcity").val(data.depcity);
+            		$("#arrcity").val(data.arrcity);
+            		$("#depterminal").val(data.depterminal);
+            		$("#arrterminal").val(data.arrterminal);
+            		$("#depscheduled").val(data.depscheduled);
+            		$("#arrscheduled").val(data.arrscheduled);
+            		$("#depactual").val(data.depactual);
+            		$("#arractual").val(data.arractual);
+            		$("#depport").val(data.depport);
+            		$("#arrport").val(data.arrport);
+            		$("#flightstate").val(data.flightstate);
+        		}
+        		
+        		
+        	}
+        	
         }
 	});
 	

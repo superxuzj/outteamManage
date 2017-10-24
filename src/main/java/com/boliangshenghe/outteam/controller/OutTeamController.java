@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.json.JsonFlight;
+import com.boliangshenghe.outteam.json.Result;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.UserService;
 import com.boliangshenghe.outteam.util.FlightUtils;
+import com.boliangshenghe.outteam.util.JsonUtils;
 
 /**
  * 出队管理
@@ -163,24 +166,79 @@ public class OutTeamController {
   			HttpServletResponse response,String depdate,String flight,Model model) throws Exception{
 		response.setContentType("text/json;charset=utf-8"); 
 		System.out.println(depdate);
-		/*String content = FlightUtils.makeRequest(flight, depdate);
+		String content = FlightUtils.makeRequest(flight, depdate);
 		if(content.indexOf("output")==-1){//查询失败，返回失败信息
 			return content;
 		}
 		
 		JSONObject jsonObj = JSONObject.parseObject(content);
-		System.out.println(jsonObj.toString());
-		JsonFlight jsonFlight = JSON.toJavaObject(jsonObj, JsonFlight.class);*/
+//		System.out.println(jsonObj.toString());
+		JsonFlight jsonFlight = JSON.toJavaObject(jsonObj, JsonFlight.class);
+		List<Result> resultList = jsonFlight.getOutput().getResult();
+		
 		
 		JSONObject retudate = new JSONObject();
-		retudate.put("date", "111");
-		retudate.put("data", "询");
-		
-		
-	
-		//2、使用JSONArray
+		if(resultList!=null && resultList.size()>1){
+			retudate.put("size",resultList.size());
+		}
+		if(resultList!=null && resultList.size()>0){
+			Result result = resultList.get(0);
+			retudate.put("depcity",result.getDepCity());
+			retudate.put("arrcity",result.getArrCity());
+			retudate.put("depterminal",result.getDepTerminal());
+			retudate.put("arrterminal",result.getArrTerminal());
+			retudate.put("depscheduled",result.getDepScheduled());
+			retudate.put("arrscheduled",result.getArrScheduled());
+			retudate.put("depactual",result.getDepActual());
+			retudate.put("arractual",result.getArrActual());
+			retudate.put("depport",result.getDepPort());
+			retudate.put("arrport",result.getArrPort());
+			retudate.put("flightstate",result.getFlightState());
+		}
 		String json = retudate.toString();
-		json =new String(json.getBytes(),"utf-8");
 		return json;
+		
+		/*JSONObject retudate = new JSONObject();
+		retudate.put("depcity","123");
+		retudate.put("arrcity","234");
+		String json = retudate.toString();
+		return json;*/
+	}
+	
+	
+	/**
+	 * 获取航班信息 
+	 * 肯定是多个
+	 * @param request
+	 * @param response
+	 * @param outteam
+	 * @param model
+	 * @return
+	 * 到达 计划 起飞
+	 * 
+	 * 0001-01-01T00:00:00Z
+	 * @throws Exception 
+	 */
+	@RequestMapping("flightlist")
+	public String flightlist(HttpServletRequest request, 
+  			HttpServletResponse response,String depdate,String flight,Model model) throws Exception{
+		String content = FlightUtils.makeRequest(flight, depdate);
+		JSONObject jsonObj = JSONObject.parseObject(content);
+//		System.out.println(jsonObj.toString());
+		JsonFlight jsonFlight = JSON.toJavaObject(jsonObj, JsonFlight.class);
+		List<Result> resultList = jsonFlight.getOutput().getResult();
+		List<Result> list = new ArrayList<Result>();
+		for(int i=0;i<resultList.size();i++){
+			Result temp = resultList.get(i);
+			
+			
+			
+			temp.setIndex(i);
+			list.add(temp);
+		}
+		model.addAttribute("resultList", list);
+		return "outteam/flightlist";
+		
+		
 	}
 }
