@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.json.JsonFlight;
 import com.boliangshenghe.outteam.json.Result;
+import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.UserService;
@@ -44,6 +46,9 @@ public class OutTeamController {
 	@Autowired
 	private OutteamDetailService outteamDetailService;
 	
+	@Autowired
+	private FlightService flightService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/outteam/list";
@@ -65,6 +70,17 @@ public class OutTeamController {
 		if(id!=null){
 			Outteam outteam = outteamService.selectByPrimaryKey(id);
 			model.addAttribute("outteam", outteam);
+			if(outteam.getFid()!=null){
+				Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
+				model.addAttribute("flight", flight);
+			}
+			OutteamDetail outteamDetail = new OutteamDetail();
+			outteamDetail.setCid(outteam.getCid());
+			outteamDetail.setEqid(outteam.getEqid());
+			List<OutteamDetail> otdetailList = outteamDetailService.selectOutteamDetailList(outteamDetail);
+			if(otdetailList!=null && otdetailList.size()>0){
+				model.addAttribute("otdetailList", otdetailList);
+			}
 		}
 		return "outteam/info";
 	}
@@ -75,7 +91,7 @@ public class OutTeamController {
 		
 		outteamService.addDetail(outteam);
 		
-		System.out.println(outteam.getChooses());
+		System.out.println(outteam.getChooses()+" save");
 		return "redirect:/outteam/list";
 	}
 	/**
@@ -92,7 +108,10 @@ public class OutTeamController {
 		if(id!=null){
 			Outteam outteam = outteamService.selectByPrimaryKey(id);
 			model.addAttribute("outteam", outteam);
-			
+			if(outteam.getFid()!=null){
+				Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
+				model.addAttribute("flight", flight);
+			}
 			OutteamDetail outteamDetail = new OutteamDetail();
 			outteamDetail.setCid(outteam.getCid());
 			outteamDetail.setEqid(outteam.getEqid());
@@ -189,7 +208,17 @@ public class OutTeamController {
 			retudate.put("arractual",result.getArrActual());
 			retudate.put("depport",result.getDepPort());
 			retudate.put("arrport",result.getArrPort());
-			retudate.put("flightstate",result.getFlightState());
+			
+			if(result.getDepActual().equals("0001-01-01T00:00:00Z")&&result.getArrActual().equals("0001-01-01T00:00:00Z")){
+				retudate.put("flightstate","计划");
+			}else if(!result.getDepActual().equals("0001-01-01T00:00:00Z")&& result.getArrActual().equals("0001-01-01T00:00:00Z")){
+				retudate.put("flightstate","起飞");
+			}else{
+				retudate.put("flightstate","到达");
+			}
+			
+			
+			
 		}
 		String json = retudate.toString();
 		return json;
@@ -227,7 +256,13 @@ public class OutTeamController {
 		for(int i=0;i<resultList.size();i++){
 			Result temp = resultList.get(i);
 			
-			
+			if(temp.getDepActual().equals("0001-01-01T00:00:00Z")&&temp.getArrActual().equals("0001-01-01T00:00:00Z")){
+				temp.setFlightState("计划");
+			}else if(!temp.getDepActual().equals("0001-01-01T00:00:00Z")&& temp.getArrActual().equals("0001-01-01T00:00:00Z")){
+				temp.setFlightState("起飞");
+			}else{
+				temp.setFlightState("到达");
+			}
 			
 			temp.setIndex(i);
 			list.add(temp);

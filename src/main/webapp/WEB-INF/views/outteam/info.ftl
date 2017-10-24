@@ -34,13 +34,15 @@
                    <div class="form-group col-lg-6" col-lg-6>
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname }" disabled>
+                       <input type="hidden" name="eqid" value="${outteam.eqid }">   
+                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname }" readonly />
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位名称</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname }" disabled>
+                       <input type="hidden" name="cid" value="${outteam.cid }"/>   
+                           <input type="text" class="form-control" name="company" value="${outteam.company }" />
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -52,44 +54,105 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">状态</label>
                        <div class="col-lg-9">
-                           ${outteam.state }
+                       	<#if outteam.state==1>
+                       		<input type="text" class="form-control" value="通知" disabled>
+                       	<#elseif outteam.state==1>
+                       		<input type="text" class="form-control" value="出队 " disabled>
+                       	<#else>
+                       		<input type="text" class="form-control" value="结束 " disabled>
+                       	</#if>
                        </div>
                    </div>
+                  
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
+                       <label class="col-lg-3 control-label">出发日期</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="count" value="${outteam.count }" disabled>
+                          <input class="form-control Wdate" type="text" name="depdate" id="depdate" value="${flight.depdate }" onclick="WdatePicker({minDate:'%y-%M-%d'})"/>
+	                   
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">航班号</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="flight" value="${outteam.flight }" disabled>
+                           <input type="text" class="form-control" id="flight" name="flight" value="${flight.flight }">
                        </div>
-                       <a class="btn btn-primary btn-sm" href="" title="获取航班信息">获取航班信息</a>
+                      
                    </div>
+                   
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出发地点</label>
+                       <label class="col-lg-3 control-label">出发城市</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
-                       </div>
-                   </div>
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">到达地点</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control" name="depcity" id="depcity" value="${flight.depcity }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出发时间</label>
+                       <label class="col-lg-3 control-label">到达城市</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control"  name="arrcity" id="arrcity" value="${flight.arrcity }"/>
+                       </div>
+                   </div>
+                    <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">出发机场</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depport" id="depport" value="${flight.depport }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">到达时间</label>
+                       <label class="col-lg-3 control-label">到达机场</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control"  name="arrport" id="arrport" value="${flight.arrport }"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">出发航站楼</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depterminal" id="depterminal" value="${flight.depterminal }"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">到达航站楼</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control"  name="arrterminal" id="arrterminal" value="${flight.arrterminal }"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">计划出发时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depscheduled" id="depscheduled" value="${flight.depscheduled }"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">计划到达时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="arrscheduled" id="arrscheduled" value="${flight.arrscheduled}"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">实际出发时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="depactual" id="depactual" value="${flight.depactual }"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">实际到达时间</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="arractual" id="arractual" value="${flight.arractual}"/>
+                       </div>
+                   </div>
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">航班状态</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="flightstate" id="flightstate" value="${flight.flightstate}"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">人数</label>
+                       <div class="col-lg-9">
+                           <input type="text" class="form-control" name="count" value="${outteam.count }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -109,41 +172,30 @@
                           <table class="table">
                               <thead>
                               <tr>
-                                  <th>#</th>
-                                  <th>First Name</th>
-                                  <th>Last Name</th>
-                                  <th>Username</th>
+                                  <th>姓名</th>
+                                  <th>单位</th>
+                                  <th>电话</th>
                               </tr>
                               </thead>
-                              <tbody>
-                              <tr>
-                                  <td>1</td>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                  <td>2</td>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <td>3</td>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>@twitter</td>
-                              </tr>
+                              <tbody id="usertbody">
+                                  <#list otdetailList as detail>
+                                  	<tr>
+										<td>${detail.name }</td>
+										<td>${detail.company }</td>
+										<td>${detail.phone }</td>
+									</tr>
+								   </#list>
                               </tbody>
                           </table>
                       </section>
                   </div>
                    </div>
-                   
+                   <input type="hidden" name="chooses" id="chooses"/>
+                   <input type="hidden" name="contacts" id="contacts"/>
+                   <input type="hidden" name="leaders" id="leaders"/>
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="submit" class="btn btn-primary">审批</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger">返回</button>
                        </div>
                    </div>
                </form>

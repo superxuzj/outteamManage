@@ -15,7 +15,7 @@ public class Outteam {
 
     private String outtype;//1 震源省份 2 响应等级 3 轮值 4 自己申请
 
-    private String state;//状态 1 通知 2 出队 3 结束
+    private String state;//状态 1 通知 2 出队 3撤退申请 4结束
 
     private Integer count;
 
@@ -47,9 +47,14 @@ public class Outteam {
     
     //航班信息
     
+
     private String depcity;//出发城市
 
-	private String arrcity;//到达城市
+    private String arrcity;//到达城市
+    
+    private String arrport;//到达机场名称
+
+	private String depport;//出发机场名称
 
     private String depterminal;//出发航站楼
 
@@ -87,6 +92,21 @@ public class Outteam {
 		return depterminal;
 	}
 
+	public String getArrport() {
+		return arrport;
+	}
+
+	public void setArrport(String arrport) {
+		this.arrport = arrport;
+	}
+
+	public String getDepport() {
+		return depport;
+	}
+
+	public void setDepport(String depport) {
+		this.depport = depport;
+	}
 	public void setDepterminal(String depterminal) {
 		this.depterminal = depterminal;
 	}

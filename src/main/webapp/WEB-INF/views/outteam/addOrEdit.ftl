@@ -37,8 +37,6 @@
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form" id="outteamform" action="/outteam/save">  
-               	   <input type="hidden" name="id" value="${outteam.id }"> 
-               	                                                
                    <div class="form-group col-lg-6" col-lg-6>
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
@@ -75,14 +73,14 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发日期</label>
                        <div class="col-lg-9">
-                          <input class="form-control Wdate" type="text" name="depdate" id="depdate" onclick="WdatePicker({minDate:'%y-%M-%d'})"/>
+                          <input class="form-control Wdate" type="text" name="depdate" id="depdate" value="${flight.depdate }" onclick="WdatePicker({minDate:'%y-%M-%d'})"/>
 	                   
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">航班号</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="flight" name="flight" value="${outteam.flight }">
+                           <input type="text" class="form-control" id="flight" name="flight" value="${flight.flight }">
                        </div>
                        <a class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
                    </div>
@@ -90,70 +88,70 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发城市</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="depcity" id="depcity" value="${outteam.depcity }"/>
+                           <input type="text" class="form-control" name="depcity" id="depcity" value="${flight.depcity }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">到达城市</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control"  name="arrcity" id="arrcity" value="${outteam.arrcity }"/>
+                           <input type="text" class="form-control"  name="arrcity" id="arrcity" value="${flight.arrcity }"/>
                        </div>
                    </div>
                     <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发机场</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="depport" id="depport" value="${outteam.depport }"/>
+                           <input type="text" class="form-control" name="depport" id="depport" value="${flight.depport }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">到达机场</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control"  name="arrport" id="arrport" value="${outteam.arrport }"/>
+                           <input type="text" class="form-control"  name="arrport" id="arrport" value="${flight.arrport }"/>
                        </div>
                    </div>
                    
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出发航站楼</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="depterminal" id="depterminal" value="${outteam.depterminal }"/>
+                           <input type="text" class="form-control" name="depterminal" id="depterminal" value="${flight.depterminal }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">到达航站楼</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control"  name="arrterminal" id="arrterminal" value="${outteam.arrterminal }"/>
+                           <input type="text" class="form-control"  name="arrterminal" id="arrterminal" value="${flight.arrterminal }"/>
                        </div>
                    </div>
                    
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">计划出发时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="depscheduled" id="depscheduled" value="${outteam.depscheduled }"/>
+                           <input type="text" class="form-control" name="depscheduled" id="depscheduled" value="${flight.depscheduled }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">计划到达时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="arrscheduled" id="arrscheduled" value="${outteam.arrscheduled}"/>
+                           <input type="text" class="form-control" name="arrscheduled" id="arrscheduled" value="${flight.arrscheduled}"/>
                        </div>
                    </div>
                    
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">实际出发时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="depactual" id="depactual" value="${outteam.depactual }"/>
+                           <input type="text" class="form-control" name="depactual" id="depactual" value="${flight.depactual }"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">实际到达时间</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="arractual" id="arractual" value="${outteam.arractual}"/>
+                           <input type="text" class="form-control" name="arractual" id="arractual" value="${flight.arractual}"/>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">航班状态</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="flightstate" id="flightstate" value="${outteam.flightstate}"/>
+                           <input type="text" class="form-control" name="flightstate" id="flightstate" value="${flight.flightstate}"/>
                        </div>
                    </div>
                    

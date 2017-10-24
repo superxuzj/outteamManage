@@ -60,7 +60,7 @@
 					<tr>
 						<th>ID</th>
 						<th>单位简码</th>
-						<th>省份</th>
+						<th>单位名称</th>
 						<th>类型</th>
 						<th>操作</th>
 					</tr>
