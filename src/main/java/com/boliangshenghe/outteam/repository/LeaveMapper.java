@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.repository;
 
+import java.util.List;
+
 import com.boliangshenghe.outteam.entity.Leave;
 
 public interface LeaveMapper {
@@ -14,4 +16,6 @@ public interface LeaveMapper {
     int updateByPrimaryKeySelective(Leave record);
 
     int updateByPrimaryKey(Leave record);
+    
+    List<Leave> selectLeaveList(Leave record);
 }

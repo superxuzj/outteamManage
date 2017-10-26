@@ -76,9 +76,10 @@
                            <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                            	操作<span class="caret"></span></a>
                            <ul class="dropdown-menu">
-                             <li><a href="/outteam/info?id=${outteam.id }" title="详情">详情</a></li>
                              <li class="divider"></li>
-                             <li><a href="/outteam/del?id=${outteam.id }" title="结束">撤退</a></li>
+                             <li><a href="/leave/ask?id=${outteam.id }" title="结束">撤退申请</a></li>
+                             <li class="divider"></li>
+                             <li><a href="/leave/info?id=${outteam.id }" title="结束">详情受灾省</a></li>
                            </ul>
                        </div>
                        </td>

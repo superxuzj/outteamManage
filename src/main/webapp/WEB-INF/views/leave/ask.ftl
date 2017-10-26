@@ -75,7 +75,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="submit" class="btn btn-primary">批准</button>
+                           <button type="submit" class="btn btn-primary">申请</button>
                            <button type="button" class="btn btn-danger">返回</button>
                        </div>
                    </div>

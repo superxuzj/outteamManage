@@ -5,6 +5,8 @@ import java.util.Date;
 public class LeaveDetail {
     private Integer id;
 
+    private Integer lid;
+
     private Integer userid;
 
     private String name;
@@ -17,6 +19,8 @@ public class LeaveDetail {
 
     private Integer otid;
 
+    private String state;
+
     private Date createtime;
 
     private String reamrk;
@@ -27,6 +31,14 @@ public class LeaveDetail {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getLid() {
+        return lid;
+    }
+
+    public void setLid(Integer lid) {
+        this.lid = lid;
     }
 
     public Integer getUserid() {
@@ -75,6 +87,14 @@ public class LeaveDetail {
 
     public void setOtid(Integer otid) {
         this.otid = otid;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
 
     public Date getCreatetime() {

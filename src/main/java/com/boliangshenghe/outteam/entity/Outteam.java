@@ -22,6 +22,8 @@ public class Outteam {
     private Integer fid;
     
     private String flight;
+    
+    private Integer lid;
 
     private String duty;
 
@@ -333,5 +335,13 @@ public class Outteam {
 
 	public void setLeaders(String leaders) {
 		this.leaders = leaders;
+	}
+
+	public Integer getLid() {
+		return lid;
+	}
+
+	public void setLid(Integer lid) {
+		this.lid = lid;
 	}
 }

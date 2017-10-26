@@ -2,44 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.boliangshenghe.outteam.repository.LeaveMapper" >
   <resultMap id="BaseResultMap" type="com.boliangshenghe.outteam.entity.Leave" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="cid" property="cid" jdbcType="INTEGER" />
     <result column="company" property="company" jdbcType="VARCHAR" />
     <result column="fid" property="fid" jdbcType="INTEGER" />
     <result column="eqid" property="eqid" jdbcType="INTEGER" />
     <result column="eqname" property="eqname" jdbcType="VARCHAR" />
     <result column="otid" property="otid" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, cid, company, fid, eqid, eqname, otid, createtime, remark
+    id, cid, company, fid, eqid, eqname, otid, state, createtime, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_leave
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_leave
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.Leave" >
-    insert into t_leave (ID, cid, company, 
+    insert into t_leave (id, cid, company, 
       fid, eqid, eqname, 
-      otid, createtime, remark
-      )
+      otid, state, createtime, 
+      remark)
     values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
       #{fid,jdbcType=INTEGER}, #{eqid,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, 
-      #{otid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
-      )
+      #{otid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Leave" >
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+  	  </selectKey>
     insert into t_leave
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        ID,
+        id,
       </if>
       <if test="cid != null" >
         cid,
@@ -58,6 +62,9 @@
       </if>
       <if test="otid != null" >
         otid,
+      </if>
+      <if test="state != null" >
+        state,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -88,6 +95,9 @@
       <if test="otid != null" >
         #{otid,jdbcType=INTEGER},
       </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -117,6 +127,9 @@
       <if test="otid != null" >
         otid = #{otid,jdbcType=INTEGER},
       </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -124,7 +137,7 @@
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.outteam.entity.Leave" >
     update t_leave
@@ -134,8 +147,30 @@
       eqid = #{eqid,jdbcType=INTEGER},
       eqname = #{eqname,jdbcType=VARCHAR},
       otid = #{otid,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 新加   -->
+   <select id="selectLeaveList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Leave">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_leave
+    <where>
+        <if test="cid != null">
+            AND cid = #{cid,jdbcType=INTEGER}
+        </if>
+        <if test="eqid != null">
+            AND eqid = #{eqid,jdbcType=INTEGER}
+        </if>
+        <if test="otid != null">
+            AND otid = #{otid,jdbcType=INTEGER}
+        </if>
+    </where>
+   	    <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+   	</select>
 </mapper>

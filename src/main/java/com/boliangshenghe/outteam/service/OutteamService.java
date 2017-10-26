@@ -87,22 +87,21 @@ public class OutteamService {
     	flight.setFlight(outteam.getFlight());
     	flight.setFlightstate(outteam.getFlightstate());
     	flight.setDepdate(outteam.getDepdate());
-    	
-    	List<Flight> flightlist = flightMapper.selectFlightByRecord(flight);
-    	if(flightlist!=null && flightlist.size()>0){
-    		flight.setId(flightlist.get(0).getId());
-    		flightMapper.updateByPrimaryKeySelective(flight);
-    	}else{
-    		flightMapper.insertSelective(flight);
+    	if(!outteam.getFlight().equals("")){//要是不要坐飞机，没有航班信息
+    		List<Flight> flightlist = flightMapper.selectFlightByRecord(flight);
+        	if(flightlist!=null && flightlist.size()>0){
+        		flight.setId(flightlist.get(0).getId());
+        		flightMapper.updateByPrimaryKeySelective(flight);
+        	}else{
+        		flightMapper.insertSelective(flight);
+        	}
+        	
+        	outteam.setFid(flight.getId());
+        	outteam.setFlight(flight.getFlight());
     	}
     	
-    	outteam.setFid(flight.getId());
-    	outteam.setFlight(flight.getFlight());
     	outteamMapper.updateByPrimaryKeySelective(outteam);
 		
-    	
-    	
-    	
 		String chooses = outteam.getChooses();
 		String[] choosesArr = chooses.split(",");
 		if(!choosesArr[0].equals("")){

@@ -85,6 +85,14 @@ public class OutTeamController {
 		return "outteam/info";
 	}
 	
+	/**
+	 * 添加 插入
+	 * @param request
+	 * @param response
+	 * @param outteam
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Outteam outteam,Model model){
