@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.repository;
 
+import java.util.List;
+
 import com.boliangshenghe.outteam.entity.Yearm;
 
 public interface YearmMapper {
@@ -14,4 +16,6 @@ public interface YearmMapper {
     int updateByPrimaryKeySelective(Yearm record);
 
     int updateByPrimaryKey(Yearm record);
+    
+    List<Yearm> selectYearmList(Yearm record);
 }

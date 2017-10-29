@@ -18,4 +18,6 @@ public interface OndutyMapper {
     int updateByPrimaryKey(Onduty record);
     
     List<Onduty> selectOndutyList(Onduty record);
+    
+    int deleteByOnduty(Onduty onduty);
 }
