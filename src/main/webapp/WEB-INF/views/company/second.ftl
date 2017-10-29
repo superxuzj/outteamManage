@@ -55,10 +55,10 @@
 	    	    });
 	    	   	str+="</tr>";
 		    });
-		    parent.$('#companytbody').html(str);
+		    parent.$('#secondcompanytbody').html(str);
 		    
 			var cids = chooseArr.join(',');//选择的人
-			parent.$('#cids').val(cids);
+			parent.$('#secondcids').val(cids);
 				
 		    parent.layer.close(index);
 		});
