@@ -8,11 +8,24 @@ public class Yearm {
     private String state;
 
     private String remark;
+    
+    private String cids;
+    
 
+	private Integer start;
+    
+    private Integer limit;
+    
     public Integer getId() {
         return id;
     }
+    public String getCids() {
+		return cids;
+	}
 
+	public void setCids(String cids) {
+		this.cids = cids;
+	}
     public void setId(Integer id) {
         this.id = id;
     }
@@ -40,4 +53,20 @@ public class Yearm {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+    
+    public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
 }

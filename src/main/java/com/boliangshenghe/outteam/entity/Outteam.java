@@ -15,7 +15,7 @@ public class Outteam {
 
     private String outtype;//1 震源省份 2 响应等级 3 轮值 4 自己申请
 
-    private String state;//状态 1 通知 2 出队 3撤退申请 4结束
+    private String state;//状态 1 通知 2 出队 3撤退申请 4撤退同意  5结束  写总结
 
     private Integer count;
 
