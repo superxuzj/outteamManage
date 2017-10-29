@@ -100,6 +100,9 @@
         <if test="province != null">
             AND province = #{province,jdbcType=VARCHAR} 
         </if>
+        <if test="type != null">
+            AND type = #{type,jdbcType=VARCHAR} 
+        </if>
     </where>
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
