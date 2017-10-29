@@ -19,36 +19,27 @@
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form">                                                  
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">ID</label>
+                       <label class="col-lg-2 control-label">年月</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
+                           <input type="text" class="form-control" name="yearm" id="yearm" value="${yearm.yearm }">
                        </div>
                    </div>
-                   <div class="form-group">
-                       <label class="col-lg-2 control-label">名称</label>
+                   
+                  <div class="form-group">
+                       <label class="col-lg-2 control-label">状态</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" value="预案a" placeholder=" ">
+                          <#if yearm.state==1>
+                        		  开启
+                          <#else>
+                          		关闭
+                          </#if>
                        </div>
                    </div>
                    
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">地震等级</label>
+                       <label class="col-lg-2 control-label">备注</label>
                        <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
-                       </div>
-                   </div>
-                   <div class="form-group">
-                       <label class="col-lg-2 control-label">响应等级</label>
-                       <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
+                           <input type="text" class="form-control" value="${yearm.remark }">
                        </div>
                    </div>
                    
@@ -57,36 +48,21 @@
                       <section class="panel personpanel">
                           <header class="panel-heading">
                                                                    轮值单位 
-                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="addCompany()" title="">添加单位</a>
                           </header>
                           <table class="table">
                               <thead>
                               <tr>
-                                  <th>ID</th>
-                                  <th>名称</th>
+                                  <th>年月</th>
                                   <th>省份</th>
-                                  <th>类型</th>
                               </tr>
                               </thead>
                               <tbody>
+                              <#list dutyList as duty>
                               <tr>
-                                  <td>1</td>
-                                  <td>地震局</td>
-                                  <td>北京</td>
-                                  <td>部门</td>
+                                  <td>${duty.yearm }</td>
+                                  <td>${duty.company }</td>
                               </tr>
-                              <tr>
-                                  <td>1</td>
-                                  <td>地震局</td>
-                                  <td>北京</td>
-                                  <td>部门</td>
-                              </tr>
-                              <tr>
-                                  <td>1</td>
-                                  <td>地震局</td>
-                                  <td>天津</td>
-                                  <td>部门</td>
-                              </tr>
+                              </#list>
                               </tbody>
                           </table>
                       </section>
@@ -95,8 +71,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger">返回</button>
                        </div>
                    </div>
                </form>

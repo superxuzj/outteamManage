@@ -1,5 +1,10 @@
 <@override name="head"> </@override> <@override name="body">
+<style>
 
+.aleft{
+	margin-left:480px;
+}
+</style>
 <div class="row">
 	<div class="col-lg-12">
 		<ol class="breadcrumb">
@@ -7,9 +12,13 @@
 			<li><a href="/">首页</a>
 			</li>
 			<li>轮值管理</li>
-			<li>新增</li>
-			<!-- <li>Dashboard</li>
-						<li>Dashb省道oard</li> -->
+			<li>
+			<#if yearm.id??>
+				修改
+			<#else>
+				添加
+			</#if>
+			</li>
 		</ol>
 	</div>
 </div>
@@ -17,21 +26,29 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form">                                                  
+               <form class="form-horizontal" role="form" id="ondutyform" action="/onduty/save">  
+               <input type="hidden" name="id"  value="${yearm.id }" />                                                
                    <div class="form-group">
                        <label class="col-lg-2 control-label">年月</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="yearm" value="" placeholder=" ">
+                           <input class="form-control Wdate" type="text" name="yearm" id="yearm" value="${yearm.yearm }" onclick="WdatePicker({dateFmt:'yyyy-MM'})"/>
                        </div>
                    </div>
                    
                    <div class="form-group">
                        <label class="col-lg-2 control-label">状态</label>
                        <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>开启</option>
-                                              <option>关闭</option>
-                                          </select>
+                           <select class="form-control m-bot15" name="state">
+                                <option value="1">开启</option>
+                                <option value="2">关闭</option>
+                            </select>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label class="col-lg-2 control-label">备注</label>
+                       <div class="col-lg-6">
+                           <input type="text" class="form-control" name="remark" value="${yearm.remark }">
                        </div>
                    </div>
                    
@@ -45,29 +62,28 @@
                           <table class="table">
                               <thead>
                               <tr>
-                                  <th>ID</th>
-                                  <th>名称</th>
+                                  <th>单位id</th>
                                   <th>省份</th>
-                                  <th>类型</th>
                               </tr>
                               </thead>
-                              <tbody id="companys">
-                              <tr>
-                                  <td>1</td>
-                                  <td>地震局</td>
-                                  <td>北京</td>
-                                  <td>部门</td>
-                              </tr>
-                              
+                              <tbody id="companytbody">
+                               <#list dutyList as duty>
+                              	 <tr>
+	                                  <th>${duty.cid }</th>
+	                                  <th>${duty.company }</th>
+                             	 </tr>
+                               </#list>
                               </tbody>
                           </table>
                       </section>
                   </div>
                    </div>
                    
+                   
+                    <input type="hidden" name="cids" id="cids"/>
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
+                           <button type="button" class="btn btn-primary" onclick="save()">保存</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
                    </div>
@@ -78,6 +94,10 @@
 </div>
 
 <script type="text/javascript">
+function save(){
+	$("#ondutyform").submit();
+}
+
 function addCompany(){
    	 layer.open({
 			type: 2,
