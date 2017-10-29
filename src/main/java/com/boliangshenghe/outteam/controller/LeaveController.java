@@ -46,8 +46,19 @@ public class LeaveController {
 		return "leave/list";
 	}
 	
+	/**
+	 * 审批看到详情
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("info")
-	public String info(){
+	public String info(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		Leave leave = leaveService.selectByPrimaryKey(id);
+		model.addAttribute("leave", leave);
 		return "leave/info";
 	}
 	
@@ -65,6 +76,32 @@ public class LeaveController {
 			outteam.setState("3");
 			outteam.setLid(leave.getId());
 			outteamService.updateByPrimaryKeySelective(outteam);
+		}
+		
+//		model.addAttribute("page", page);
+		return "redirect:/leave/list";
+	}
+	
+	/**
+	 * 受灾省份审批确认
+	 * @param request
+	 * @param response
+	 * @param leave
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("approval")
+	public String approval(HttpServletRequest request, 
+  			HttpServletResponse response,Leave leave,Model model){
+		if(leave.getId()!=null){
+			leave = leaveService.selectByPrimaryKey(leave.getId());
+			leave.setState("2");
+			leaveService.updateByPrimaryKeySelective(leave);
+			
+			Outteam outteam = outteamService.selectByPrimaryKey(leave.getOtid());
+			outteam.setState("4");
+			outteamService.updateByPrimaryKeySelective(outteam);
+			
 		}
 		
 //		model.addAttribute("page", page);

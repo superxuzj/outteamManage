@@ -102,8 +102,7 @@ public class OutTeamController {
 		System.out.println(outteam.getChooses()+" save");
 		return "redirect:/outteam/list";
 	}
-	/**
-	 * 跳转到修改页面
+	/**flight
 	 * @param request
 	 * @param response
 	 * @param id

@@ -58,6 +58,14 @@ public class CompanyController {
 		model.addAttribute("list", list);
 		return "company/all";
 	}
+	//第二梯队
+	@RequestMapping("second")
+	public String second(HttpServletRequest request, 
+  			HttpServletResponse response,Company company,Model model){
+		List<Company> list = companyService.selectCompanyList(company);
+		model.addAttribute("list", list);
+		return "company/second";
+	}
 	
 	@RequestMapping("info")
 	public String info(HttpServletRequest request, 
