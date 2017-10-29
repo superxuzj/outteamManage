@@ -38,6 +38,10 @@ public class OndutyService {
     	return ondutyMapper.deleteByPrimaryKey(id);
     }
     
+    public int deleteByOnduty(Onduty onduty){
+    	return ondutyMapper.deleteByOnduty(onduty);
+    }
+    
     public List<Onduty> selectOndutyList(Onduty record){
     	return ondutyMapper.selectOndutyList(record);
     }

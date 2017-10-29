@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Leave;
-import com.boliangshenghe.outteam.entity.Onduty;
 import com.boliangshenghe.outteam.repository.LeaveMapper;
 import com.boliangshenghe.outteam.util.CommonUtils;
 import com.github.pagehelper.PageHelper;
@@ -43,7 +42,7 @@ public class LeaveService {
     	return LeaveMapper.selectLeaveList(record);
     }
     
-    public PageBean<Leave> getOndutyByPage(Leave record,Integer pageNo) {
+    public PageBean<Leave> getLeaveByPage(Leave record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<Leave> list = this.LeaveMapper.selectLeaveList(record);
         return new PageBean<Leave>(list);
