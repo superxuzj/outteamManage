@@ -35,10 +35,11 @@
                           <span>预案管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
-                          <li><a class="" href="/plan">预案管理</a></li>
+                      <ul>
+                          <li><a class="" href="/hbplan">华北预案管理</a></li>
                           <li><a class="" href="/onduty">轮值管理 </a></li> 
                           <li><a class="" href="/respond">响应等级</a></li>
+                          <li><a class="" href="/link">联动管理</a></li>
                       </ul>
                   </li>
                   

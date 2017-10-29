@@ -79,7 +79,7 @@
                              <li class="divider"></li>
                              <li><a href="/leave/ask?id=${outteam.id }" title="结束">撤退申请</a></li>
                              <li class="divider"></li>
-                             <li><a href="/leave/info?id=${outteam.id }" title="结束">详情受灾省</a></li>
+                             <li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="结束">详情受灾省</a></li>
                            </ul>
                        </div>
                        </td>
@@ -92,4 +92,13 @@
            	这里是分页的页码
        </div>
    </div>
+   <script type="text/javascript">
+function vete(lid){
+	if(lid==""){
+		alert("该单位还未申请撤离，请等待！");
+		return;
+	}
+	window.location.href="/leave/info?id="+lid;
+}
+</script>
 </@override> <@extends name="/base/base.ftl"/>

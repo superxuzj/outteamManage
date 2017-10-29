@@ -30,33 +30,30 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" action="/leave/save" method="pose">                                                  
+               <form class="form-horizontal" role="form" action="/leave/approval" method="pose">                                                  
                    <div class="form-group col-lg-6" col-lg-6>
-                       <input type="hidden" name="id" value="${outteam.lid}" >
-                   	   <input type="hidden" name="otid" value="${outteam.id}" >
+                       <input type="hidden" name="id" value="${leave.id}" >
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
-                      	   <input type="hidden" name="eqid" value="${outteam.eqid}" >
-                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname}" >
+                           <input type="text" class="form-control" name="eqname" value="${leave.eqname}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位名称</label>
                        <div class="col-lg-9">
-                       	   <input type="hidden" name="cid" value="${outteam.cid}" >
-                           <input type="text" class="form-control" name="company" value="${outteam.company}" >
+                           <input type="text" class="form-control" name="company" value="${leave.company}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出队类型</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="outtype" value="${outteam.outtype}" >
+                           <input type="text" class="form-control" name="outtype" value="${leave.outtype}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">状态</label>
                        <div class="col-lg-9">
-                          <input type="text" class="form-control" name="state" value="${outteam.state}" >
+                          <input type="text" class="form-control" name="state" value="${leave.state}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -75,7 +72,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="submit" class="btn btn-primary">批准</button>
+                           <button type="submit" class="btn btn-primary" <#if leave.state!=1> disabled="disabled"</#if>>批准</button>
                            <button type="button" class="btn btn-danger">返回</button>
                        </div>
                    </div>
@@ -86,17 +83,7 @@
 </div>
 
 <script type="text/javascript">
-function choosePerson(){
-	
-   	 layer.open({
-			type: 2,
-		    area: ['750px', '561px'],
-		    fix: false, //不固定
-		    title: "队员列表",
-		    maxmin: true,
-		    content: '/outteam/personlist'
-		}); 
-}
+
 </script>
 
 </@override> <@extends name="/base/base.ftl"/>
