@@ -10,8 +10,6 @@ import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Link;
 import com.boliangshenghe.outteam.entity.LinkDetail;
-import com.boliangshenghe.outteam.entity.Onduty;
-import com.boliangshenghe.outteam.entity.Yearm;
 import com.boliangshenghe.outteam.repository.CompanyMapper;
 import com.boliangshenghe.outteam.repository.LinkDetailMapper;
 import com.boliangshenghe.outteam.repository.LinkMapper;

@@ -58,7 +58,7 @@
 
 	</div>
 	<div class="col-lg-12">
-		<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
+		<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
 	</div>
 	<div class="col-lg-12">
 		<section class="panel">
@@ -215,6 +215,10 @@
 		这里是分页的页码
 	</div>
 </div>
-
+<script type="text/javascript">
+	function add(){
+		window.location.href = "/user/goadd";
+	}
+</script>
 
 </@override> <@extends name="/base/base.ftl"/>
