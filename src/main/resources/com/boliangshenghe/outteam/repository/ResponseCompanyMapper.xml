@@ -140,4 +140,9 @@
 			LIMIT #{start} ,#{limit}
 		</if>
    	</select>
+   	
+   	<delete id="deleteByResponseCompany" parameterType="com.boliangshenghe.outteam.entity.ResponseCompany" >
+    delete from t_response_company
+    where rid = #{rid,jdbcType=INTEGER} 
+  </delete>
 </mapper>

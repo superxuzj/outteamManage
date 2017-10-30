@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Hbplan;
-import com.boliangshenghe.outteam.entity.Link;
+import com.boliangshenghe.outteam.entity.HbplanDetail;
+import com.boliangshenghe.outteam.service.HbplanDetailService;
 import com.boliangshenghe.outteam.service.HbplanService;
 
 /**
@@ -26,6 +29,9 @@ public class HbplanController {
 	
 	@Autowired
 	private HbplanService hbplanService;
+	
+	@Autowired
+	private HbplanDetailService hbplanDetailService;
 	
 	@RequestMapping
 	public String defaultIndex(){
@@ -42,7 +48,24 @@ public class HbplanController {
 	}
 	
 	@RequestMapping("info")
-	public String info(){
+	public String info(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(null!=id){
+			Hbplan hbplan = hbplanService.selectByPrimaryKey(id);
+			model.addAttribute("hbplan", hbplan);
+			
+			HbplanDetail hbplanDetail = new HbplanDetail();
+			hbplanDetail.setHbplanid(id);
+			hbplanDetail.setType("1");
+			List<HbplanDetail> firstdetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail);
+			model.addAttribute("firstdetailList", firstdetailList);
+			
+			HbplanDetail hbplanDetail2 = new HbplanDetail();
+			hbplanDetail2.setHbplanid(id);
+			hbplanDetail2.setType("2");
+			List<HbplanDetail> seconddetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail2);
+			model.addAttribute("seconddetailList", seconddetailList);
+		}
 		return "hbplan/info";
 	}
 	
@@ -60,7 +83,7 @@ public class HbplanController {
 		
 		hbplanService.addDetail(hbplan);
 		
-		return "redirect:/Hbplan/list";
+		return "redirect:/hbplan/list";
 	}
 	
 	/**
@@ -73,11 +96,17 @@ public class HbplanController {
 		if(null!=id){
 			Hbplan hbplan = hbplanService.selectByPrimaryKey(id);
 			model.addAttribute("hbplan", hbplan);
-			/*
-			LinkDetail linkDetail = new LinkDetail();
-			linkDetail.setLinkid(id);
-			List<LinkDetail> detailList = linkDetailService.selectLinkDetailList(linkDetail);
-			model.addAttribute("detailList", detailList);*/
+			HbplanDetail hbplanDetail = new HbplanDetail();
+			hbplanDetail.setHbplanid(id);
+			hbplanDetail.setType("1");
+			List<HbplanDetail> firstdetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail);
+			model.addAttribute("firstdetailList", firstdetailList);
+			
+			HbplanDetail hbplanDetail2 = new HbplanDetail();
+			hbplanDetail2.setHbplanid(id);
+			hbplanDetail2.setType("2");
+			List<HbplanDetail> seconddetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail2);
+			model.addAttribute("seconddetailList", seconddetailList);
 		}
 		
 		

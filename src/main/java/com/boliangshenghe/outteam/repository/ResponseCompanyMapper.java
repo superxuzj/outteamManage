@@ -6,6 +6,8 @@ import com.boliangshenghe.outteam.entity.ResponseCompany;
 
 public interface ResponseCompanyMapper {
     int deleteByPrimaryKey(Integer id);
+    
+    int deleteByResponseCompany(ResponseCompany record);
 
     int insert(ResponseCompany record);
 

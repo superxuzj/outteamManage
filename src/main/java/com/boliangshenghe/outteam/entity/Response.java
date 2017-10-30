@@ -13,6 +13,8 @@ public class Response {
     
     private Integer limit;
     
+    private String cids;
+    
     public Integer getStart() {
 		return start;
 	}
@@ -62,4 +64,12 @@ public class Response {
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
     }
+
+	public String getCids() {
+		return cids;
+	}
+
+	public void setCids(String cids) {
+		this.cids = cids;
+	}
 }
