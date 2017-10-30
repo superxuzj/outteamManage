@@ -93,7 +93,7 @@
        </div>
    </div>
    <script type="text/javascript">
-function vete(lid){
+	function vete(lid){
 	if(lid==""){
 		alert("该单位还未申请撤离，请等待！");
 		return;

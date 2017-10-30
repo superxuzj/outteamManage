@@ -1,5 +1,10 @@
 <@override name="head"> </@override> <@override name="body">
+<style>
 
+.secondtd{
+	padding-left:300px !important;
+}
+</style>
 <div class="row">
 	<div class="col-lg-12">
 		<ol class="breadcrumb">
@@ -17,55 +22,76 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form">                                                  
-                   <div class="form-group">
-                       <label class="col-lg-2 control-label">ID</label>
-                       <div class="col-lg-6">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
-                       </div>
-                   </div>
+               <form class="form-horizontal" role="form">  
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input class="form-control" type="text" name="name" value="${hbplan.name }"/>
                        </div>
                    </div>
                    
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">地震等级</label>
+                       <label class="col-lg-2 control-label">备注</label>
                        <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
+                           <input class="form-control" type="text" name="remark" value="${hbplan.remark }"/>
                        </div>
                    </div>
+                   
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">响应等级</label>
-                       <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
-                       </div>
+                       <div class="col-lg-offset-1 col-sm-7">
+                      <section class="panel personpanel">
+                          <header class="panel-heading">
+                                                                   第一梯队
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>单位id</th>
+                                  <th>省份</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <#list firstdetailList as detail>
+                              	 <tr>
+	                                  <th>${detail.cid }</th>
+	                                  <th>${detail.company }</th>
+                             	 </tr>
+                               </#list>
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
                    </div>
+                   <input type="hidden" name="cids" id="cids"/>
+                   
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">预案时间</label>
-                       <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
-                       </div>
+                       <div class="col-lg-offset-1 col-sm-7">
+                      <section class="panel personpanel">
+                          <header class="panel-heading">
+                                                                   第二梯队
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>单位id</th>
+                                  <th class="secondtd">省份</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <#list seconddetailList as detail>
+                              	 <tr>
+	                                  <th>${detail.cid }</th>
+	                                  <th class="secondtd">${detail.company }</th>
+                             	 </tr>
+                               </#list>
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
                    </div>
-                   <div class="form-group">
-                       <label class="col-lg-2 control-label">创建时间</label>
-                       <div class="col-lg-6">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
-                       </div>
-                   </div>
+                   <input type="hidden" name="secondcids" id="secondcids"/>
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
                    </div>
@@ -74,6 +100,5 @@
        </section>
 	</div>
 </div>
-
 
 </@override> <@extends name="/base/base.ftl"/>

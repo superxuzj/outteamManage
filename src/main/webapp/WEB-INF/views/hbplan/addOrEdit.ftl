@@ -4,6 +4,9 @@
 .aleft{
 	margin-left:480px;
 }
+.secondtd{
+	padding-left:290px !important;
+}
 </style>
 <div class="row">
 	<div class="col-lg-12">
@@ -38,7 +41,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">备注</label>
                        <div class="col-lg-6">
-                           <input class="form-control" type="text" name="remark" value="${link.remark }"/>
+                           <input class="form-control" type="text" name="remark" value="${hbplan.remark }"/>
                        </div>
                    </div>
                    
@@ -57,10 +60,10 @@
                               </tr>
                               </thead>
                               <tbody id="companytbody">
-                               <#list detailList as duty>
+                               <#list firstdetailList as detail>
                               	 <tr>
-	                                  <th>${duty.cid }</th>
-	                                  <th>${duty.company }</th>
+	                                  <th>${detail.cid }</th>
+	                                  <th>${detail.company }</th>
                              	 </tr>
                                </#list>
                               </tbody>
@@ -81,14 +84,14 @@
                               <thead>
                               <tr>
                                   <th>单位id</th>
-                                  <th>省份</th>
+                                  <th class="secondtd">省份</th>
                               </tr>
                               </thead>
                               <tbody id="secondcompanytbody">
-                               <#list detailList as duty>
+                               <#list seconddetailList as detail>
                               	 <tr>
-	                                  <th>${duty.cid }</th>
-	                                  <th>${duty.company }</th>
+	                                  <th>${detail.cid }</th>
+	                                  <th class="secondtd">${detail.company }</th>
                              	 </tr>
                                </#list>
                               </tbody>

@@ -39,19 +39,17 @@
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-									href="" title="Bootstrap 3 themes generator"> 操作<span
+									href=""> 操作<span
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/plan/info"
-										title="Bootstrap 3 themes generator">详情</a>
+									<li><a href="/hbplan/info?id=${hbplan.id }"
+										title="详情">详情</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/plan/info"
-										title="Bootstrap 3 themes generator">修改</a>
+									<li><a href="/hbplan/goadd?id=${hbplan.id }"
+										title="修改">修改</a>
 									</li>
-									<li class="divider"></li>
-									<li><a href="" title="Bootstrap 3 themes generator">结束</a>
 									</li>
 								</ul>
 							</div></td>
