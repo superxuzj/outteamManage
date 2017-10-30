@@ -3,6 +3,7 @@ package com.boliangshenghe.outteam.controller;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,8 @@ import org.apache.poi.hwpf.usermodel.TableRow;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.boliangshenghe.outteam.entity.Response;
+import com.boliangshenghe.outteam.entity.ResponseCompany;
 
 /**
  *用户管理
@@ -48,6 +51,28 @@ public class UserController {
 	@RequestMapping("info")
 	public String info(){
 		return "user/info";
+	}
+	
+	/**
+	 * 跳转到新增页面
+	 * @return
+	 */
+	@RequestMapping("goadd")
+	public String goadd(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(null!=id){
+			/*Response resp = responseService.selectByPrimaryKey(id);
+			model.addAttribute("response", resp);
+			
+			ResponseCompany responseCompany = new ResponseCompany();
+			responseCompany.setRid(id);
+			List<ResponseCompany> companyList = responseCompanyService.selectResponseCompanyList(responseCompany);
+			model.addAttribute("companyList", companyList);*/
+			
+		}
+		
+		
+		return "user/addOrEdit";
 	}
 	
 	/**

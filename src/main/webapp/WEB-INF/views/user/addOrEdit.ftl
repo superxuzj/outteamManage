@@ -29,12 +29,6 @@
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form">                                                  
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">ID</label>
-                       <div class="col-lg-7">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
-                       </div>
-                   </div>
-                   <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">姓名</label>
                        <div class="col-lg-7">
                            <input type="text" class="form-control" id="l-name" placeholder=" ">

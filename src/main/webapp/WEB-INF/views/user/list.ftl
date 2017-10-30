@@ -91,7 +91,7 @@
 										title="Bootstrap 3 themes generator">详情</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/user/info"
+									<li><a href="/user/goadd"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
@@ -145,7 +145,7 @@
 										title="Bootstrap 3 themes generator">详情</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/user/info"
+									<li><a href="/user/goadd"
 										title="Bootstrap 3 themes generator">修改</a>
 									</li>
 									<li class="divider"></li>
