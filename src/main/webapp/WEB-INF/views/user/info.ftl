@@ -29,53 +29,47 @@
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form">                                                  
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">ID</label>
-                       <div class="col-lg-7">
-                           <input type="text" class="form-control" id="f-name" value="123" placeholder=" ">
-                       </div>
-                   </div>
-                   <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">姓名</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="name" value="${user.name }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">性别</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <select class="form-control m-bot15" name="sex">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">身份证号</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="idcard" value="${user.idcard }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                         <input type="text" class="form-control" name="company" value="${user.company }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">联系电话</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="phone" value="${user.phone }">
                        </div>
                    </div>
                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">救援专业</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" id="l-name" placeholder=" ">
+                           <input type="text" class="form-control" name="profession" value="${user.profession }">
                        </div>
                    </div>
-                   
-                   
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="submit" class="btn btn-primary">Save</button>
                            <button type="button" class="btn btn-danger">Cancel</button>
                        </div>
                    </div>

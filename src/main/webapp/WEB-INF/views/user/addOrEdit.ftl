@@ -53,7 +53,7 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">身份证号</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" name="name" value="${user.name }">
+                           <input type="text" class="form-control" name="idcard" value="${user.idcard }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -61,7 +61,7 @@
                        <div class="col-lg-7">
                           <select class="form-control m-bot15" name="cid">
                              <#list companyList as company>
-                                <option value="${company.id }">${company.province }</option>
+                                <option value="${company.id }"  <#if company.id==user.cid>selected="selected"</#if> >${company.province }</option>
                              </#list>
                             </select>
                        </div>
@@ -69,14 +69,14 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">联系电话</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" name="name" value="${user.name }">
+                           <input type="text" class="form-control" name="phone" value="${user.phone }">
                        </div>
                    </div>
                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">救援专业</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" name="name" value="${user.name }">
+                           <input type="text" class="form-control" name="profession" value="${user.profession }">
                        </div>
                    </div>
                    <div class="form-group">
