@@ -61,6 +61,7 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="/person">我的信息</a></li>                          
+                         
                           <!-- <li><a class="" href="/personteam">我的出队</a></li> -->
                       </ul>
                   </li>  
