@@ -13,11 +13,12 @@
     <result column="cid" property="cid" jdbcType="INTEGER" />
     <result column="company" property="company" jdbcType="VARCHAR" />
     <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, roleid, name, username, phone, password, sex, idcard, cid, company, profession, 
-    createtime
+    state, createtime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -33,11 +34,13 @@
     insert into t_user (ID, roleid, name, 
       username, phone, password, 
       sex, idcard, cid, company, 
-      profession, createtime)
+      profession, state, createtime
+      )
     values (#{id,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
-      #{profession,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+      #{profession,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.User" >
     insert into t_user
@@ -74,6 +77,9 @@
       </if>
       <if test="profession != null" >
         profession,
+      </if>
+      <if test="state != null" >
+        state,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -113,6 +119,9 @@
       <if test="profession != null" >
         #{profession,jdbcType=VARCHAR},
       </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -151,6 +160,9 @@
       <if test="profession != null" >
         profession = #{profession,jdbcType=VARCHAR},
       </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -169,6 +181,7 @@
       cid = #{cid,jdbcType=INTEGER},
       company = #{company,jdbcType=VARCHAR},
       profession = #{profession,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -190,6 +203,9 @@
         </if>
          <if test="cid != null">
             AND cid = #{cid,jdbcType=INTEGER}
+        </if>
+        <if test="state != null">
+            AND state = #{state,jdbcType=VARCHAR}
         </if>
     </where>
    	    <if test="start != null and limit != null"> 

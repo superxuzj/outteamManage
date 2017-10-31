@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.service.CompanyService;
+import com.boliangshenghe.outteam.service.RoleService;
 import com.boliangshenghe.outteam.service.UserService;
 
 /**
@@ -40,19 +42,20 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/user/list";
 	}
 	
 	@RequestMapping("list")
-	public String index(){
+	public String index(HttpServletRequest request, 
+  			HttpServletResponse response,User user,Model model,
+  			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
+		user.setState("1");//state为0 逻辑删除 
+		PageBean<User> page =userService.getUserByPage(user, pageNo);
+		model.addAttribute("page", page);
 		return "user/list";
-	}
-	
-	@RequestMapping("info")
-	public String info(){
-		return "user/info";
 	}
 	
 	/**
@@ -72,6 +75,15 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 	
+	@RequestMapping("info")
+	public String info(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(id!=null){
+			User user = userService.selectByPrimaryKey(id);
+			model.addAttribute("user", user);
+		}
+		return "user/info";
+	}
 	/**
 	 * 跳转到新增页面
 	 * @return
@@ -80,18 +92,30 @@ public class UserController {
 	public String goadd(HttpServletRequest request, 
   			HttpServletResponse response,Integer id,Model model){
 		if(null!=id){
-			/*Response resp = responseService.selectByPrimaryKey(id);
-			model.addAttribute("response", resp);
-			
-			ResponseCompany responseCompany = new ResponseCompany();
-			responseCompany.setRid(id);
-			List<ResponseCompany> companyList = responseCompanyService.selectResponseCompanyList(responseCompany);
-			model.addAttribute("companyList", companyList);*/
+			User user = userService.selectByPrimaryKey(id);
+			model.addAttribute("user", user);
 		}
 		
 		List<Company> companyList = companyService.selectCompanyList(new Company());
 		model.addAttribute("companyList", companyList);
+		
+		/*
+		 * 系统里面添加的只是队员
+		 * List<Role> roleList = roleService.selectRoleList(new Role());
+		model.addAttribute("roleList", roleList);*/
+		
 		return "user/addOrEdit";
+	}
+	
+	@RequestMapping("del")
+	public String del(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(id!=null){
+			User user = userService.selectByPrimaryKey(id);
+			user.setState("0");//逻辑删除
+			userService.updateByPrimaryKeySelective(user);
+		}
+		return "redirect:/user/list";
 	}
 	
 	/**

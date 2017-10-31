@@ -11,7 +11,9 @@ import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Link;
 import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.entity.User;
+import com.boliangshenghe.outteam.repository.CompanyMapper;
 import com.boliangshenghe.outteam.repository.UserMapper;
+import com.boliangshenghe.outteam.util.CommonUtils;
 import com.github.pagehelper.PageHelper;
 
 @Service
@@ -19,6 +21,9 @@ public class UserService {
 
 	@Autowired
 	UserMapper userMapper;
+	
+	@Autowired
+	CompanyMapper companyMapper;
 	
 	public int insertSelective(User user) {
         return userMapper.insertSelective(user);
@@ -36,13 +41,16 @@ public class UserService {
     	return userMapper.selectUserList(record);
     }
     
-    public PageBean<User> getUserByPage(User record,Integer pageNo,Integer size) {
-        PageHelper.startPage(pageNo,10);
+    public PageBean<User> getUserByPage(User record,Integer pageNo) {
+        PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<User> list = this.userMapper.selectUserList(record);
         return new PageBean<User>(list);
     }
     
     public void addDetail(User user){
+    	Company company = companyMapper.selectByPrimaryKey(user.getCid());
+    	user.setCompany(company.getProvince());
+    	user.setState("1");
     	if(null == user.getId()){
     		userMapper.insertSelective(user);
     	}else{

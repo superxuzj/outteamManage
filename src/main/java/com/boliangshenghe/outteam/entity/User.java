@@ -39,6 +39,12 @@ public class User {
     
     private String ischoose;
     
+    private String state;
+    
+    private String phoneone;
+
+    private String phonetwo;
+
     public Integer getId() {
         return id;
     }
@@ -181,5 +187,29 @@ public class User {
 
 	public void setIschoose(String ischoose) {
 		this.ischoose = ischoose;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getPhoneone() {
+		return phoneone;
+	}
+
+	public void setPhoneone(String phoneone) {
+		this.phoneone = phoneone;
+	}
+
+	public String getPhonetwo() {
+		return phonetwo;
+	}
+
+	public void setPhonetwo(String phonetwo) {
+		this.phonetwo = phonetwo;
 	}
 }
