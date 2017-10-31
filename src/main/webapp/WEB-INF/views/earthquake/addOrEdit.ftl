@@ -40,11 +40,14 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">区域</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="area" value="${earthquake.area}"/>
+                       		<select class="form-control m-bot15" name="area" id="area">
+                       			 <option value="非华北" <#if earthquake.area=='非华北' >selected</#if> >非华北</option>
+                                 <option value="华北"  <#if earthquake.area=='华北' >selected</#if> >华北</option>
+                            </select>
                        </div>
                    </div>
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">省市</label>
+                       <label class="col-lg-2 control-label">省份</label>
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="province" value="${earthquake.province}"/>
                        </div>
@@ -59,10 +62,10 @@
                        <label class="col-lg-2 control-label">地震等级</label>
                        <div class="col-lg-6">
                            <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
                        </div>
                    </div>
                    <div class="form-group">
@@ -95,7 +98,7 @@
                            <input type="text" class="form-control" name="depth" value="${earthquake.depth}">
                        </div>
                    </div>
-                   <div class="form-group">
+                   <div class="form-group"  id="responddiv">
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
                           <select class="form-control m-bot15" name="responseid" id="responseid">
@@ -167,5 +170,15 @@
 		
 		// $("#earthquakeForm").submit();
 	}
+	
+	
+	$(document).on("change",'select#area',function(){
+		var val = $(this).val();
+		if(val=="华北"){
+			$("#responddiv").hide();
+		}else{
+			$("#responddiv").show();
+		}
+	});
 </script>
 </@override> <@extends name="/base/base.ftl"/>

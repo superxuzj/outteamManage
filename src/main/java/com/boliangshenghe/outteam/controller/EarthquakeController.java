@@ -197,11 +197,13 @@ public class EarthquakeController extends BaseController{
 	public String ruleoutteam(HttpServletRequest request, 
   			HttpServletResponse response,Integer id,Integer rid,Model model){
 		System.out.println(id);
-		Response resinfo = responseService.selectByPrimaryKey(rid);//在页面上选取的响应等级
-		Set<String> set = new HashSet<String>();
 		
 		Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
 		model.addAttribute("earthquake", earthquake);
+		
+		Response resinfo = responseService.selectByPrimaryKey(rid);//在页面上选取的响应等级
+		Set<String> set = new HashSet<String>();
+		
 		
 		/**
 		 * 震源省份从单位表里面取 
@@ -216,18 +218,24 @@ public class EarthquakeController extends BaseController{
 			set.add(comlist.get(0).getProvince());
 		}
 		
-		
-		ResponseCompany responseCompany = new ResponseCompany();
-		responseCompany.setRid(resinfo.getId());//根据响应id查
-		List<ResponseCompany> rcList = responseCompanyService.selectResponseCompanyList(responseCompany);
-		model.addAttribute("responseName", resinfo.getName());
-		model.addAttribute("rcList", rcList);//响应等级出队单位
-		
-		if(rcList!=null && rcList.size()>0){
-			for (ResponseCompany temp : rcList) {
-				set.add(temp.getCompany());
+		if(earthquake.getArea().equals("华北")){
+			
+			
+			
+		}else{
+			ResponseCompany responseCompany = new ResponseCompany();
+			responseCompany.setRid(resinfo.getId());//根据响应id查
+			List<ResponseCompany> rcList = responseCompanyService.selectResponseCompanyList(responseCompany);
+			model.addAttribute("responseName", resinfo.getName());
+			model.addAttribute("rcList", rcList);//响应等级出队单位
+			
+			if(rcList!=null && rcList.size()>0){
+				for (ResponseCompany temp : rcList) {
+					set.add(temp.getCompany());
+				}
 			}
 		}
+		
 		
 		Onduty onduty = new Onduty();
 		onduty.setYearm(CodeUtils.getYearMonth());
