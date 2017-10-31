@@ -12,6 +12,11 @@ public class IndexController {
 	@Autowired
 	public UserService userService;
 	@RequestMapping("/")
+	public String all(){
+		return "redirect:/index";
+	}
+	
+	@RequestMapping("/index")
 	public String index(){
 		return "index";
 	}

@@ -85,4 +85,9 @@
 	<!-- <mvc:resources mapping="/html/**" location="/WEB-INF/views/html/" />
 	<mvc:resources mapping="/code/**" location="/WEB-INF/views/code/" /> -->
 	 <mvc:resources mapping="/outteamstatic/**" location="/outteamstatic/" />
+	 
+	 
+	 <mvc:interceptors>
+		<bean class="com.boliangshenghe.outteam.interceptor.CommonInterceptor" />
+	</mvc:interceptors>
 </beans>

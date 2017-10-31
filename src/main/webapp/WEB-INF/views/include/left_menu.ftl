@@ -1,41 +1,45 @@
+ <style>
+
+</style>   
+ 
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">  
-             	 <li>
+             	 <li <#if _request.requestURI?index_of("/index")!=-1> class="active" </#if>>
                       <a class="" href="/">
                           <span>首页</span>
                       </a>
                   </li>              
-                  <li>
+                  <li <#if _request.requestURI?index_of("/earthquake")!=-1> class="active" </#if>>
                       <a class="" href="/earthquake">
                           <span>地震事件管理</span>
                       </a>
                   </li>
-                  <li>
+                  <li <#if _request.requestURI?index_of("/outteam")!=-1> class="active" </#if>>
                       <a class="" href="/outteam">
                           <span>出队管理</span>
                       </a>
                   </li>
                   
-                  <li>
+                  <li <#if _request.requestURI?index_of("/leave")!=-1> class="active" </#if>>
                       <a class="" href="/leave">
                           <span>撤离管理</span>
                       </a>
                   </li>
                   
-                  <li class="active" >
+                  <li <#if _request.requestURI?index_of("/company")!=-1> class="active" </#if>>
                       <a class="" href="/company">
                           <span>单位管理</span>
                       </a>
                   </li>
                   
                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
+                      <a href="javascript:;" class="" id="tongglehide">
                           <span>预案管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul>
+                      <ul class="sub">
                           <li><a class="" href="/hbplan">华北预案管理</a></li>
                           <li><a class="" href="/onduty">轮值管理 </a></li> 
                           <li><a class="" href="/respond">响应等级</a></li>
@@ -67,7 +71,7 @@
                   </li>  
                   
                    <li>
-                      <a class="" href="index.html">
+                      <a class="" href="#">
                           <span>统计分析</span>
                       </a>
                   </li>
@@ -75,3 +79,6 @@
               <!-- sidebar menu end-->
           </div>
       </aside>
+<script>
+
+</script>

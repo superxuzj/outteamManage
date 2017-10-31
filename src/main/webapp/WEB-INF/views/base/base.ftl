@@ -29,6 +29,7 @@
     <link href="<@ps.s/>/css/style-responsive.css" rel="stylesheet" />
 	<link href="<@ps.s/>/css/xcharts.min.css" rel=" stylesheet">
 	<link href="<@ps.s/>/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+	<script src="<@ps.s/>/js/jquery-1.8.3.min.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
       <script src="<@ps.s/>/js/html5shiv.js"></script>

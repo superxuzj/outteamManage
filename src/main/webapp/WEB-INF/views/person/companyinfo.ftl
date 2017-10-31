@@ -69,11 +69,9 @@
 	</div>
 </div>
 <script type="text/javascript">
-<script type="text/javascript">
 	function save(){
 		$("#companyuserform").submit();
 	}
-</script>
 </script>
 
 </@override> <@extends name="/base/base.ftl"/>
