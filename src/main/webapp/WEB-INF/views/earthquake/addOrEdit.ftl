@@ -49,7 +49,12 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">省份</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="province" value="${earthquake.province}"/>
+                       
+                       <select class="form-control m-bot15" name="province" id="province">
+                       		<#list companyList as company>
+                       			 <option value="${company.province }" >${company.province }</option>
+                       			 </#list>
+                            </select>
                        </div>
                    </div>
                    <div class="form-group">
@@ -61,11 +66,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">地震等级</label>
                        <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                            </select>
+                           <input type="text" class="form-control" name="magnitude" value="${earthquake.magnitude}"/>
                        </div>
                    </div>
                    <div class="form-group">

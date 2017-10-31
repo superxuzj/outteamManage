@@ -19,12 +19,16 @@ import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseController;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
+import com.boliangshenghe.outteam.entity.Link;
+import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.entity.Onduty;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.service.LinkDetailService;
+import com.boliangshenghe.outteam.service.LinkService;
 import com.boliangshenghe.outteam.service.OndutyService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.ResponseCompanyService;
@@ -54,6 +58,12 @@ public class EarthquakeController extends BaseController{
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private LinkService linkService;
+	
+	@Autowired
+	private LinkDetailService linkDetailService;
 	
 	@Autowired
 	private ResponseCompanyService responseCompanyService;
@@ -97,6 +107,10 @@ public class EarthquakeController extends BaseController{
 		List<Response> responseList = responseService.selectResponseList(new Response());
 		model.addAttribute("responseList", responseList);
 		
+		Company company = new Company();
+		company.setType("1");
+		List<Company> companyList = companyService.selectCompanyList(company);
+		model.addAttribute("companyList", companyList);
 		return "earthquake/addOrEdit";
 	}
 	/**
@@ -186,7 +200,7 @@ public class EarthquakeController extends BaseController{
 	}
 	
 	/**
-	 * 震源省份 响应等级 轮值单位这三个判断规则应该出队的单位
+	 * 震源省份 响应等级 联动 轮值单位这三个判断规则应该出队的单位
 	 * @param request
 	 * @param response
 	 * @param id
@@ -203,7 +217,6 @@ public class EarthquakeController extends BaseController{
 		
 		Response resinfo = responseService.selectByPrimaryKey(rid);//在页面上选取的响应等级
 		Set<String> set = new HashSet<String>();
-		
 		
 		/**
 		 * 震源省份从单位表里面取 
@@ -234,6 +247,25 @@ public class EarthquakeController extends BaseController{
 					set.add(temp.getCompany());
 				}
 			}
+			
+			//联动方案
+			Link link = new Link();
+			link.setRid(resinfo.getId());
+			link.setEqcompany(earthquake.getProvince());
+			List<Link> linkList = linkService.selectLinkList(link);
+			if(null != linkList && linkList.size()>0){
+				Link temp = linkList.get(0);
+				LinkDetail linkDetail = new LinkDetail();
+				linkDetail.setLinkid(temp.getId());
+				List<LinkDetail> linkDetailList = linkDetailService.selectLinkDetailList(linkDetail);
+				model.addAttribute("linkDetailList", linkDetailList);//联动方案出队单位
+				if(linkDetailList!=null && linkDetailList.size()>0){
+					for (LinkDetail detail : linkDetailList) {
+						set.add(detail.getCompany());//添加到set里面
+					}
+				}
+			}
+			
 		}
 		
 		
