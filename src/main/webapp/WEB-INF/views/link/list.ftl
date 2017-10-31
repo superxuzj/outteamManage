@@ -91,11 +91,13 @@
 					</tr>
 					</#list>
 				</tbody>
-
 			</table>
 		</section>
-		这里是分页的页码
 	</div>
+	<div class="col-lg-12">
+				<#import "/macros/pager.ftl" as p/>
+				<@p.pager page/>
+			 </div>
 </div>
 <script type="text/javascript">
 	function add(){

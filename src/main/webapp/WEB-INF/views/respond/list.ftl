@@ -53,7 +53,6 @@
 					</tr>
 					</#list>
 				</tbody>
-
 			</table>
 		</section>
 	</div>
