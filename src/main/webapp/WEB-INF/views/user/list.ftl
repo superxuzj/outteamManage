@@ -78,7 +78,7 @@
 						<td>${user.name }</td>
 						<td>
 						<#if user.sex==1>
-						男
+						男 
 						<#else>
 						女
 						</#if>
