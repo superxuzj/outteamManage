@@ -13,6 +13,12 @@ public class Hbplan {
 
     private Date createtime;
     
+    private String companys;
+
+    private String low;
+
+    private String high;
+    
     private Integer limit;
     
     private Integer start;
@@ -92,4 +98,28 @@ public class Hbplan {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+	public String getCompanys() {
+		return companys;
+	}
+
+	public void setCompanys(String companys) {
+		this.companys = companys;
+	}
+
+	public String getLow() {
+		return low;
+	}
+
+	public void setLow(String low) {
+		this.low = low;
+	}
+
+	public String getHigh() {
+		return high;
+	}
+
+	public void setHigh(String high) {
+		this.high = high;
+	}
 }

@@ -19,6 +19,8 @@ import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseController;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
+import com.boliangshenghe.outteam.entity.Hbplan;
+import com.boliangshenghe.outteam.entity.HbplanDetail;
 import com.boliangshenghe.outteam.entity.Link;
 import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.entity.Onduty;
@@ -27,6 +29,8 @@ import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.service.HbplanDetailService;
+import com.boliangshenghe.outteam.service.HbplanService;
 import com.boliangshenghe.outteam.service.LinkDetailService;
 import com.boliangshenghe.outteam.service.LinkService;
 import com.boliangshenghe.outteam.service.OndutyService;
@@ -68,6 +72,12 @@ public class EarthquakeController extends BaseController{
 	@Autowired
 	private ResponseCompanyService responseCompanyService;
 	
+	@Autowired
+	private HbplanService hbplanService;
+	
+	@Autowired
+	private HbplanDetailService hbplanDetailService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/earthquake/list";
@@ -80,6 +90,7 @@ public class EarthquakeController extends BaseController{
 		
 		PageBean<Earthquake> page = earthquakeService.getEarthquakeByPage(earthquake, pageNo);
 		model.addAttribute("page", page);
+		
 		return "earthquake/list";
 	}
 	
@@ -163,8 +174,6 @@ public class EarthquakeController extends BaseController{
 			earthquakeService.updateByPrimaryKeySelective(earthquake);
 			return earthquake.getId().toString();
 		}
-		
-		
 	}
 	
 	/**
@@ -231,8 +240,23 @@ public class EarthquakeController extends BaseController{
 			set.add(comlist.get(0).getProvince());
 		}
 		
-		if(earthquake.getArea().equals("华北")){
+		if(earthquake.getArea().equals("华北")){//华北地区的出队判断
+			//华北地区 通过t_hbplan 来判断
+			Hbplan hbplan = new Hbplan();
+			hbplan.setCompanys(earthquake.getProvince());//发震省份
+			hbplan.setHigh(earthquake.getMagnitude());//地震级数
+			Hbplan hbplantemp = hbplanService.selectHbplanByCompanys(hbplan);
 			
+			HbplanDetail hbplanDetail = new HbplanDetail();
+			hbplanDetail.setHbplanid(hbplantemp.getId());
+			List<HbplanDetail> hbplanDetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail);
+			if(hbplanDetailList!=null && hbplanDetailList.size()>0){
+				for (HbplanDetail detail : hbplanDetailList) {
+					set.add(detail.getCompany());//添加到set里面
+				}
+			}
+			model.addAttribute("hbplan", hbplantemp);
+			model.addAttribute("hbplanDetailList", hbplanDetailList);
 			
 			
 		}else{
@@ -259,6 +283,7 @@ public class EarthquakeController extends BaseController{
 				linkDetail.setLinkid(temp.getId());
 				List<LinkDetail> linkDetailList = linkDetailService.selectLinkDetailList(linkDetail);
 				model.addAttribute("linkDetailList", linkDetailList);//联动方案出队单位
+				model.addAttribute("link", temp);//联动方案出队单位
 				if(linkDetailList!=null && linkDetailList.size()>0){
 					for (LinkDetail detail : linkDetailList) {
 						set.add(detail.getCompany());//添加到set里面
@@ -295,10 +320,10 @@ public class EarthquakeController extends BaseController{
 	 */
 	@RequestMapping("addoutteam")
 	public String addoutteam(HttpServletRequest request, 
-  			HttpServletResponse response,Integer eqid,Model model){
+  			HttpServletResponse response,Integer eqid,String cids,Model model){
 		System.out.println(eqid);
 		
-		earthquakeService.addoutteam(eqid);
+		earthquakeService.addoutteam(eqid,cids);
 		
 		return "redirect:/earthquake/list";
 	}

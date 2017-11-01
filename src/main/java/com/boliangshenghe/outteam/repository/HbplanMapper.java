@@ -18,4 +18,6 @@ public interface HbplanMapper {
     int updateByPrimaryKey(Hbplan record);
     
     List<Hbplan> selectHbplanList(Hbplan record);
+    
+    List<Hbplan> selectHbplanByCompanys(Hbplan record);
 }

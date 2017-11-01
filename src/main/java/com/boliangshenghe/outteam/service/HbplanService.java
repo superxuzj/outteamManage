@@ -54,6 +54,21 @@ public class HbplanService {
     	return hbplanMapper.selectHbplanList(record);
     }
     
+    /**
+     * 根据省份like 
+     * 地震等级比较
+     * @param record
+     * @return
+     */
+    public Hbplan selectHbplanByCompanys(Hbplan record){
+    	List<Hbplan> list = hbplanMapper.selectHbplanByCompanys(record);
+    	if(null!=list && list.size()>0){
+    		return list.get(0);
+    	}else{
+    		return new Hbplan();
+    	}
+    }
+    
     public PageBean<Hbplan> gethbplanByPage(Hbplan record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<Hbplan> list = this.hbplanMapper.selectHbplanList(record);
