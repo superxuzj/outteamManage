@@ -39,6 +39,13 @@
                    </div>
                    
                    <div class="form-group">
+                       <label class="col-lg-2 control-label">受灾省份</label>
+                       <div class="col-lg-6">
+                           <input class="form-control" type="text" name="name" value="${hbplan.name }"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group">
                        <label class="col-lg-2 control-label">备注</label>
                        <div class="col-lg-6">
                            <input class="form-control" type="text" name="remark" value="${hbplan.remark }"/>
