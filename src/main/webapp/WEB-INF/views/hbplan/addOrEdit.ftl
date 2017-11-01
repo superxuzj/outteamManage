@@ -29,7 +29,8 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" id="hbplanform" action="/hbplan/save">  
+               <form class="form-horizontal" role="form" id="hbplanform"
+               data-validator-option="{timely:2, theme:'yellow_top'}" action="/hbplan/save">  
                <input type="hidden" name="id"  value="${hbplan.id }" />                                                
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
@@ -41,7 +42,14 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">受灾省份</label>
                        <div class="col-lg-6">
-                           <input class="form-control" type="text" name="name" value="${hbplan.name }"/>
+                           <input class="form-control" type="text" name="companys" value="${hbplan.companys }" placeholder="多个省份用空格"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label class="col-lg-2 control-label">对应震级</label>
+                       <div class="col-lg-6">
+                           <input  type="text" name="low" value="${hbplan.low }"/>----<input  type="text" name="high" value="${hbplan.high }"/>
                        </div>
                    </div>
                    
