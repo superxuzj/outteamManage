@@ -28,7 +28,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eqname" value="${earthquake.eqname}"/>
+                           <input type="text" class="form-control" name="eqname" id="eqname" value="${earthquake.eqname}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -66,7 +66,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">地震等级</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="magnitude" value="${earthquake.magnitude}"/>
+                           <input type="text" class="form-control" name="magnitude" id="magnitude" value="${earthquake.magnitude}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -103,6 +103,7 @@
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
                           <select class="form-control m-bot15" name="responseid" id="responseid">
+                          <option value="" >请选择</option>
 	                          <#list responseList as response>
 	                          	<option value="${response.id }" <#if response.id==earthquake.responseid>selected="selected"</#if> >
 	                          		${response.name }
@@ -126,6 +127,18 @@
 
 <script type="text/javascript">
 	function save(){
+		if($("#eqname").val()==""){
+			alert("请输入地震名称！");
+			return false;
+		}
+		if($("#magnitude").val()==""){
+			alert("请输入地震等级！");
+			return false;
+		}
+		if($("#area").val()=="非华北" && $("#responseid").val()==""){
+			alert("请选择响应等级");
+			return false;
+		}
 		var rid=$("#responseid").val();
 		var id = $("#hiddenid").val();
 		//新增
@@ -139,7 +152,7 @@
 	            	$("#hiddenid").val(data);//返回的地震id赋值给id框
 	            	layer.open({
 	        			type: 2,
-	        		    area: ['750px', '561px'],
+	        		    area: ['780px', '561px'],
 	        		    fix: false, //不固定
 	        		    title: "出队列表",
 	        		    maxmin: true,
@@ -156,14 +169,15 @@
 		         	if(result=="success"){
 		         		layer.open({
 		        			type: 2,
-		        		    area: ['750px', '561px'],
+		        		    area: ['780px', '561px'],
 		        		    fix: false, //不固定
 		        		    title: "出队列表",
 		        		    maxmin: true,
 		        		    content: '/earthquake/ruleoutteam?id='+id+"&rid="+rid
 		        		}); 
 		         	}else{
-		         		window.location.url="/earthquake/list";
+		         		alert("已确定出队单位，请在出队管理界面查看！");
+		         		window.location.href="/earthquake/list";
 		         	}
 		         }
 		     });

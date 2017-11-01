@@ -100,6 +100,9 @@
 	<script src="<@ps.s/>/js/jquery.slimscroll.min.js"></script>
 	<script src="<@ps.s/>/layer/layer.js"></script>
 	
+	<script src="<@ps.s/>/js/validate/jquery.validator.min.js?local=zh-CN"></script>
+
+	
 	<script type="text/javascript" src="<@ps.s/>/js/My97DatePicker/WdatePicker.js"></script>
 
   </body>

@@ -26,7 +26,8 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" id="ondutyform" action="/onduty/save">  
+               <form class="form-horizontal" role="form" id="ondutyform"
+               data-validator-option="{timely:2, theme:'yellow_top'}" action="/onduty/save">  
                <input type="hidden" name="id"  value="${yearm.id }" />                                                
                    <div class="form-group">
                        <label class="col-lg-2 control-label">年月</label>

@@ -16,6 +16,7 @@
 						</div>
 					</div>
 					</#if>
+					<#if rcList??>
 					<div class="form-group">
 						<div class="col-sm-11">
 							<section class="panel personpanel">
@@ -53,6 +54,68 @@
 							</section>
 						</div>
 					</div>
+					</#if>
+					
+					<#if linkDetailList??>
+					<div class="form-group">
+						<div class="col-sm-11">
+							<section class="panel personpanel">
+								<header class="panel-heading">
+									${link.name }对应的出队单位
+								</header>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>单位id</th>
+											<th>单位名称</th>
+											<th>人数</th>
+										</tr>
+									</thead>
+									<tbody>
+										<#list linkDetailList as linkDetail>
+										<tr>
+											<td>${linkDetail.cid }</td>
+											<td>${linkDetail.company }</td>
+											<td>${linkDetail.count }</td>
+										</tr>
+										</#list>
+									</tbody>
+								</table>
+							</section>
+						</div>
+					</div>
+					</#if>
+					
+					<#if hbplanDetailList??>
+					<div class="form-group">
+						<div class="col-sm-11">
+							<section class="panel personpanel">
+								<header class="panel-heading">
+									${hbplan.name }对应的出队单位
+								</header>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>单位id</th>
+											<th>单位名称</th>
+											<th>人数</th>
+										</tr>
+									</thead>
+									<tbody>
+										<#list hbplanDetailList as hbplanDetail>
+										<tr>
+											<td>${hbplanDetail.cid }</td>
+											<td>${hbplanDetail.company }</td>
+											
+											<td>${hbplanDetail.count }</td>
+										</tr>
+										</#list>
+									</tbody>
+								</table>
+							</section>
+						</div>
+					</div>
+					</#if>
 					
 					<div class="form-group">
 						<div class="col-sm-11">
@@ -91,6 +154,29 @@
 							</section>
 						</div>
 					</div>
+					
+					<div class="form-group">
+                       <div class="col-lg-offset-1 col-sm-7">
+                      <section class="panel personpanel">
+                          <header class="panel-heading">
+                                                                   手动添加单位
+                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="addCompany()" title="">添加单位</a>
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>单位id</th>
+                                  <th>省份</th>
+                              </tr>
+                              </thead>
+                              <tbody id="companytbody">
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+                   </div>
+					<input type="hidden" name="cids" id="cids"/>
+					
 					<div class="form-group">
 						<div class="col-lg-offset-5 col-lg-7">
 							<button type="button" class="btn btn-primary" id="confirm">确定</button>
@@ -107,7 +193,10 @@
 	$(document).ready(function(){ 
 		var index = parent.layer.getFrameIndex(window.name);
 		$('#confirm').on('click', function(){
-			parent.location.href="/earthquake/addoutteam?eqid="+${earthquake.id};
+			
+			var cids = $("#cids").val();
+		
+			parent.location.href="/earthquake/addoutteam?eqid="+${earthquake.id}+"&cids="+cids;
 		    parent.layer.close(index);
 		});
 		
@@ -115,5 +204,16 @@
 		    parent.layer.close(index);
 		});
 	});
+	
+	function addCompany(){
+	   	 layer.open({
+				type: 2,
+			    area: ['750px', '561px'],
+			    fix: false, //不固定
+			    title: "单位列表",
+			    maxmin: true,
+			    content: '/company/all'
+			}); 
+	}
 </script>
 </@override> <@extends name="/base/base_dialog.ftl"/>

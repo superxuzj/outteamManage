@@ -31,6 +31,20 @@
                    </div>
                    
                    <div class="form-group">
+                       <label class="col-lg-2 control-label">受灾省份</label>
+                       <div class="col-lg-6">
+                           <input class="form-control" type="text" name="companys" value="${hbplan.companys }" placeholder="多个省份用空格"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label class="col-lg-2 control-label">对应震级</label>
+                       <div class="col-lg-6">
+                           <input  type="text" name="low" value="${hbplan.low }"/>----<input  type="text" name="high" value="${hbplan.high }"/>
+                       </div>
+                   </div>
+                   
+                   <div class="form-group">
                        <label class="col-lg-2 control-label">备注</label>
                        <div class="col-lg-6">
                            <input class="form-control" type="text" name="remark" value="${hbplan.remark }"/>

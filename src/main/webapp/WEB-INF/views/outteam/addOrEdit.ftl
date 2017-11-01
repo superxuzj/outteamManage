@@ -36,7 +36,9 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" id="outteamform" action="/outteam/save">  
+               <form class="form-horizontal" role="form" id="outteamform"
+               data-validator-option="{timely:2, theme:'yellow_top'}" action="/outteam/save">  
+               <input type="hidden" name="id" value="${outteam.id }"/>
                    <div class="form-group col-lg-6" col-lg-6>
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">

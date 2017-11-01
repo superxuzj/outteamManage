@@ -26,7 +26,8 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" id="linkform" action="/link/save">  
+               <form class="form-horizontal" role="form" id="linkform"
+               data-validator-option="{timely:2, theme:'yellow_top'}" action="/link/save">  
                <input type="hidden" name="id"  value="${link.id }" />                                                
                    <div class="form-group">
                        <label class="col-lg-2 control-label">联动条件名称</label>

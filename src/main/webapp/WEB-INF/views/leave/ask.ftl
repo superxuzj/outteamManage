@@ -30,7 +30,8 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" action="/leave/save" method="pose">                                                  
+               <form class="form-horizontal" role="form" action="/leave/save"
+               data-validator-option="{timely:2, theme:'yellow_top'}" method="pose">                                                  
                    <div class="form-group col-lg-6" col-lg-6>
                        <input type="hidden" name="id" value="${outteam.lid}" >
                    	   <input type="hidden" name="otid" value="${outteam.id}" >

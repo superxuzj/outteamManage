@@ -28,7 +28,8 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form" id="responseform" action="/respond/save">                                                  
+               <form class="form-horizontal" role="form" id="responseform"
+               data-validator-option="{timely:2, theme:'yellow_top'}" action="/respond/save">                                                  
                     <input type="hidden"  name="id" value="${response.id }">
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>

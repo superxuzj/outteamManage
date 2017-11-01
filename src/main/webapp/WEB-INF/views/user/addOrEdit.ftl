@@ -33,7 +33,9 @@
 	<div class="col-lg-12">
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
-               <form class="form-horizontal" role="form"  id="userform" action="/user/save">    
+               <form class="form-horizontal" role="form" 
+               data-validator-option="{timely:2, theme:'yellow_top'}"
+                id="userform" action="/user/save">    
              	  <input type="hidden" name="id" value="${user.id }">                                              
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">姓名</label>
@@ -53,7 +55,8 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">身份证号</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" name="idcard" value="${user.idcard }">
+                           <input type="text" class="form-control" name="idcard" 
+                           value="${user.idcard }" data-rule="required IDcard">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
@@ -69,7 +72,7 @@
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">联系电话</label>
                        <div class="col-lg-7">
-                           <input type="text" class="form-control" name="phone" value="${user.phone }">
+                           <input type="text" class="form-control" name="phone" value="${user.phone }" data-rule="required mobile">
                        </div>
                    </div>
                   
