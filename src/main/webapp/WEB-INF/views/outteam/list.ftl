@@ -82,8 +82,8 @@ margin-bottom:1px !important;
                              <li><a href="/outteam/info?id=${outteam.id }" title="详情">详情</a></li>
                              <li class="divider"></li>
                              <li><a href="/outteam/goadd?id=${outteam.id }" title="修改">修改</a></li>
-                             <li class="divider"></li>
-                             <li><a href="/outteam/del?id=${outteam.id }" title="结束">撤退</a></li>
+                             <!-- <li class="divider"></li>
+                             <li><a href="/outteam/del?id=${outteam.id }" title="结束">撤退</a></li> -->
                            </ul>
                        </div>
                        </td>

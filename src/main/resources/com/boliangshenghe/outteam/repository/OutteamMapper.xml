@@ -15,6 +15,7 @@
     <result column="lid" property="lid" jdbcType="INTEGER" />
     <result column="duty" property="duty" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="hit" property="hit" jdbcType="VARCHAR" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
@@ -22,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     ID, eqid, eqname, cid, company, outtype, state, count, fid, flight, lid, duty, summary, 
-    creator, createtime, operator, operatetime
+    hit, creator, createtime, operator, operatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,14 +40,16 @@
       cid, company, outtype, 
       state, count, fid, 
       flight, lid, duty, 
-      summary, creator, createtime, 
-      operator, operatetime)
+      summary, hit, creator, 
+      createtime, operator, operatetime
+      )
     values (#{id,jdbcType=INTEGER}, #{eqid,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, 
       #{cid,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{outtype,jdbcType=VARCHAR}, 
       #{state,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, 
       #{flight,jdbcType=VARCHAR}, #{lid,jdbcType=INTEGER}, #{duty,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{operator,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP})
+      #{summary,jdbcType=VARCHAR}, #{hit,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Outteam" >
     insert into t_outteam
@@ -89,6 +92,9 @@
       </if>
       <if test="summary != null" >
         summary,
+      </if>
+      <if test="hit != null" >
+        hit,
       </if>
       <if test="creator != null" >
         creator,
@@ -143,6 +149,9 @@
       <if test="summary != null" >
         #{summary,jdbcType=VARCHAR},
       </if>
+      <if test="hit != null" >
+        #{hit,jdbcType=VARCHAR},
+      </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
       </if>
@@ -196,6 +205,9 @@
       <if test="summary != null" >
         summary = #{summary,jdbcType=VARCHAR},
       </if>
+      <if test="hit != null" >
+        hit = #{hit,jdbcType=VARCHAR},
+      </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
       </if>
@@ -225,6 +237,7 @@
       lid = #{lid,jdbcType=INTEGER},
       duty = #{duty,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
+      hit = #{hit,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       operator = #{operator,jdbcType=VARCHAR},
@@ -232,7 +245,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-   <!-- 新加   -->
+  <!-- 新加   -->
    <select id="selectOutteamList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
    	    select 
     <include refid="Base_Column_List" />
@@ -240,6 +253,13 @@
     <where>
         <if test="eqid != null">
             AND eqid = #{eqid,jdbcType=INTEGER}
+        </if>
+        
+        <if test="cid != null">
+            AND cid = #{cid,jdbcType=INTEGER}
+        </if>
+        <if test="hit == 1">
+            AND hit = #{hit,jdbcType=VARCHAR}
         </if>
     </where>
    	    <if test="start != null and limit != null"> 
@@ -258,4 +278,27 @@
         </if>
     </where>
    	</select>
+   	
+   <!-- 新加   -->
+   <select id="selectDistinctEqIDByCid" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
+   	 select 
+    DISTINCT eqid
+    from t_outteam where cid=#{cid,jdbcType=INTEGER} and hit=1
+   	</select>
+   	
+   <select id="selectOutteamListForLeave" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Outteam">
+       SELECT * from (
+		select * FROM t_outteam WHERE eqid IN 
+		<foreach collection="eqids" index="index" item="item" open="(" separator="," close=")">
+	               ${item}
+	      </foreach> 
+	      AND cid!=#{cid,jdbcType=INTEGER} and hit=2
+		UNION ALL 
+		select * FROM t_outteam WHERE cid=#{cid,jdbcType=INTEGER} and hit=2
+		) a
+       
+       <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+		</select>
 </mapper>

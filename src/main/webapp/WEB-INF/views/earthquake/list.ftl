@@ -57,7 +57,9 @@ margin-bottom:1px !important;
 
               </div>
           <div class="col-lg-12">
+          	<#if roleid==1>
 				<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
+			</#if>
 			</div>
               <div class="col-lg-12">
                   <section class="panel">
@@ -93,10 +95,12 @@ margin-bottom:1px !important;
                                 	操作<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                   <li><a href="/earthquake/info?id=${earthquake.id }" title="详情">详情</a></li>
+                                 <#if roleid==1>
                                   <li class="divider"></li>
                                   <li><a href="/earthquake/goadd?id=${earthquake.id }" title="修改">修改</a></li>
                                   <li class="divider"></li>
                                   <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
+                                  </#if>
                                 </ul>
                             </div>
                             </td>

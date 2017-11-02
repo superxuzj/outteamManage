@@ -7,7 +7,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">  
              	 <li <#if _request.requestURI?index_of("/index")!=-1> class="active" </#if>>
-                      <a class="" href="/">
+                      <a class="" href="/index">
                           <span>首页</span>
                       </a>
                   </li>              

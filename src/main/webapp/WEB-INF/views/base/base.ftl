@@ -104,7 +104,11 @@
 
 	
 	<script type="text/javascript" src="<@ps.s/>/js/My97DatePicker/WdatePicker.js"></script>
-
+<script type="text/javascript">
+	function loginout(){
+		window.location.href="/loginout";
+	}
+</script>
   </body>
 </html>
 
