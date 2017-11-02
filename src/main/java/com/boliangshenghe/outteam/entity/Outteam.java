@@ -28,6 +28,8 @@ public class Outteam {
     private String duty;
 
     private String summary;
+    
+    private String hit;
 
     private String creator;
 
@@ -46,6 +48,8 @@ public class Outteam {
     private Integer start;
     
     private Integer limit;
+    
+    Integer [] eqids;
     
     //航班信息
     
@@ -344,4 +348,21 @@ public class Outteam {
 	public void setLid(Integer lid) {
 		this.lid = lid;
 	}
+
+	public String getHit() {
+		return hit;
+	}
+
+	public void setHit(String hit) {
+		this.hit = hit;
+	}
+
+	public Integer[] getEqids() {
+		return eqids;
+	}
+
+	public void setEqids(Integer[] eqids) {
+		this.eqids = eqids;
+	}
+
 }
