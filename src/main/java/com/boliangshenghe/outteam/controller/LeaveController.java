@@ -1,6 +1,7 @@
 package com.boliangshenghe.outteam.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.controller.base.BaseCommonController;
 import com.boliangshenghe.outteam.entity.Leave;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.service.LeaveService;
@@ -25,7 +27,7 @@ import com.boliangshenghe.outteam.service.UserService;
  */
 @Controller
 @RequestMapping("/leave")
-public class LeaveController {
+public class LeaveController extends BaseCommonController{
 	@Autowired
 	private OutteamService outteamService;
 	@Autowired
@@ -41,8 +43,30 @@ public class LeaveController {
 	public String index(HttpServletRequest request, 
   			HttpServletResponse response,Outteam outteam,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
-		PageBean<Outteam> page = outteamService.getOutteamByPage(outteam, pageNo);
-		model.addAttribute("page", page);
+		
+		Outteam eqoutteam = new Outteam();
+		eqoutteam.setCid(this.getUserCid(request));
+		List<Outteam> eqlist = outteamService.selectDistinctEqIDByCid(eqoutteam);
+		Integer[] eqids = new Integer[10];
+		if( null!=eqlist && eqlist.size()>0){
+			for(int i=0;i<eqlist.size();i++){
+				eqids[i] = eqlist.get(i).getEqid();
+			}
+			outteam.setEqids(eqids);
+			outteam.setCid(this.getUserCid(request));
+			PageBean<Outteam> page = outteamService.getOutteamByPageForLeave(outteam, pageNo);
+			model.addAttribute("page", page);
+			
+		}else{
+			
+			if(this.getRoleId(request)!=1){//不是系统管理员 只能看到本单位的出队
+				outteam.setCid(this.getUserCid(request));
+			}
+			PageBean<Outteam> page = outteamService.getOutteamByPage(outteam, pageNo);
+			model.addAttribute("page", page);
+		}
+		
+		
 		return "leave/list";
 	}
 	

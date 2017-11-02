@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.controller.base.BaseCommonController;
 import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
@@ -35,7 +36,7 @@ import com.boliangshenghe.outteam.util.FlightUtils;
  */
 @Controller
 @RequestMapping("/outteam")
-public class OutTeamController {
+public class OutTeamController extends BaseCommonController{
 	
 	@Autowired
 	private OutteamService outteamService;
@@ -59,6 +60,9 @@ public class OutTeamController {
   			HttpServletResponse response,Outteam outteam,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
 		
+		if(this.getRoleId(request)!=1){//不是系统管理员 只能看到本单位的出队
+			outteam.setCid(this.getUserCid(request));
+		}
 		PageBean<Outteam> page = outteamService.getOutteamByPage(outteam, pageNo);
 		model.addAttribute("page", page);
 		return "outteam/list";

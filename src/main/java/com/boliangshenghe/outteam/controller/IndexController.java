@@ -9,7 +9,7 @@ import com.boliangshenghe.outteam.service.UserService;
 @Controller
 public class IndexController {
 	
-	@Autowired
+	/*@Autowired
 	public UserService userService;
 	@RequestMapping("/")
 	public String all(){
@@ -19,7 +19,7 @@ public class IndexController {
 	@RequestMapping("/index")
 	public String index(){
 		return "index";
-	}
+	}*/
 	
 /*	@RequestMapping("/page")
 	public String hello(User user,Model model,@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
