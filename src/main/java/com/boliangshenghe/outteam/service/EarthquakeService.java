@@ -100,6 +100,7 @@ public class EarthquakeService {
 			source.setOuttype("1");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 			source.setState("1");
 			source.setCreatetime(new Date());
+			source.setHit("1");
 			source.setCreator("管理员");
 			outteamMapper.insertSelective(source);
 		}
@@ -125,6 +126,7 @@ public class EarthquakeService {
 						source.setEqname(earthquake.getEqname());
 						source.setOuttype("4");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 						source.setState("1");
+						source.setHit("2");
 						source.setCreatetime(new Date());
 						source.setCreator("管理员");
 						outteamMapper.insertSelective(source);	
@@ -148,6 +150,7 @@ public class EarthquakeService {
 						source.setEqname(earthquake.getEqname());
 						source.setOuttype("2");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 						source.setState("1");
+						source.setHit("2");
 						source.setCreatetime(new Date());
 						source.setCreator("管理员");
 						outteamMapper.insertSelective(source);	
@@ -176,6 +179,7 @@ public class EarthquakeService {
 							source.setEqname(earthquake.getEqname());
 							source.setOuttype("5");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 							source.setState("1");
+							source.setHit("2");
 							source.setCreatetime(new Date());
 							source.setCreator("管理员");
 							outteamMapper.insertSelective(source);	
@@ -200,6 +204,7 @@ public class EarthquakeService {
 					source.setEqname(earthquake.getEqname());
 					source.setOuttype("3");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 					source.setState("1");
+					source.setHit("2");
 					source.setCreatetime(new Date());
 					source.setCreator("管理员");
 					outteamMapper.insertSelective(source);	
@@ -220,6 +225,7 @@ public class EarthquakeService {
 						source.setEqname(earthquake.getEqname());
 						source.setOuttype("6");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
 						source.setState("1");
+						source.setHit("2");
 						source.setCreatetime(new Date());
 						source.setCreator("管理员");
 						outteamMapper.insertSelective(source);

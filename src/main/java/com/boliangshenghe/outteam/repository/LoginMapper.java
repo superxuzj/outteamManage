@@ -1,20 +1,17 @@
 package com.boliangshenghe.outteam.repository;
 
 import com.boliangshenghe.outteam.entity.Login;
-import com.boliangshenghe.outteam.entity.LoginWithBLOBs;
 
 public interface LoginMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(LoginWithBLOBs record);
+    int insert(Login record);
 
-    int insertSelective(LoginWithBLOBs record);
+    int insertSelective(Login record);
 
-    LoginWithBLOBs selectByPrimaryKey(Integer id);
+    Login selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(LoginWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(LoginWithBLOBs record);
+    int updateByPrimaryKeySelective(Login record);
 
     int updateByPrimaryKey(Login record);
 }

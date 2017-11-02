@@ -45,6 +45,12 @@ public class CompanyService {
     public PageBean<Company> getCompanyByPage(Company record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<Company> list = this.companyMapper.selectCompanyList(record);
+        /*for (Company company : list) {
+
+        	 System.out.println("INSERT INTO t_user (roleid,name,username,password,cid,company) VALUES(2,'"
+        	 +company.getProvince()+"','"+company.getCode()+"','111111',"
+        	 +company.getId()+",'"+company.getProvince()+"');");
+		}*/
         return new PageBean<Company>(list);
     }
 }

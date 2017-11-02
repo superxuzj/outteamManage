@@ -19,5 +19,10 @@ public interface OutteamMapper {
     
     List<Outteam> selectOutteamList(Outteam record);
     
+    List<Outteam> selectDistinctEqIDByCid(Outteam record);
+    
+    List<Outteam> selectOutteamListForLeave(Outteam record);
+    
+    
     int selectOutteamCount(Outteam record);
 }

@@ -68,6 +68,24 @@ public class OutteamService {
         return new PageBean<Outteam>(list);
     }
     
+    /**
+     * select 
+    DISTINCT eqid
+    from t_outteam where cid=#{cid,jdbcType=INTEGER} and hit=1
+         获取是受灾省份对应的eqid
+     * @param record
+     * @return
+     */
+    public List<Outteam> selectDistinctEqIDByCid(Outteam record){
+    	return outteamMapper.selectDistinctEqIDByCid(record);
+    }
+    
+    public PageBean<Outteam> getOutteamByPageForLeave(Outteam record,Integer pageNo) {
+        PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
+        List<Outteam> list = this.outteamMapper.selectOutteamListForLeave(record);
+        return new PageBean<Outteam>(list);
+    }
+    
     public void addDetail(Outteam outteam){
 	    //获取航班信息，插入航班表 获取航班表id
 //    	
