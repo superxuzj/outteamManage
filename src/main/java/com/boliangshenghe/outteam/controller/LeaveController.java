@@ -90,6 +90,7 @@ public class LeaveController extends BaseCommonController{
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Leave leave,Model model){
 		if(leave.getId()!=null){
+			
 			leaveService.updateByPrimaryKeySelective(leave);
 		}else{
 			leave.setCreatetime(new Date());

@@ -13,7 +13,7 @@
          <!-- user login dropdown start-->
          <li class="dropdown">
              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                 <span class="username">${realname }</span>
+                 <span class="username">${sessionrealname }</span>
                  <b class="caret"></b>
              </a>
              <ul class="dropdown-menu extended logout">

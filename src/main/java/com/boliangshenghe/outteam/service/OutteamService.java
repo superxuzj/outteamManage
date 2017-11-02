@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.User;
+import com.boliangshenghe.outteam.repository.EarthquakeMapper;
 import com.boliangshenghe.outteam.repository.FlightMapper;
 import com.boliangshenghe.outteam.repository.OutteamDetailMapper;
 import com.boliangshenghe.outteam.repository.OutteamMapper;
@@ -34,6 +36,9 @@ public class OutteamService {
 	
 	@Autowired
 	OutteamDetailMapper outteamDetailMapper;
+	
+	@Autowired
+	EarthquakeMapper earthquakeMapper;
 	
 	@Autowired
 	FlightMapper flightMapper;
@@ -83,6 +88,12 @@ public class OutteamService {
     public PageBean<Outteam> getOutteamByPageForLeave(Outteam record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<Outteam> list = this.outteamMapper.selectOutteamListForLeave(record);
+        if(null!=list && list.size()>0){
+        	for (Outteam outteam : list) {
+        		Earthquake earthquake = earthquakeMapper.selectByPrimaryKey(outteam.getEqid());
+        		outteam.setEqcompany(earthquake.getProvince());//获取受灾省份
+			}
+        }
         return new PageBean<Outteam>(list);
     }
     

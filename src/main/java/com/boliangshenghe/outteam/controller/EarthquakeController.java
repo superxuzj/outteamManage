@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.controller.base.BaseCommonController;
 import com.boliangshenghe.outteam.controller.base.BaseController;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
@@ -46,7 +47,7 @@ import com.boliangshenghe.outteam.util.CodeUtils;
  */
 @Controller
 @RequestMapping("/earthquake")
-public class EarthquakeController extends BaseController{
+public class EarthquakeController extends BaseCommonController{
 	
 	@Autowired
 	private EarthquakeService earthquakeService;

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import com.alibaba.fastjson.JSON;
 import com.boliangshenghe.outteam.util.CommonUtils;
@@ -24,6 +27,13 @@ public class BaseCommonController {
 		return dictionaryService.getDictvalueByCode(code);
 	}*/
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		dateFormat.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, true));
+	}
 	public void maxtime(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(60*120);//单位为秒

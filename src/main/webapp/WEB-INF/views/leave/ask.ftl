@@ -38,26 +38,26 @@
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
                       	   <input type="hidden" name="eqid" value="${outteam.eqid}" >
-                           <input type="text" class="form-control" name="eqname" value="${outteam.eqname}" >
+                           <input type="text" class="form-control"  value="${outteam.eqname}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位名称</label>
                        <div class="col-lg-9">
                        	   <input type="hidden" name="cid" value="${outteam.cid}" >
-                           <input type="text" class="form-control" name="company" value="${outteam.company}" >
+                           <input type="text" class="form-control"  value="${outteam.company}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出队类型</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" name="outtype" value="${outteam.outtype}" >
+                           <input type="text" class="form-control" value="${outteam.outtype}" >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">状态</label>
+                       <label class="col-lg-3 control-label">出队状态</label>
                        <div class="col-lg-9">
-                          <input type="text" class="form-control" name="state" value="${outteam.state}" >
+                          <input type="text" class="form-control" value="${outteam.state}" >
                        </div>
                    </div>
                    

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.boliangshenghe.outteam.controller.base.BaseCommonController;
 import com.boliangshenghe.outteam.entity.Phone;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.service.PhoneService;
@@ -22,7 +23,7 @@ import com.boliangshenghe.outteam.service.UserService;
  */
 @Controller
 @RequestMapping("/person")
-public class PersonController {
+public class PersonController extends BaseCommonController{
 
 	@Autowired
 	private UserService userService;
@@ -63,19 +64,17 @@ public class PersonController {
 		 * 跳转到单位管理员补充手机号
 		 * 
 		 */
-		id=4;
-		if(id!=null){
-			User user = userService.selectByPrimaryKey(id);
-			Phone record = new Phone();
-			record.setUserid(id);
-			List<Phone> phonelist = phoneService.selectListByPhone(record);
-			if(null!=phonelist && phonelist.size()>0){
-				Phone phone = phonelist.get(0);
-				user.setPhoneone(phone.getPhoneone());
-				user.setPhonetwo(phone.getPhonetwo());
-			}
-			model.addAttribute("user", user);
+		User user = userService.selectByPrimaryKey(this.getUserId(request));
+		Phone record = new Phone();
+		record.setUserid(this.getUserId(request));
+		record.setCid(this.getUserCid(request));
+		List<Phone> phonelist = phoneService.selectListByPhone(record);
+		if(null!=phonelist && phonelist.size()>0){
+			Phone phone = phonelist.get(0);
+			user.setPhoneone(phone.getPhoneone());
+			user.setPhonetwo(phone.getPhonetwo());
 		}
+		model.addAttribute("user", user);
 		return "person/companyinfo";
 	}
 }

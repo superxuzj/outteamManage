@@ -13,12 +13,12 @@ public class CommonUtils {
 	
 	public static final String REQUEST_KEY_REQUEST = "_request";// 当前请求
 	
-	public static final String USERID = "userid";
-	public static final String USERNAME = "username";
-	public static final String REALNAME = "realname";
-	public static final String ROLEID = "roleid";
-	public static final String CID = "cid";
-	public static final String COMPANY = "company";
+	public static final String USERID = "sessionuserid";
+	public static final String USERNAME = "sessionusername";
+	public static final String REALNAME = "sessionrealname";
+	public static final String ROLEID = "sessionroleid";
+	public static final String CID = "sessioncid";
+	public static final String COMPANY = "sessioncompany";
 	public static final String ISLOGIN = "islogin";
 	
 	

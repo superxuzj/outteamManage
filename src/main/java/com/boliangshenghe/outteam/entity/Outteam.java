@@ -49,12 +49,13 @@ public class Outteam {
     
     private Integer limit;
     
-    Integer [] eqids;
+    private Integer [] eqids;
+    
+    private String eqcompany;
     
     //航班信息
     
-
-    private String depcity;//出发城市
+	private String depcity;//出发城市
 
     private String arrcity;//到达城市
     
@@ -78,6 +79,14 @@ public class Outteam {
 
     private String depdate;//出发日期
 
+    public String getEqcompany() {
+  		return eqcompany;
+  	}
+
+  	public void setEqcompany(String eqcompany) {
+  		this.eqcompany = eqcompany;
+  	}
+    
     public String getDepcity() {
 		return depcity;
 	}

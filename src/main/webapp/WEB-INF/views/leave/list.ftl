@@ -76,10 +76,11 @@
                            <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                            	操作<span class="caret"></span></a>
                            <ul class="dropdown-menu">
-                             <li class="divider"></li>
+                             <#if outteam.eqcompany==sessioncompany>
+                             <li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="结束">审批</a></li>
+                          	<#else>
                              <li><a href="/leave/ask?id=${outteam.id }" title="结束">撤退申请</a></li>
-                             <li class="divider"></li>
-                             <li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="结束">详情受灾省</a></li>
+                          	</#if>
                            </ul>
                        </div>
                        </td>
