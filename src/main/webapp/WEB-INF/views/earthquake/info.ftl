@@ -57,11 +57,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">地震等级</label>
                        <div class="col-lg-6">
-                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
-                                          </select>
+                           <input type="text" class="form-control" name="magnitude" value="${earthquake.magnitude}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -79,41 +75,34 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震日期</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control"  value="${earthquake.eqdate}">
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震时刻</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control"  value="${earthquake.eqtime}">
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">震源深度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
-                       </div>
-                   </div>
-                   <div class="form-group">
-                       <label class="col-lg-2 control-label">状态</label>
-                       <div class="col-lg-6">
-                           <input type="text" class="form-control" id="mobile" placeholder=" ">
+                           <input type="text" class="form-control"  value="${earthquake.depth}">
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
                           <select class="form-control m-bot15">
-                                              <option>Option 1</option>
-                                              <option>Option 2</option>
-                                              <option>Option 3</option>
+                                              <option <#if earthquake.responseid==1>selected</#if>>一级响应</option>
+                                              <option <#if earthquake.responseid==2>selected</#if>>二级响应</option>
                                           </select>
                        </div>
                    </div>
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="button" class="btn btn-danger">返回</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>
@@ -121,6 +110,10 @@
        </section>
 	</div>
 </div>
-
+<script type="text/javascript">
+function gohistory(){
+	window.history.go(-1);
+}
+</script>
 
 </@override> <@extends name="/base/base.ftl"/>

@@ -85,7 +85,7 @@
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
                            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>

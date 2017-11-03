@@ -22,31 +22,20 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<div class="panel-body">
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" action="/user/list">
 					<div class="form-group col-lg-3">
-						<label for="inputPassword1" class="col-lg-3 control-label">名称</label>
+						<label for="inputPassword1" class="col-lg-3 control-label">姓名</label>
 						<div class="col-lg-9">
-							<input type="text" class="form-control" id="inputPassword1"
-								placeholder="名称">
+							<input type="text" class="form-control" name="name" value="${user.name }">
 						</div>
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="inputPassword1" class="col-lg-3 control-label">单位</label>
 						<div class="col-lg-9">
-							<input type="text" class="form-control" id="inputPassword1"
-								placeholder="单位">
+							<input type="text" class="form-control" name="company" value="${user.company }">
 						</div>
 					</div>
-					<div class="form-group col-lg-3">
-						<label for="inputPassword1" class="col-lg-3 control-label">类型</label>
-						<div class="col-lg-9">
-							<select class="form-control m-bot15">
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-							</select>
-						</div>
-					</div>
+					
 					<div class="form-group col-lg-3">
 						<div class="col-lg-offset-2 col-lg-10">
 							<button type="submit" class="btn">搜索</button>
@@ -65,6 +54,7 @@
 			<table class="table table-striped table-advance table-hover">
 				<tbody>
 					<tr>
+					    <th>角色</th>
 						<th>姓名</th>
 						<th>性别</th>
 						<th>单位</th>
@@ -75,12 +65,13 @@
 					
 					<#list page.list as user>
 					<tr>
+						<td><@ps.userroleid user.roleid/></td>
 						<td>${user.name }</td>
 						<td>
-						<#if user.sex==1>
-						男 
-						<#else>
+						<#if user.sex==2>
 						女
+						<#else>
+						男
 						</#if>
 						</td>
 						<td>${user.company }</td>

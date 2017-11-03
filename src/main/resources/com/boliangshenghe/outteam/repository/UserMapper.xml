@@ -195,6 +195,9 @@
         <if test="name != null">
             AND name like '%${name}%' 
         </if>
+        <if test="company != null">
+            AND company like '%${company}%' 
+        </if>
         <if test="phone != null">
             AND phone = #{phone,jdbcType=VARCHAR}
         </if>

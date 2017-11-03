@@ -108,6 +108,9 @@
 	function loginout(){
 		window.location.href="/loginout";
 	}
+	function gohistory(){
+		window.history.go(-1);
+	}
 </script>
   </body>
 </html>

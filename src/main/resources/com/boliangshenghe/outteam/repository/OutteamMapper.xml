@@ -251,6 +251,12 @@
     <include refid="Base_Column_List" />
     from t_outteam
     <where>
+        <if test="eqname != null">
+            AND eqname like '%${eqname}%' 
+        </if>
+         <if test="company != null">
+            AND company like '%${company}%' 
+        </if>
         <if test="eqid != null">
             AND eqid = #{eqid,jdbcType=INTEGER}
         </if>
@@ -258,7 +264,7 @@
         <if test="cid != null">
             AND cid = #{cid,jdbcType=INTEGER}
         </if>
-        <if test="hit == 1">
+        <if test="hit != null">
             AND hit = #{hit,jdbcType=VARCHAR}
         </if>
     </where>
@@ -295,8 +301,18 @@
 	      AND cid!=#{cid,jdbcType=INTEGER} and hit=2
 		UNION ALL 
 		select * FROM t_outteam WHERE cid=#{cid,jdbcType=INTEGER} and hit=2
-		) a
-       
+		) a 
+		
+		<where>
+        <if test="eqname != null">
+            AND eqname like '%${eqname}%' 
+        </if>
+         <if test="company != null">
+            AND company like '%${company}%' 
+        </if>
+        
+    </where>
+		group by eqid,cid
        <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>

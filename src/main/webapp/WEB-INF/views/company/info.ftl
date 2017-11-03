@@ -49,9 +49,8 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="button" class="btn btn-danger" onclick="history()">返回</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                            
-                           <a href="javascript:history.go(-1)" title="删除">返回</a>
                        </div>
                    </div>
                </form>
@@ -61,8 +60,5 @@
 </div>
 
 <script type="text/javascript">
-	function history(){
-		window.location.go(-1);
-	}
 </script>
 </@override> <@extends name="/base/base.ftl"/>

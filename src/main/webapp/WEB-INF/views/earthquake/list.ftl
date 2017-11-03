@@ -23,27 +23,18 @@ margin-bottom:1px !important;
           <div class="col-lg-12">
                   <section class="panel">
                       <div class="panel-body">
-                          <form class="form-horizontal" role="form">
-                              <div class="form-group col-lg-3">
-                                  <label for="inputEmail1" class="col-lg-3 control-label">eqinfo_id</label>
-                                  <div class="col-lg-9">
-                                      <input type="text" class="form-control" id="inputEmail1" placeholder="eqinfo_id">
-                                  </div>
-                              </div>
+                          <form class="form-horizontal" role="form" action="/earthquake/list">
+                              
                               <div class="form-group col-lg-3">
                                   <label for="inputPassword1" class="col-lg-3 control-label">名称</label>
                                   <div class="col-lg-9">
-                                      <input type="text" class="form-control" id="inputPassword1" placeholder="名称">
+                                      <input type="text" class="form-control" name="eqname" value="${earthquake.eqname }">
                                   </div>
                               </div>
                               <div class="form-group col-lg-3">
-                             	 <label for="inputPassword1" class="col-lg-3 control-label">等级</label>
+                             	  <label for="inputPassword1" class="col-lg-3 control-label">单位</label>
                                   <div class="col-lg-9">
-                                    <select class="form-control m-bot15">
-                                          <option>Option 1</option>
-                                          <option>Option 2</option>
-                                          <option>Option 3</option>
-                                      </select>
+                                      <input type="text" class="form-control" name="province" value="${earthquake.province }">
                                   </div>
                               </div>
                               <div class="form-group col-lg-3">
@@ -57,7 +48,7 @@ margin-bottom:1px !important;
 
               </div>
           <div class="col-lg-12">
-          	<#if roleid==1>
+          	<#if sessionroleid==1>
 				<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
 			</#if>
 			</div>
@@ -88,18 +79,27 @@ margin-bottom:1px !important;
                            <td>${earthquake.magnitude }</td>
                            <td>${earthquake.eqdate }</td>
                            <td>${earthquake.responseid }</td>
-                           <td>${earthquake.state }</td>
+                           <td>
+                           <#if earthquake.state==2>
+                           eqim触发
+                           <#else>
+                           	手动演练
+                           </#if>
+                          	</td>
                            <td>
                             <div class="btn-group">
                                 <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                                 	操作<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                   <li><a href="/earthquake/info?id=${earthquake.id }" title="详情">详情</a></li>
-                                 <#if roleid==1>
+                                  <#if sessionroleid==2>
+                                  <li><a href="javascript:appoutteam('${earthquake.id }');" title="申请出队">申请出队</a></li>
+                                 	</#if>
+                                 <#if sessionroleid==1>
                                   <li class="divider"></li>
                                   <li><a href="/earthquake/goadd?id=${earthquake.id }" title="修改">修改</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="" title="Bootstrap 3 themes generator">结束</a></li>
+                                  <!-- <li class="divider"></li>
+                                  <li><a href="" title="Bootstrap 3 themes generator">结束</a></li> -->
                                   </#if>
                                 </ul>
                             </div>
@@ -118,8 +118,27 @@ margin-bottom:1px !important;
 </div>
 
 <script type="text/javascript">
-	function add(){
-		window.location.href = "/earthquake/goadd";
-	}
+function appoutteam(eqid){
+	$.ajax({ 
+        type: "POST",
+        url:"/outteam/isappoutteam",
+        data:{  
+            "eqid" : eqid
+        },
+        scriptCharset: 'utf-8',
+        success: function(data) {
+        	if(data=="no"){
+        		window.location.href = "/outteam/addapplyoutteam?eqid="+eqid;
+        	}else{
+        		alert("已有出队信息，请在出队管理中查看！");
+        		return ;
+        	}
+        }
+	});
+	
+}
+function add(){
+	window.location.href = "/earthquake/goadd";
+}
 </script>
 </@override> <@extends name="/base/base.ftl"/>

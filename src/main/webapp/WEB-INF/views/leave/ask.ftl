@@ -38,26 +38,26 @@
                        <label class="col-lg-3 control-label">地震名称</label>
                        <div class="col-lg-9">
                       	   <input type="hidden" name="eqid" value="${outteam.eqid}" >
-                           <input type="text" class="form-control"  value="${outteam.eqname}" >
+                           <input type="text" class="form-control"  value="${outteam.eqname}" name="eqname" readonly>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位名称</label>
                        <div class="col-lg-9">
                        	   <input type="hidden" name="cid" value="${outteam.cid}" >
-                           <input type="text" class="form-control"  value="${outteam.company}" >
+                           <input type="text" class="form-control"  value="${outteam.company}" name="company" readonly >
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出队类型</label>
+                       <label class="col-lg-3 control-label">人数</label>
                        <div class="col-lg-9">
-                           <input type="text" class="form-control" value="${outteam.outtype}" >
+                           <input type="text" class="form-control" value="${outteam.count }" readonly>
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">出队状态</label>
                        <div class="col-lg-9">
-                          <input type="text" class="form-control" value="${outteam.state}" >
+                          <input type="text" class="form-control" value="<@ps.outteamstate outteam.state/>" readonly>
                        </div>
                    </div>
                    
@@ -145,26 +145,18 @@
                            <input type="text" class="form-control" name="flightstate" id="flightstate" value="${flight.flightstate}"/>
                        </div>
                    </div>
-                   
-                   
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" id="occupation" placeholder=" ">
-                       </div>
-                   </div>
                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">撤离备注</label>
                        <div class="col-lg-9">
-                          <textarea name="remark" rows="5" cols="50">这里写内容</textarea>
+                          <textarea name="remark" rows="5" cols="50" name="remark">${leave.remark }</textarea>
                        </div>
                    </div>
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
                            <button type="submit" class="btn btn-primary">申请</button>
-                           <button type="button" class="btn btn-danger">返回</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>
@@ -174,6 +166,9 @@
 </div>
 
 <script type="text/javascript">
+function gohistory(){
+	window.history.go(-1);
+}
 function getFliht(){
 	var flight = $("#flight").val();
 	var depdate = $("#depdate").val();

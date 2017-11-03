@@ -84,7 +84,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震日期</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eqdate" value="${earthquake.eqdate}"/>
+                       	<input class="form-control Wdate" type="text" name="eqdate" id="eqdate" value="${earthquake.eqdate }" onclick="WdatePicker({maxDate:'%y-%M-%d'})"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -116,7 +116,7 @@
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
                            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>
@@ -126,6 +126,11 @@
 </div>
 
 <script type="text/javascript">
+function gohistory(){
+	window.history.go(-1);
+}
+
+
 	function save(){
 		if($("#eqname").val()==""){
 			alert("请输入地震名称！");

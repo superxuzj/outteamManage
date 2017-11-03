@@ -22,22 +22,18 @@
 <div class="col-lg-12">
            <section class="panel">
                <div class="panel-body">
-                   <form class="form-horizontal" role="form">
+                   <form class="form-horizontal" role="form" action="/leave/list">
                        <div class="form-group col-lg-3">
                            <label for="inputPassword1" class="col-lg-3 control-label">名称</label>
                            <div class="col-lg-9">
-                               <input type="text" class="form-control" id="inputPassword1" placeholder="名称">
+                               <input type="text" class="form-control" name="eqname" value="${outteam. eqname}">
                            </div>
                        </div>
                        <div class="form-group col-lg-3">
-                      	 <label for="inputPassword1" class="col-lg-3 control-label">类型</label>
-                           <div class="col-lg-9">
-                             <select class="form-control m-bot15">
-                                   <option>Option 1</option>
-                                   <option>Option 2</option>
-                                   <option>Option 3</option>
-                               </select>
-                           </div>
+                     	  <label for="inputPassword1" class="col-lg-3 control-label">单位</label>
+                          <div class="col-lg-9">
+                              <input type="text" class="form-control" name="company" value="${outteam.company }">
+                          </div>
                        </div>
                        <div class="form-group col-lg-3">
                            <div class="col-lg-offset-2 col-lg-10">
@@ -48,9 +44,9 @@
                </div>
            </section>
        </div>
-	   <div class="col-lg-12">
+	   <!-- <div class="col-lg-12">
 			<a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">新增</a>
-	   </div>
+	   </div> -->
        <div class="col-lg-12">
            <section class="panel">
                <table class="table table-striped table-advance table-hover">
@@ -58,7 +54,6 @@
                    <tr>
                       <th>地震名称</th>
                       <th>单位名称</th>
-                      <th>出队类型</th>
                       <th>人数</th>
                       <th>状态</th>
                       <th>操作</th>
@@ -67,9 +62,8 @@
                    <tr>
                       <td>${outteam.eqname }</td>
                       <td>${outteam.company }</td>
-                      <td>${outteam.state }</td>
                       <td>${outteam.count }</td>
-                      <td>${outteam.state }</td>
+                      <td><@ps.outteamstate outteam.state/></td>
                       
                       <td>
                        <div class="btn-group">

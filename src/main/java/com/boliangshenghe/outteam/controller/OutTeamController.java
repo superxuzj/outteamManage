@@ -1,6 +1,7 @@
 package com.boliangshenghe.outteam.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +18,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseCommonController;
+import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.json.JsonFlight;
 import com.boliangshenghe.outteam.json.Result;
+import com.boliangshenghe.outteam.service.EarthquakeService;
 import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
@@ -50,6 +53,9 @@ public class OutTeamController extends BaseCommonController{
 	@Autowired
 	private FlightService flightService;
 	
+	@Autowired
+	private EarthquakeService earthquakeService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/outteam/list";
@@ -65,6 +71,7 @@ public class OutTeamController extends BaseCommonController{
 		}
 		PageBean<Outteam> page = outteamService.getOutteamByPage(outteam, pageNo);
 		model.addAttribute("page", page);
+		model.addAttribute("outteam", outteam);
 		return "outteam/list";
 	}
 	
@@ -100,10 +107,12 @@ public class OutTeamController extends BaseCommonController{
 	@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Outteam outteam,Model model){
-		
+		outteam.setState("2");
+    	outteam.setOperatetime(new Date());
+    	outteam.setOperator(this.getName(request));
 		outteamService.addDetail(outteam);
 		
-		System.out.println(outteam.getChooses()+" save");
+//		System.out.println(outteam.getChooses()+" save");
 		return "redirect:/outteam/list";
 	}
 	/**flight
@@ -280,7 +289,57 @@ public class OutTeamController extends BaseCommonController{
 		}
 		model.addAttribute("resultList", list);
 		return "outteam/flightlist";
+	}
+	
+	/**
+	查看该单位此次地震是否已经出队
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/isappoutteam")
+	@ResponseBody
+	public String isappoutteam(HttpServletRequest request, 
+  			HttpServletResponse response,Integer eqid,Model model) throws Exception{
+		System.out.println(eqid);
 		
+		Outteam record = new Outteam();
+		record.setEqid(eqid);
+		record.setCid(this.getUserCid(request));//判断
+		List<Outteam> outteamlist = outteamService.selectOutteamList(record);
+		String json = "";
+		if(null!=outteamlist && outteamlist.size()>0){
+			json = "yes";
+		}else{
+			json = "no";
+		}
+		return json;
+	}
+	
+	/**
+	 * 添加 插入
+	 * @param request
+	 * @param response
+	 * @param outteam
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("addapplyoutteam")
+	public String addapplyoutteam(HttpServletRequest request, 
+  			HttpServletResponse response,Integer eqid,Model model){
 		
+		Earthquake earthquake = earthquakeService.selectByPrimaryKey(eqid);
+		
+		Outteam source = new Outteam();
+		source.setCid(this.getUserCid(request));
+		source.setCompany(this.getUserCompany(request));
+		source.setEqid(eqid);
+		source.setEqname(earthquake.getEqname());
+		source.setOuttype("7");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
+		source.setState("1");
+		source.setCreatetime(new Date());
+		source.setHit("2");
+		source.setCreator("管理员");
+		outteamService.insertSelective(source);
+		
+		return "redirect:/outteam/list";
 	}
 }

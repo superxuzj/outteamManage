@@ -23,9 +23,9 @@ public class Earthquake {
 
     private String latitude;
 
-    private Date eqdate;
+    private String eqdate;
 
-    private Date eqtime;
+    private String eqtime;
 
     private String depth;
 
@@ -123,19 +123,19 @@ public class Earthquake {
         this.latitude = latitude == null ? null : latitude.trim();
     }
 
-    public Date getEqdate() {
+    public String getEqdate() {
         return eqdate;
     }
 
-    public void setEqdate(Date eqdate) {
+    public void setEqdate(String eqdate) {
         this.eqdate = eqdate;
     }
 
-    public Date getEqtime() {
+    public String getEqtime() {
         return eqtime;
     }
 
-    public void setEqtime(Date eqtime) {
+    public void setEqtime(String eqtime) {
         this.eqtime = eqtime;
     }
 

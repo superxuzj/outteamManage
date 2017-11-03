@@ -29,7 +29,7 @@ public class Outteam {
 
     private String summary;
     
-    private String hit;
+    private String hit;//1 受灾省份 2非受灾
 
     private String creator;
 

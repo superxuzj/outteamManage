@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseCommonController;
-import com.boliangshenghe.outteam.controller.base.BaseController;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Hbplan;
@@ -91,6 +90,7 @@ public class EarthquakeController extends BaseCommonController{
 		
 		PageBean<Earthquake> page = earthquakeService.getEarthquakeByPage(earthquake, pageNo);
 		model.addAttribute("page", page);
+		model.addAttribute("earthquake", earthquake);
 		
 		return "earthquake/list";
 	}
@@ -139,11 +139,12 @@ public class EarthquakeController extends BaseCommonController{
 		
 		if(earthquake.getId()!=null){
 			earthquake.setCreatetime(new Date());
-			earthquake.setCreator("管理员");
+			earthquake.setCreator(this.getName(request));
 			earthquakeService.updateByPrimaryKeySelective(earthquake);
 		}else{
+			earthquake.setState("1");//1演练 2 eqim触发
 			earthquake.setCreatetime(new Date());
-			earthquake.setCreator("管理员");
+			earthquake.setCreator(this.getName(request));
 			earthquakeService.insertSelective(earthquake);
 		}
 		
@@ -166,6 +167,7 @@ public class EarthquakeController extends BaseCommonController{
 		if(earthquake.getId()==null){
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator("管理员");
+			earthquake.setState("1");//1演练 2 eqim触发
 			earthquakeService.insertSelective(earthquake);
 			String retu = earthquake.getId().toString();
 			return retu;

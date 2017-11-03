@@ -52,6 +52,7 @@
                             </select>
                        </div>
                    </div>
+                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">身份证号</label>
                        <div class="col-lg-7">
@@ -64,7 +65,11 @@
                        <div class="col-lg-7">
                           <select class="form-control m-bot15" name="cid">
                              <#list companyList as company>
+                             <#if user??>
                                 <option value="${company.id }"  <#if company.id==user.cid>selected="selected"</#if> >${company.province }</option>
+                            <#else>
+                            <option value="${company.id }"  <#if company.id==sessioncid>selected="selected"</#if> >${company.province }</option>
+                            </#if>
                              </#list>
                             </select>
                        </div>
@@ -85,7 +90,7 @@
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
                            <button type="submit" class="btn btn-primary"  onclick="save()">保存</button>
-                           <button type="button" class="btn btn-danger">Cancel</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>

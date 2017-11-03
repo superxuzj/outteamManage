@@ -44,36 +44,30 @@
                            <input type="text" class="form-control" name="company" value="${leave.company}" >
                        </div>
                    </div>
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出队类型</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" name="outtype" value="${leave.outtype}" >
-                       </div>
-                   </div>
+                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">状态</label>
                        <div class="col-lg-9">
-                          <input type="text" class="form-control" name="state" value="${leave.state}" >
+                          <input type="text" class="form-control" value="<@ps.leavestate leave.state/>" >
                        </div>
                    </div>
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" id="occupation" placeholder=" ">
-                       </div>
-                   </div>
+                   
                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">撤离备注</label>
                        <div class="col-lg-9">
-                          <textarea name="remark" rows="5" cols="50">这里写内容</textarea>
+                          <textarea name="remark" rows="5" cols="50" readonly>${leave.remark}</textarea>
                        </div>
                    </div>
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="submit" class="btn btn-primary" <#if leave.state!=1> disabled="disabled"</#if>>批准</button>
-                           <button type="button" class="btn btn-danger">返回</button>
+                      		<#if leave.state!=1>
+                           <button type="submit" class="btn btn-primary" disabled="disabled">已批准</button>
+                           	<#else>
+                           	<button type="submit" class="btn btn-primary">批准</button>
+                           	</#if>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>
@@ -83,7 +77,9 @@
 </div>
 
 <script type="text/javascript">
-
+function gohistory(){
+	window.history.go(-1);
+}
 </script>
 
 </@override> <@extends name="/base/base.ftl"/>

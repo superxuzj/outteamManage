@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.controller.base.BaseCommonController;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.User;
 import com.boliangshenghe.outteam.service.CompanyService;
-import com.boliangshenghe.outteam.service.RoleService;
 import com.boliangshenghe.outteam.service.UserService;
 
 /**
@@ -35,7 +35,7 @@ import com.boliangshenghe.outteam.service.UserService;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseCommonController{
 	
 	@Autowired
 	private CompanyService companyService;
@@ -53,6 +53,9 @@ public class UserController {
   			HttpServletResponse response,User user,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
 		user.setState("1");//state为0 逻辑删除 
+		if(this.getRoleId(request)!=1){//不是系统管理员 只能看到本单位的队员
+			user.setCid(this.getUserCid(request));
+		}
 		PageBean<User> page =userService.getUserByPage(user, pageNo);
 		model.addAttribute("page", page);
 		return "user/list";

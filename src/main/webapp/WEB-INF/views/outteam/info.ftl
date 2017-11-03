@@ -45,22 +45,16 @@
                            <input type="text" class="form-control" name="company" value="${outteam.company }" />
                        </div>
                    </div>
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">出队类型</label>
+                  <div class="form-group col-lg-6">
+                       <label class="col-lg-3 control-label">人数</label>
                        <div class="col-lg-9">
-                           ${outteam.outtype }
+                           <input type="text" class="form-control" name="count" value="${outteam.count }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">状态</label>
                        <div class="col-lg-9">
-                       	<#if outteam.state==1>
-                       		<input type="text" class="form-control" value="通知" disabled>
-                       	<#elseif outteam.state==1>
-                       		<input type="text" class="form-control" value="出队 " disabled>
-                       	<#else>
-                       		<input type="text" class="form-control" value="结束 " disabled>
-                       	</#if>
+                       	<input type="text" class="form-control" value="<@ps.outteamstate outteam.state/>" readonly />
                        </div>
                    </div>
                   
@@ -149,12 +143,7 @@
                        </div>
                    </div>
                    
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">人数</label>
-                       <div class="col-lg-9">
-                           <input type="text" class="form-control" name="count" value="${outteam.count }">
-                       </div>
-                   </div>
+                   
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">总结</label>
                        <div class="col-lg-9">
@@ -195,7 +184,7 @@
                    <input type="hidden" name="leaders" id="leaders"/>
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
-                           <button type="button" class="btn btn-danger">返回</button>
+                           <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
                </form>
@@ -205,8 +194,10 @@
 </div>
 
 <script type="text/javascript">
+function gohistory(){
+	window.history.go(-1);
+}
 function choosePerson(){
-	
    	 layer.open({
 			type: 2,
 		    area: ['750px', '561px'],

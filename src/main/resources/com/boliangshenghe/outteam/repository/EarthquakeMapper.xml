@@ -12,8 +12,8 @@
     <result column="magnitude" property="magnitude" jdbcType="VARCHAR" />
     <result column="longitude" property="longitude" jdbcType="VARCHAR" />
     <result column="latitude" property="latitude" jdbcType="VARCHAR" />
-    <result column="eqdate" property="eqdate" jdbcType="TIMESTAMP" />
-    <result column="eqtime" property="eqtime" jdbcType="TIMESTAMP" />
+    <result column="eqdate" property="eqdate" jdbcType="VARCHAR" />
+    <result column="eqtime" property="eqtime" jdbcType="VARCHAR" />
     <result column="depth" property="depth" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="responseid" property="responseid" jdbcType="INTEGER" />
@@ -44,14 +44,14 @@
     values (#{id,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, #{eventid,jdbcType=VARCHAR}, 
       #{cid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{magnitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
-      #{latitude,jdbcType=VARCHAR}, #{eqdate,jdbcType=TIMESTAMP}, #{eqtime,jdbcType=TIMESTAMP}, 
+      #{latitude,jdbcType=VARCHAR}, #{eqdate,jdbcType=VARCHAR}, #{eqtime,jdbcType=VARCHAR}, 
       #{depth,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{responseid,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Earthquake" >
-      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
-  	</selectKey>
+		</selectKey>
     insert into t_earthquake
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -138,10 +138,10 @@
         #{latitude,jdbcType=VARCHAR},
       </if>
       <if test="eqdate != null" >
-        #{eqdate,jdbcType=TIMESTAMP},
+        #{eqdate,jdbcType=VARCHAR},
       </if>
       <if test="eqtime != null" >
-        #{eqtime,jdbcType=TIMESTAMP},
+        #{eqtime,jdbcType=VARCHAR},
       </if>
       <if test="depth != null" >
         #{depth,jdbcType=VARCHAR},
@@ -191,10 +191,10 @@
         latitude = #{latitude,jdbcType=VARCHAR},
       </if>
       <if test="eqdate != null" >
-        eqdate = #{eqdate,jdbcType=TIMESTAMP},
+        eqdate = #{eqdate,jdbcType=VARCHAR},
       </if>
       <if test="eqtime != null" >
-        eqtime = #{eqtime,jdbcType=TIMESTAMP},
+        eqtime = #{eqtime,jdbcType=VARCHAR},
       </if>
       <if test="depth != null" >
         depth = #{depth,jdbcType=VARCHAR},
@@ -225,8 +225,8 @@
       magnitude = #{magnitude,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=VARCHAR},
-      eqdate = #{eqdate,jdbcType=TIMESTAMP},
-      eqtime = #{eqtime,jdbcType=TIMESTAMP},
+      eqdate = #{eqdate,jdbcType=VARCHAR},
+      eqtime = #{eqtime,jdbcType=VARCHAR},
       depth = #{depth,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       responseid = #{responseid,jdbcType=INTEGER},
@@ -235,7 +235,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-  <!-- 新加   -->
+   <!-- 新加   -->
    <select id="selectEarthquakeList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Earthquake">
    	    select 
     <include refid="Base_Column_List" />
@@ -243,6 +243,9 @@
     <where>
         <if test="eqname != null">
             AND eqname like '%${eqname}%' 
+        </if>
+         <if test="province != null">
+            AND province like '%${province}%' 
         </if>
     </where>
    	    <if test="start != null and limit != null"> 

@@ -28,6 +28,7 @@
                       </a>
                   </li>
                   
+                  <#if sessionroleid==1>
                   <li <#if _request.requestURI?index_of("/company")!=-1> class="active" </#if>>
                       <a class="" href="/company">
                           <span>单位管理</span>
@@ -46,7 +47,7 @@
                           <li><a class="" href="/link">联动管理</a></li>
                       </ul>
                   </li>
-                  
+                  </#if>
 				  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <span>用户管理</span>

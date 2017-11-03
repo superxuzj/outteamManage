@@ -48,6 +48,7 @@ public class CompanyController {
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
 		PageBean<Company> page = companyService.getCompanyByPage(company, pageNo);
 		model.addAttribute("page", page);
+		model.addAttribute("company", company);
 		return "company/list";
 	}
 	

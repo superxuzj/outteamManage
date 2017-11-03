@@ -22,22 +22,11 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<div class="panel-body">
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" action="/company/list">
 					<div class="form-group col-lg-3">
 						<label for="inputPassword1" class="col-lg-3 control-label">名称</label>
 						<div class="col-lg-9">
-							<input type="text" class="form-control" id="inputPassword1"
-								placeholder="名称">
-						</div>
-					</div>
-					<div class="form-group col-lg-3">
-						<label for="inputPassword1" class="col-lg-3 control-label">类型</label>
-						<div class="col-lg-9">
-							<select class="form-control m-bot15">
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-							</select>
+							<input type="text" class="form-control" name="province" value="${company.province }">
 						</div>
 					</div>
 					<div class="form-group col-lg-3">
@@ -50,9 +39,9 @@
 		</section>
 
 	</div>
-	<div class="col-lg-12">
+	<!-- <div class="col-lg-12">
 		<a class="btn btn-primary btn-sm" href="/company/goadd" title="新增">新增</a>
-	</div>
+	</div> -->
 	<div class="col-lg-12">
 		<section class="panel">
 			<table class="table table-striped table-advance table-hover">

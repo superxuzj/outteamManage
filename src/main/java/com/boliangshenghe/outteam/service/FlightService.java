@@ -1,5 +1,7 @@
 package com.boliangshenghe.outteam.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,10 @@ public class FlightService {
     
     public int deleteByPrimaryKey(Integer id){
     	return flightMapper.deleteByPrimaryKey(id);
+    }
+    
+    public List<Flight> selectFlightByRecord(Flight record){
+    	return flightMapper.selectFlightByRecord(record);
     }
     
 }

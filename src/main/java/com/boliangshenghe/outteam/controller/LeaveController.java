@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseCommonController;
+import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Leave;
 import com.boliangshenghe.outteam.entity.Outteam;
+import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.LeaveService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.UserService;
@@ -32,8 +34,10 @@ public class LeaveController extends BaseCommonController{
 	private OutteamService outteamService;
 	@Autowired
 	private LeaveService leaveService;
+	
 	@Autowired
-	private UserService userService;
+	private FlightService flightService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/leave/list";
@@ -66,7 +70,7 @@ public class LeaveController extends BaseCommonController{
 			model.addAttribute("page", page);
 		}
 		
-		
+		model.addAttribute("outteam", outteam);
 		return "leave/list";
 	}
 	
@@ -89,8 +93,33 @@ public class LeaveController extends BaseCommonController{
 	@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Leave leave,Model model){
+		Flight flight = new Flight();
+    	flight.setArractual(leave.getArractual());
+    	flight.setArrcity(leave.getArrcity());
+    	flight.setArrport(leave.getArrport());
+    	flight.setArrscheduled(leave.getArrscheduled());
+    	flight.setArrterminal(leave.getArrterminal());
+    	flight.setDepactual(leave.getDepactual());
+    	flight.setDepcity(leave.getDepcity());
+    	flight.setDepdate(leave.getDepdate());
+    	flight.setDepport(leave.getDepport());
+    	flight.setDepscheduled(leave.getDepscheduled());
+    	flight.setDepterminal(leave.getDepterminal());
+    	flight.setFlight(leave.getFlight());
+    	flight.setFlightstate(leave.getFlightstate());
+    	flight.setDepdate(leave.getDepdate());
+    	if(!leave.getFlight().equals("")){//要是不要坐飞机，没有航班信息
+    		List<Flight> flightlist = flightService.selectFlightByRecord(flight);
+        	if(flightlist!=null && flightlist.size()>0){
+        		flight.setId(flightlist.get(0).getId());
+        		flightService.updateByPrimaryKeySelective(flight);
+        	}else{
+        		flightService.insertSelective(flight);
+        	}
+        	leave.setFid(flight.getId());
+    	}
+		
 		if(leave.getId()!=null){
-			
 			leaveService.updateByPrimaryKeySelective(leave);
 		}else{
 			leave.setCreatetime(new Date());
@@ -146,6 +175,12 @@ public class LeaveController extends BaseCommonController{
 			if(outteam.getLid()!=null){
 				Leave leave = leaveService.selectByPrimaryKey(outteam.getLid());
 				model.addAttribute("leave", leave);
+				
+				if(null!=leave.getFid()){
+					Flight flight = flightService.selectByPrimaryKey(leave.getFid());
+					model.addAttribute("flight", flight);
+					
+				}
 			}
 		}
 		return "leave/ask";

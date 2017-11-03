@@ -48,6 +48,9 @@ public class UserService {
     	Company company = companyMapper.selectByPrimaryKey(user.getCid());
     	user.setCompany(company.getProvince());
     	user.setState("1");
+    	user.setRoleid(4);
+    	user.setUsername(user.getPhone());
+    	user.setPassword("111111");
     	if(null == user.getId()){
     		userMapper.insertSelective(user);
     	}else{

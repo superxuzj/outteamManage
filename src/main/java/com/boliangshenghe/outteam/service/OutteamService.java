@@ -70,6 +70,15 @@ public class OutteamService {
     public PageBean<Outteam> getOutteamByPage(Outteam record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<Outteam> list = this.outteamMapper.selectOutteamList(record);
+        if(null!=list && list.size()>0){
+        	for (Outteam outteam : list) {
+        		if(null != outteam.getFid()){
+        			Flight f = flightMapper.selectByPrimaryKey(outteam.getFid());
+            		outteam.setFlight(f.getFlight());
+        		}
+        		
+			}
+        }
         return new PageBean<Outteam>(list);
     }
     
@@ -115,7 +124,6 @@ public class OutteamService {
     	flight.setDepterminal(outteam.getDepterminal());
     	flight.setFlight(outteam.getFlight());
     	flight.setFlightstate(outteam.getFlightstate());
-    	flight.setDepdate(outteam.getDepdate());
     	if(!outteam.getFlight().equals("")){//要是不要坐飞机，没有航班信息
     		List<Flight> flightlist = flightMapper.selectFlightByRecord(flight);
         	if(flightlist!=null && flightlist.size()>0){
