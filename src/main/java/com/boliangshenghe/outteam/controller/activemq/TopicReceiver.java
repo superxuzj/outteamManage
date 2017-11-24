@@ -1,4 +1,4 @@
-package com.boliangshenghe.outteam.activemq;
+package com.boliangshenghe.outteam.controller.activemq;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
