@@ -43,7 +43,7 @@
                        </div>
                    </div>
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">省市</label>
+                       <label class="col-lg-2 control-label">受灾省份</label>
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="province" value="${earthquake.province}"/>
                        </div>

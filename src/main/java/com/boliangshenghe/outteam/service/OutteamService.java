@@ -160,6 +160,9 @@ public class OutteamService {
 				if(isInclude(user.getId().toString(),outteam.getLeaders())){
 					outteamDetail.setIslead("1");
 				}
+				if(isInclude(user.getId().toString(),outteam.getMeets())){
+					outteamDetail.setIsmeet("1");
+				}
 				outteamDetail.setUserid(user.getId());
 				outteamDetail.setName(user.getName());
 				outteamDetail.setOtid(outteam.getId());

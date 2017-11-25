@@ -2,8 +2,10 @@ package com.boliangshenghe.outteam.repository;
 
 import java.util.List;
 
-import com.boliangshenghe.outteam.entity.Hbplan;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.boliangshenghe.outteam.entity.Hbplan;
+@Mapper
 public interface HbplanMapper {
     int deleteByPrimaryKey(Integer id);
 

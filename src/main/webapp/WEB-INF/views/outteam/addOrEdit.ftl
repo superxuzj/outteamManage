@@ -189,6 +189,7 @@
                    <input type="hidden" name="chooses" id="chooses"/>
                    <input type="hidden" name="contacts" id="contacts"/>
                    <input type="hidden" name="leaders" id="leaders"/>
+                   <input type="hidden" name="meets" id="meets"/>
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
                            <button type="button" class="btn btn-primary" onclick="save()">确认</button>

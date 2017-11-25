@@ -169,6 +169,7 @@
             AND otid = #{otid,jdbcType=INTEGER}
         </if>
     </where>
+    order by eqid desc,cid asc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>

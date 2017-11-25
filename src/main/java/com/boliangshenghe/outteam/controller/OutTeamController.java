@@ -154,8 +154,10 @@ public class OutTeamController extends BaseCommonController{
 	public String personlist(HttpServletRequest request, 
   			HttpServletResponse response,Integer id,Model model){
 		Outteam outteam = outteamService.selectByPrimaryKey(id);
+		model.addAttribute("hit", outteam.getHit());
 		User user = new User();
 		user.setCid(outteam.getCid());
+		user.setRoleid(4);
 		//user.setCid(1);
 		List<User> userlist = userService.selectUserList(user);//查询单位员工
 		OutteamDetail outteamDetail = new OutteamDetail();

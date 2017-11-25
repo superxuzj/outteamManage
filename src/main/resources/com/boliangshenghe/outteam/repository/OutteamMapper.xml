@@ -268,6 +268,7 @@
             AND hit = #{hit,jdbcType=VARCHAR}
         </if>
     </where>
+    order by eqid desc,cid asc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
@@ -310,9 +311,8 @@
          <if test="company != null">
             AND company like '%${company}%' 
         </if>
-        
-    </where>
-		group by eqid,cid
+   	 </where>
+		order by eqid desc ,cid asc
        <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>

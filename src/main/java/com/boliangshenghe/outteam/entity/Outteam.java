@@ -44,8 +44,10 @@ public class Outteam {
     private String contacts;
     
     private String leaders;
+    
+    private String meets;
 
-    private Integer start;
+	private Integer start;
     
     private Integer limit;
     
@@ -95,6 +97,13 @@ public class Outteam {
 		this.depcity = depcity;
 	}
 
+	public String getMeets() {
+		return meets;
+	}
+
+	public void setMeets(String meets) {
+		this.meets = meets;
+	}
 	public String getArrcity() {
 		return arrcity;
 	}

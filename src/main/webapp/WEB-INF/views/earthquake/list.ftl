@@ -32,7 +32,7 @@ margin-bottom:1px !important;
                                   </div>
                               </div>
                               <div class="form-group col-lg-3">
-                             	  <label for="inputPassword1" class="col-lg-3 control-label">单位</label>
+                             	  <label for="inputPassword1" class="col-lg-3 control-label">省份</label>
                                   <div class="col-lg-9">
                                       <input type="text" class="form-control" name="province" value="${earthquake.province }">
                                   </div>
@@ -57,7 +57,7 @@ margin-bottom:1px !important;
                       <table class="table table-striped table-advance table-hover">
                        <tbody>
                           <tr>
-                             <th>event_id</th>
+                             <th>地震唯一标识码</th>
                              <th>名称</th>
                              <th>区域</th>
                              <th>省份</th>
@@ -65,7 +65,7 @@ margin-bottom:1px !important;
                              <th>震级</th>
                              <th>日期</th>
                              <th>响应等级</th>
-                             <th>状态</th>
+                             <th>事件来源</th>
                              <th>操作</th>
                           </tr>
                           
@@ -78,7 +78,15 @@ margin-bottom:1px !important;
                            <td>${earthquake.location }</td>
                            <td>${earthquake.magnitude }</td>
                            <td>${earthquake.eqdate }</td>
-                           <td>${earthquake.responseid }</td>
+                           <td>
+                           
+                           <#if earthquake.responseid==1>
+                           	一级响应
+                           <#elseif earthquake.responseid==2>
+                           	二级响应	
+                           	<#else>
+                           	华北响应
+                           </#if></td>
                            <td>
                            <#if earthquake.state==2>
                            eqim触发

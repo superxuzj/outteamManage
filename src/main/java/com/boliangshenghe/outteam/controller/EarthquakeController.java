@@ -247,21 +247,23 @@ public class EarthquakeController extends BaseCommonController{
 			//华北地区 通过t_hbplan 来判断
 			Hbplan hbplan = new Hbplan();
 			hbplan.setCompanys(earthquake.getProvince());//发震省份
+			if(null!=earthquake.getMagnitude() && earthquake.getMagnitude().length()==1){
+				earthquake.setMagnitude(earthquake.getMagnitude()+".0");
+			}
 			hbplan.setHigh(earthquake.getMagnitude());//地震级数
 			Hbplan hbplantemp = hbplanService.selectHbplanByCompanys(hbplan);
-			
-			HbplanDetail hbplanDetail = new HbplanDetail();
-			hbplanDetail.setHbplanid(hbplantemp.getId());
-			List<HbplanDetail> hbplanDetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail);
-			if(hbplanDetailList!=null && hbplanDetailList.size()>0){
-				for (HbplanDetail detail : hbplanDetailList) {
-					set.add(detail.getCompany());//添加到set里面
+			if(null!=hbplantemp.getId()){//有对应的华预案
+				HbplanDetail hbplanDetail = new HbplanDetail();
+				hbplanDetail.setHbplanid(hbplantemp.getId());
+				List<HbplanDetail> hbplanDetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail);
+				if(hbplanDetailList!=null && hbplanDetailList.size()>0){
+					for (HbplanDetail detail : hbplanDetailList) {
+						set.add(detail.getCompany());//添加到set里面
+					}
 				}
+				model.addAttribute("hbplan", hbplantemp);
+				model.addAttribute("hbplanDetailList", hbplanDetailList);
 			}
-			model.addAttribute("hbplan", hbplantemp);
-			model.addAttribute("hbplanDetailList", hbplanDetailList);
-			
-			
 		}else{
 			ResponseCompany responseCompany = new ResponseCompany();
 			responseCompany.setRid(resinfo.getId());//根据响应id查

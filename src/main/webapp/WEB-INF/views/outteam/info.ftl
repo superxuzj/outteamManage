@@ -156,7 +156,6 @@
                       <section class="panel personpanel">
                           <header class="panel-heading">
                                                                    出队队员列表 
-                      <a class="btn btn-danger btn-sm aleft" href="javascript:void(0)" onclick="choosePerson()" title="">添加队员</a>
                           </header>
                           <table class="table">
                               <thead>
@@ -164,6 +163,7 @@
                                   <th>姓名</th>
                                   <th>单位</th>
                                   <th>电话</th>
+                                  <th>职责</th>
                               </tr>
                               </thead>
                               <tbody id="usertbody">
@@ -172,6 +172,17 @@
 										<td>${detail.name }</td>
 										<td>${detail.company }</td>
 										<td>${detail.phone }</td>
+										<td>
+										<#if detail.iscontact==1>
+										联系人
+										</#if>
+										<#if detail.islead==1>
+										负责人
+										</#if>
+										<#if detail.ismeet==1>
+											接机人
+										</#if>
+										</td>
 									</tr>
 								   </#list>
                               </tbody>

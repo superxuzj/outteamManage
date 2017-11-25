@@ -109,30 +109,35 @@ public class EarthquakeService {
 			//华北地区 通过t_hbplan 来判断
 			Hbplan hbplan = new Hbplan();
 			hbplan.setCompanys(earthquake.getProvince());//发震省份
+			if(null!=earthquake.getMagnitude() && earthquake.getMagnitude().length()==1){
+				earthquake.setMagnitude(earthquake.getMagnitude()+".0");
+			}
 			hbplan.setHigh(earthquake.getMagnitude());//地震级数
 			Hbplan hbplantemp = hbplanService.selectHbplanByCompanys(hbplan);
-			
-			HbplanDetail hbplanDetail = new HbplanDetail();
-			hbplanDetail.setHbplanid(hbplantemp.getId());
-			List<HbplanDetail> hbplanDetailList = hbplanDetailMapper.selectHbplanDetailList(hbplanDetail);
-			if(null!=hbplanDetailList && hbplanDetailList.size()>0){
-				for (HbplanDetail temp : hbplanDetailList) {
-					if(set.add(temp.getCompany())){//去重操作
-						Outteam source = new Outteam();
-						source.setCid(temp.getCid());
-						source.setCompany(temp.getCompany());
-						source.setEqid(eqid);
-						source.setCount(temp.getCount());
-						source.setEqname(earthquake.getEqname());
-						source.setOuttype("4");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
-						source.setState("1");
-						source.setHit("2");
-						source.setCreatetime(new Date());
-						source.setCreator("管理员");
-						outteamMapper.insertSelective(source);	
+			if(null!=hbplantemp.getId()){//有对应的华预案
+				HbplanDetail hbplanDetail = new HbplanDetail();
+				hbplanDetail.setHbplanid(hbplantemp.getId());
+				List<HbplanDetail> hbplanDetailList = hbplanDetailMapper.selectHbplanDetailList(hbplanDetail);
+				if(null!=hbplanDetailList && hbplanDetailList.size()>0){
+					for (HbplanDetail temp : hbplanDetailList) {
+						if(set.add(temp.getCompany())){//去重操作
+							Outteam source = new Outteam();
+							source.setCid(temp.getCid());
+							source.setCompany(temp.getCompany());
+							source.setEqid(eqid);
+							source.setCount(temp.getCount());
+							source.setEqname(earthquake.getEqname());
+							source.setOuttype("4");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
+							source.setState("1");
+							source.setHit("2");
+							source.setCreatetime(new Date());
+							source.setCreator("管理员");
+							outteamMapper.insertSelective(source);	
+						}
 					}
 				}
 			}
+			
 		}else{
 			//响应等级出队
 			ResponseCompany responseCompany = new ResponseCompany();
