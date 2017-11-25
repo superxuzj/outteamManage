@@ -38,8 +38,8 @@
                        <label class="col-lg-3 control-label">性别</label>
                        <div class="col-lg-7">
                            <select class="form-control m-bot15" name="sex">
-                                <option value="1">男</option>
-                                <option value="2">女</option>
+                                <option value="1" <#if user.sex==1>selected</#if>>男</option>
+                                <option value="2" <#if user.sex==2>selected</#if>>女</option>
                             </select>
                        </div>
                    </div>

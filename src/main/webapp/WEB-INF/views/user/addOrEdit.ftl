@@ -47,8 +47,8 @@
                        <label class="col-lg-3 control-label">性别</label>
                        <div class="col-lg-7">
                            <select class="form-control m-bot15" name="sex">
-                                <option value="1">男</option>
-                                <option value="2">女</option>
+                                <option value="1" <#if user.sex==1>selected</#if>>男</option>
+                                <option value="2" <#if user.sex==2>selected</#if>>女</option>
                             </select>
                        </div>
                    </div>
@@ -64,6 +64,7 @@
                        <label class="col-lg-3 control-label">单位</label>
                        <div class="col-lg-7">
                           <select class="form-control m-bot15" name="cid">
+                          <#if sessionroleid==1>
                              <#list companyList as company>
                              <#if user??>
                                 <option value="${company.id }"  <#if company.id==user.cid>selected="selected"</#if> >${company.province }</option>
@@ -71,6 +72,9 @@
                             <option value="${company.id }"  <#if company.id==sessioncid>selected="selected"</#if> >${company.province }</option>
                             </#if>
                              </#list>
+                            <#else>
+                            <option value="${sessioncid }"  >${sessioncompany}</option>
+                            </#if>
                             </select>
                        </div>
                    </div>

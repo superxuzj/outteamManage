@@ -92,7 +92,7 @@
 										title="修改">修改</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="/user/del?id=${user.id }" title="删除">删除</a>
+									<li><a href="javascript:void(0)" onclick="del(${user.id })" title="删除">删除</a>
 									</li>
 								</ul>
 							</div></td>
@@ -111,6 +111,16 @@
 <script type="text/javascript">
 	function add(){
 		window.location.href = "/user/goadd";
+	}
+	function del(id){
+		if(window.confirm('你确定要删除吗？')){
+            //alert("确定");
+            window.location.href = "/user/del?id="+id;
+            return true;
+         }else{
+            //alert("取消");
+            return false;
+        }
 	}
 </script>
 

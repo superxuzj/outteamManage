@@ -77,4 +77,24 @@ public class PersonController extends BaseCommonController{
 		model.addAttribute("user", user);
 		return "person/companyinfo";
 	}
+	
+	@RequestMapping("/changepwd")
+	public String changepassword(HttpServletRequest request, 
+  			HttpServletResponse response,Model model){
+		User user = userService.selectByPrimaryKey(this.getUserId(request));
+  		model.addAttribute("user", user);
+		return "person/changepwd";
+	}
+	
+	@RequestMapping("/savepwd")
+	public String savechange(HttpServletRequest request, 
+  			HttpServletResponse response,User user,Model model){
+  		User olduser = userService.selectByPrimaryKey(user.getId());
+  		if(user.getPassword().equals("")){
+  			user.setPassword(olduser.getPassword());
+  		}
+  		userService.updateByPrimaryKeySelective(user);
+  		model.addAttribute("user", user);
+		return "redirect:/loginout";
+	}
 }

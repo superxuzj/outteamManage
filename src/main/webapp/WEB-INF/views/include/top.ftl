@@ -22,7 +22,7 @@
                      <a href="/person/info"><i class="icon_profile"></i>我的信息</a>
                  </li>
                  <li >
-                     <a href="/person/info"><i class="icon_key_alt"></i>修改密码</a>
+                     <a href="/person/changepwd"><i class="icon_key_alt"></i>修改密码</a>
                  </li>
                  <li>
                      <a href="#" onclick="loginout()"><i class="icon_key_alt"></i>退出</a>
