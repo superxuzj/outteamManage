@@ -21,13 +21,13 @@
                   <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="name" value="${response.name }">
+                           <input type="text" class="form-control" name="name" value="${response.name }" readonly>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
-                         <input type="text" class="form-control" name="name" value="${response.grade }">
+                         <input type="text" class="form-control" name="name" value="${response.grade }" readonly>
                        </div>
                    </div>
                    <div class="form-group">
@@ -46,8 +46,8 @@
                               <tbody>
                                 <#list companyList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th>${detail.company }</th>
+	                                  <td>${detail.cid }</td>
+	                                  <td>${detail.company }</td>
                              	 </tr>
                                </#list>
                               </tbody>

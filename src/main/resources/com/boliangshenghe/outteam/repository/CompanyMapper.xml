@@ -98,7 +98,7 @@
     from t_company
     <where>
         <if test="province != null">
-            AND province = #{province,jdbcType=VARCHAR} 
+            AND province like '%${province}%' 
         </if>
         <if test="type != null">
             AND type = #{type,jdbcType=VARCHAR} 

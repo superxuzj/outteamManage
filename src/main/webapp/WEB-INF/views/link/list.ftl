@@ -12,7 +12,7 @@
 			您的位置：
 			<li><a href="/">首页</a>
 			</li>
-			<li>轮值管理</li>
+			<li>联动管理</li>
 			<!-- <li>Dashboard</li>
 						<li>Dashb省道oard</li> -->
 		</ol>
@@ -61,14 +61,27 @@
 						<th>名称</th>
 						<th>响应等级</th>
 						<th>对应省份</th>
+						<th>状态</th>
 						<th>操作</th>
 					</tr>
 					<#list page.list as link>
 					<tr>
 						<td>${link.id }</td>
 						<td>${link.name }</td>
-						<td>${link.rid }</td>
+						<td>
+						<#if link.rid==1>
+						一级响应
+						<#else>
+						二级响应
+						</#if></td>
 						<td>${link.eqcompany }</td>
+						<td>
+						<#if link.state==1>
+						启用
+						<#else>
+						注销
+						</#if>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -84,7 +97,7 @@
 										title="修改">修改</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="" title="Bootstrap 3 themes generator">结束</a>
+									<li><a href="javascript:void(0)" onclick="del(${link.id })" title="注销">注销</a>
 									</li>
 								</ul>
 							</div></td>
@@ -102,6 +115,16 @@
 <script type="text/javascript">
 	function add(){
 		window.location.href = "/link/goadd";
+	}
+	function del(id){
+		if(window.confirm('你确定要注销吗？')){
+            //alert("确定");
+            window.location.href = "/link/del?id="+id;
+            return true;
+         }else{
+            //alert("取消");
+            return false;
+        }
 	}
 </script>
 

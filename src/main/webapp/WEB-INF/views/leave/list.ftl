@@ -71,9 +71,19 @@
                            	操作<span class="caret"></span></a>
                            <ul class="dropdown-menu">
                              <#if outteam.eqcompany==sessioncompany>
-                             <li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="结束">审批</a></li>
+                             	<#if outteam.state==4 || outteam.state==5>
+                             	<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="详情">详情</a></li>
+                             	<#else>
+                             	<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="审批">审批</a></li>
+                             	</#if>
                           	<#else>
-                             <li><a href="/leave/ask?id=${outteam.id }" title="结束">撤退申请</a></li>
+                          	
+                          		<#if outteam.state==4 || outteam.state==5>
+                             	<li><a href="/leave/ask?id=${outteam.id }" title="撤退详情">撤退详情</a></li>
+                             	<#else>
+								<li><a href="/leave/ask?id=${outteam.id }" title="撤退申请">撤退申请</a></li>
+                             	</#if>
+                             
                           	</#if>
                            </ul>
                        </div>

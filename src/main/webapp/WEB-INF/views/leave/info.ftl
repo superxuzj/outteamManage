@@ -10,6 +10,14 @@
 .aleft{
 	margin-left:750px;
 }
+.class1{
+	width:12% !important;
+	margin-right:18px;
+}
+.class2{
+	width:36% !important;
+	margin-left:-14px;
+}
 </style>
  </@override> <@override name="body">
 
@@ -45,17 +53,17 @@
                        </div>
                    </div>
                    
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">状态</label>
-                       <div class="col-lg-9">
+                   <div class="form-group col-lg-12">
+                       <label class="col-lg-1 control-label class1">状态</label>
+                       <div class="col-lg-6 class2">
                           <input type="text" class="form-control" value="<@ps.leavestate leave.state/>" >
                        </div>
                    </div>
                    
                   
-                   <div class="form-group col-lg-6">
-                       <label class="col-lg-3 control-label">撤离备注</label>
-                       <div class="col-lg-9">
+                   <div class="form-group col-lg-12">
+                       <label class="col-lg-1 control-label class1">撤离备注</label>
+                       <div class="col-lg-6 class2">
                           <textarea name="remark" rows="5" cols="50" readonly>${leave.remark}</textarea>
                        </div>
                    </div>

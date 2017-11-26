@@ -6,8 +6,8 @@
 			您的位置：
 			<li><a href="/">首页</a>
 			</li>
-			<li>轮值管理</li>
-			<li>轮值详情</li>
+			<li>联动管理</li>
+			<li>联动详情</li>
 			<!-- <li>Dashboard</li>
 						<li>Dashb省道oard</li> -->
 		</ol>
@@ -60,8 +60,8 @@
                               <tbody id="companytbody">
                                <#list detailList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th>${detail.company }</th>
+	                                  <td>${detail.cid }</td>
+	                                  <td>${detail.company }</td>
                              	 </tr>
                                </#list>
                               </tbody>

@@ -26,7 +26,7 @@
                <form class="form-horizontal" role="form" action="/company/addOrEdit" method="post">                                                  
                     <input type="hidden" class="form-control" name="id" value="${company.id }" />
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">单位简码</label>
+                       <label class="col-lg-2 control-label">单位简码<#if company==null>(登录名)</#if></label>
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="code" value="${company.code }"/>
                        </div>

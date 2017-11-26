@@ -41,9 +41,12 @@
                        <label class="col-lg-2 control-label">类型</label>
                        <div class="col-lg-6">
                             <select class="form-control m-bot15" name="type">
-                                              <option value="1" <#if company.type==1>selected</#if>>省局</option>
-                                              <option value="2" <#if company.type==2>selected</#if>>单位</option>
-                                          </select>
+                            <#if company.type==1>
+                            <option>省局</option>
+							<#else>
+							<option>单位</option>
+							</#if>		
+                            </select>
                        </div>
                    </div>
                    

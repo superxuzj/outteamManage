@@ -157,13 +157,17 @@
                    <div class="form-group col-lg-12">
                        <label class="col-lg-1 control-label class1">撤离备注</label>
                        <div>
-                          <textarea name="remark" rows="5" cols="50" name="remark">${leave.remark }</textarea>
+                          <textarea name="remark" rows="5" cols="50" name="remark" <#if leave.state==2>readonly</#if>>${leave.remark }</textarea>
                        </div>
                    </div>
                    
                    <div class="form-group">
                        <div class="col-lg-offset-5 col-lg-7">
+                      	   <#if leave.state==2>
+                           <button type="submit" class="btn btn-primary" disabled="disabled">已批准</button>
+                           <#else>
                            <button type="submit" class="btn btn-primary">申请</button>
+                           </#if>
                            <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>

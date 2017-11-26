@@ -145,6 +145,7 @@
             AND rid = #{rid,jdbcType=INTEGER}
         </if>
     </where>
+    order by state desc,id asc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>

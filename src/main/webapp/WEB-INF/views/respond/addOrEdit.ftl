@@ -34,15 +34,21 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="name" value="${response.name }">
+                       
+                           <input type="text" class="form-control" name="name" value="${response.name }" <#if response??>readonly</#if>>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
                           <select class="form-control m-bot15" name="grade">
-                               <option value="1" <#if response.grade==1>selected="selected"</#if> >一级响应</option>
+                          
+                          	   <#if response??>
+                               <option value="${response.grade }" >${response.name }</option>
+                          	   <#else>
+   								<option value="1" <#if response.grade==1>selected="selected"</#if> >一级响应</option>
                                <option value="2" <#if response.grade==2>selected="selected"</#if>>二级响应</option>
+                          	   </#if>
                            </select>
                        </div>
                    </div>
@@ -63,8 +69,8 @@
                               <tbody id="companytbody">
                                 <#list companyList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th>${detail.company }</th>
+	                                  <td>${detail.cid }</td>
+	                                  <td>${detail.company }</td>
                              	 </tr>
                                </#list>
                               </tbody>

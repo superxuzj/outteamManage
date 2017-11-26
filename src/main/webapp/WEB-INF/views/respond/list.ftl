@@ -19,9 +19,10 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-12">
+	<!--<div class="col-lg-12">
 		<a class="btn btn-primary btn-sm" href="javascript:add();" title="新增">新增</a>
 	</div>
+	-->
 	<div class="col-lg-12">
 		<section class="panel">
 			<table class="table table-striped table-advance table-hover">

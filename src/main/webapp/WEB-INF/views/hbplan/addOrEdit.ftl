@@ -72,6 +72,7 @@
                               <tr>
                                   <th>单位id</th>
                                   <th>省份</th>
+                                  <th>人数</th>
                               </tr>
                               </thead>
                               <tbody id="companytbody">
@@ -139,7 +140,7 @@ function addFirstCompany(){
 		    fix: false, //不固定
 		    title: "单位列表",
 		    maxmin: true,
-		    content: '/company/all'
+		    content: '/company/allhascount'
 		}); 
 }
 

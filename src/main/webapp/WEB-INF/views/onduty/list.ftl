@@ -81,11 +81,19 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="/onduty/info?id=${yearm.id }"
-										title="查看">查看</a>
+										title="查看">查看轮值单位</a>
 									</li>
 									<li class="divider"></li>
 									<li><a href="/onduty/goadd?id=${yearm.id }"
-										title="Bootstrap 3 themes generator">修改</a>
+										title="Bootstrap 3 themes generator">修改轮值单位</a>
+									</li>
+									<li class="divider"></li>
+									<li><a href="/onduty/goadd?id=${yearm.id }"
+										title="Bootstrap 3 themes generator">查看人员</a>
+									</li>
+									<li class="divider"></li>
+									<li><a href="/onduty/goadd?id=${yearm.id }"
+										title="Bootstrap 3 themes generator">修改人员</a>
 									</li>
 									<li class="divider"></li>
 									<li><a href="" title="Bootstrap 3 themes generator">结束</a>

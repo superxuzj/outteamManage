@@ -65,7 +65,7 @@ public class LinkService {
 			link.setEqcompany(company.getProvince());
 		}
     	if(null == link.getId()){
-    		
+    		link.setState("1");
     		linkMapper.insertSelective(link);
     	}else{
     		linkMapper.updateByPrimaryKeySelective(link);

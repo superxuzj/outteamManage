@@ -39,15 +39,14 @@
 		</section>
 
 	</div>
-	<!-- <div class="col-lg-12">
+	<div class="col-lg-12">
 		<a class="btn btn-primary btn-sm" href="/company/goadd" title="新增">新增</a>
-	</div> -->
+	</div>
 	<div class="col-lg-12">
 		<section class="panel">
 			<table class="table table-striped table-advance table-hover">
 				<tbody>
 					<tr>
-						<th>ID</th>
 						<th>单位简码</th>
 						<th>单位名称</th>
 						<th>类型</th>
@@ -55,10 +54,15 @@
 					</tr>
 					<#list page.list as company>
 					<tr>
-						<td>${company.id }</td>
 						<td>${company.code }</td>
 						<td>${company.province }</td>
-						<td>${company.type }</td>
+						<td>
+						<#if company.type==1>
+						省局
+						<#else>
+						单位
+						</#if>
+						</td>
 						<td>
 							<div class="btn-group">
 								<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
@@ -72,7 +76,7 @@
 									<li><a href="/company/goadd?id=${company.id }" title="修改">修改</a>
 									</li>
 									<li class="divider"></li>
-									<li><a href="" title="删除" onclick="del(${company.id })">删除</a>
+									<li><a href="javascript:void(0)" title="删除" onclick="del(${company.id })">删除</a>
 									</li>
 								</ul>
 							</div></td>
@@ -91,7 +95,9 @@
 
 <script type="text/javascript">
 	function del(id){
-		$.ajax({  
+		if(window.confirm('你确定要删除吗？')){
+            //alert("确定");
+            $.ajax({  
 	         type : "POST",  //提交方式  
 	         url : "/company/valdel",//路径  
 	         data : {  
@@ -99,10 +105,20 @@
 	         },//数据，这里使用的是Json格式进行传输  
 	         success : function(result) {//返回数据根据结果进行相应的处理  
 	         	if(result=="success"){
-	         		window.location.href="company/del?id="+id;
+	         		window.location.href="/company/del?id="+id;
+	         	}else{
+	         		alert("该单位已配置出队信息，不能删除！");
+	                return false;
 	         	}
+
 	         }
-	     }); 
+	         
+	     });
+         }else{
+            //alert("取消");
+            return false;
+        }
+		 
 	}
 </script>
 </@override> <@extends name="/base/base.ftl"/>

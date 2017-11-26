@@ -70,8 +70,8 @@
                               <tbody id="companytbody">
                                <#list dutyList as duty>
                               	 <tr>
-	                                  <th>${duty.cid }</th>
-	                                  <th>${duty.company }</th>
+	                                  <td>${duty.cid }</th>
+	                                  <td>${duty.company }</th>
                              	 </tr>
                                </#list>
                               </tbody>

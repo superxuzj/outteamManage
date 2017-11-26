@@ -41,7 +41,7 @@
                        <div class="col-lg-6">
                            <select class="form-control m-bot15" name="rid">
                            		<#list  responseList as response>
-                                <option value="${response.id }">${response.name }</option>
+                                <option value="${response.id }" <#if response.id==link.rid>selected</#if>>${response.name }</option>
                                 </#list>
                             </select>
                        </div>
@@ -52,7 +52,7 @@
                        <div class="col-lg-6">
                            <select class="form-control m-bot15" name="eqcid">
                              <#list companyList as company>
-                                <option value="${company.id }">${company.province }</option>
+                                <option value="${company.id }" <#if company.id==link.eqcid>selected</#if>>${company.province }</option>
                              </#list>
                             </select>
                        </div>
@@ -80,8 +80,8 @@
                               <tbody id="companytbody">
                                <#list detailList as duty>
                               	 <tr>
-	                                  <th>${duty.cid }</th>
-	                                  <th>${duty.company }</th>
+	                                  <td>${duty.cid }</td>
+	                                  <td>${duty.company }</td>
                              	 </tr>
                                </#list>
                               </tbody>

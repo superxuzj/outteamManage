@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Company;
+import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.service.CompanyService;
+import com.boliangshenghe.outteam.service.OutteamService;
 
 /**
  * 单位管理
@@ -28,6 +30,8 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyService;
+	@Autowired
+	private OutteamService  outteamService;
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/company/list";
@@ -50,6 +54,22 @@ public class CompanyController {
 		model.addAttribute("page", page);
 		model.addAttribute("company", company);
 		return "company/list";
+	}
+	
+	/**
+	 * 所有的单位 需要输入人数
+	 * @param request
+	 * @param response
+	 * @param company
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("allhascount")
+	public String allhascount(HttpServletRequest request, 
+  			HttpServletResponse response,Company company,Model model){
+		List<Company> list = companyService.selectCompanyList(company);
+		model.addAttribute("list", list);
+		return "company/allhascount";
 	}
 	
 	@RequestMapping("all")
@@ -101,8 +121,6 @@ public class CompanyController {
 	@RequestMapping("addOrEdit")
 	public String addOrEdit(HttpServletRequest request, 
   			HttpServletResponse response,Company company,Model model){
-		System.out.println(company.getProvince());
-		System.out.println(company.getId());
 		
 		if(company.getId()==null){
 			companyService.insertSelective(company);
@@ -134,6 +152,14 @@ public class CompanyController {
   			HttpServletResponse response,Integer id,Model model){
 		
 		//验证其他表是否用到的该单位
+		Company company = companyService.selectByPrimaryKey(id);
+		Outteam ot = new Outteam();
+		ot.setCompany(company.getProvince());
+		List<Outteam> otlist = outteamService.selectOutteamList(ot);
+		if(null!=otlist && otlist.size()>0){
+			return "fail";
+		}
+		System.out.println("valdel");
 		return "success";
 	}
 	

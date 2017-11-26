@@ -127,4 +127,15 @@ public class LinkController {
 		model.addAttribute("responseList", responseList);
 		return "link/addOrEdit";
 	}
+	
+	@RequestMapping("del")
+	public String del(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(id!=null){
+			Link link = linkService.selectByPrimaryKey(id);
+			link.setState("0");//逻辑删除
+			linkService.updateByPrimaryKeySelective(link);
+		}
+		return "redirect:/link/list";
+	}
 }
