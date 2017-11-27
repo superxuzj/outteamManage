@@ -31,7 +31,7 @@
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form" id="hbplanform"
                data-validator-option="{timely:2, theme:'yellow_top'}" action="/hbplan/save">  
-               <input type="hidden" name="id"  value="${hbplan.id }" />                                                
+               <input type="hidden" name="id" id="hiddenid" value="${hbplan.id }" />                                                
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
@@ -73,13 +73,16 @@
                                   <th>单位id</th>
                                   <th>省份</th>
                                   <th>人数</th>
+                                  <th>操作</th>
                               </tr>
                               </thead>
                               <tbody id="companytbody">
                                <#list firstdetailList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th>${detail.company }</th>
+	                                  <td class="test" cid="${detail.cid }">${detail.cid }</td>
+	                                  <td class="test">${detail.company }</td>
+	                                  <td class="test"><input type="text" class="inputvale" value="${detail.count }"/></td>
+	                                  <td class="test"><input type="button" value="删除" onclick="firstdel(this)"></td>
                              	 </tr>
                                </#list>
                               </tbody>
@@ -100,14 +103,18 @@
                               <thead>
                               <tr>
                                   <th>单位id</th>
-                                  <th class="secondtd">省份</th>
+                                  <th >省份</th>
+                                  <th>人数</th>
+                                  <th>操作</th>
                               </tr>
                               </thead>
                               <tbody id="secondcompanytbody">
                                <#list seconddetailList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th class="secondtd">${detail.company }</th>
+	                                  <td class="test" cid="${detail.cid }">${detail.cid }</th>
+	                                  <td class="test">${detail.company }</td>
+	                                   <td class="test"><input type="text" class="inputvale" value="${detail.count }"/></td>
+	                                  <td class="test"><input type="button" value="删除" onclick="firstdel(this)"></td>
                              	 </tr>
                                </#list>
                               </tbody>
@@ -118,7 +125,7 @@
                    <input type="hidden" name="secondcids" id="secondcids"/>
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                      		 <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+                      		 <button type="button" id="buttonsava" class="btn btn-primary" onclick="save()">保存</button>
                            <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
@@ -129,8 +136,107 @@
 </div>
 
 <script type="text/javascript">
+function firstdel(me){
+	$(me).parent().parent().remove();
+}
 function save(){
-	$("#hbplanform").submit();
+	
+	//数字验证
+	var val = "true";
+	$("#companytbody tr").each(function(){   
+		if($("td:eq(2)",this).children(".inputvale").val()==""){//非空判断
+			alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+		}
+       	if(isNaN($("td:eq(2)",this).children(".inputvale").val())){//必须是数字
+       		alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+       	}
+   	});
+	$("#secondcompanytbody tr").each(function(){  
+		if($("td:eq(2)",this).children(".inputvale").val()==""){
+			alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+		}
+	
+       	if(isNaN($("td:eq(2)",this).children(".inputvale").val())){//必须是数字
+       		alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+       	}
+   	});
+	if(val=="fail"){
+		return false;
+	}
+	$('#buttonsava').attr('disabled',"true");//添加disabled属性 
+	//保存hbplan
+	$.ajax({ 
+           type: "POST",
+           url:"/hbplan/save",
+           data:$('#hbplanform').serialize(),// 你的formid
+           async: false,
+           success: function(data) {
+           		$("#hiddenid").val(data);//id框
+          		//删除之前配置 type=1
+        		$.ajax({
+        			type : "post",
+        			url : "/hbplan/delHbplanDetail",
+        			data : "hbplanid=" +data+"&type="+1,
+        			dataType : 'text',
+        			async:false,
+        			success : function(data) {
+        			}
+        		});
+        		//保存type1
+        		$("#companytbody tr").each(function(){     	
+        	    		var count=$("td:eq(2)",this).children(".inputvale").val();
+        	    		var cid=$("td:eq(0)",this).attr("cid");
+        				$.ajax({
+        					type : "post",
+        					url : "/hbplan/addHbplanDetail",
+        					data : "hbplanid=" + data+"&cid="+cid+"&count="+count+"&type="+1,
+        					dataType : 'text',
+        					async:false,
+        					success : function(data) {
+        					}
+        				});
+        		}); 
+        		
+        		//删除之前配置type=2
+        		$.ajax({
+        			type : "post",
+        			url : "/hbplan/delHbplanDetail",
+        			data : "hbplanid=" +data+"&type="+2,
+        			dataType : 'text',
+        			async:false,
+        			success : function(data) {
+        			}
+        		});
+           		//保存type2
+        		$("#secondcompanytbody tr").each(function(){     	
+        	    		var count=$("td:eq(2)",this).children(".inputvale").val();
+        	    		var cid=$("td:eq(0)",this).attr("cid");
+        				$.ajax({
+        					type : "post",
+        					url : "/hbplan/addHbplanDetail",
+        					data : "hbplanid=" + data+"&cid="+cid+"&count="+count+"&type="+2,
+        					dataType : 'text',
+        					async:false,
+        					//jsonp: 'jsonpcallback',
+        					success : function(data) {
+        							//alert(data);
+        					}
+        				});
+        		});
+           	
+           }
+	});
+	
+	window.location.href="/hbplan/list";
+	//$("#hbplanform").submit();
 }
 
 function addFirstCompany(){

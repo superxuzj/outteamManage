@@ -30,6 +30,10 @@ public class ResponseCompanyService {
     	return responseCompanyMapper.selectByPrimaryKey(id);
     }
     
+    public int deleteByResponseCompany(ResponseCompany record){
+    	return responseCompanyMapper.deleteByResponseCompany(record);
+    }
+    
     public  int updateByPrimaryKeySelective(ResponseCompany record){
     	return responseCompanyMapper.updateByPrimaryKeySelective(record);
     }

@@ -21,7 +21,7 @@
 					<#list list as company>
 					<tr>
 						<td><input class="allchoose" type="checkbox" value="${company.id }" /></td>
-						<td  class="test">${company.id }</td>
+						<td class="test" cid="${company.id }">${company.id }</td>
 						<td>${company.code }</td>
 						<td class="test">${company.province }</td>
 					</tr>
@@ -53,12 +53,11 @@
 	    	   	$(this).parent().parent().children("td.test").each(function(i,e){
 	    	        str+=$(e).prop("outerHTML");
 	    	    });
+	    		str+="<td class='test'><input type='text' class='inputvale'/></td>";
+	    	   	str+="<td class='test'><input type='button' value='删除' onclick='firstdel(this)'></td>";
 	    	   	str+="</tr>";
 		    });
-		    parent.$('#secondcompanytbody').html(str);
-		    
-			var cids = chooseArr.join(',');//选择的人
-			parent.$('#secondcids').val(cids);
+		    parent.$('#secondcompanytbody').append(str);
 				
 		    parent.layer.close(index);
 		});

@@ -41,6 +41,7 @@
                               <tr>
                                   <th>单位id</th>
                                   <th>省份</th>
+                                  <th>人数</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -48,6 +49,7 @@
                               	 <tr>
 	                                  <td>${detail.cid }</td>
 	                                  <td>${detail.company }</td>
+	                                  <td>${detail.count}</td>
                              	 </tr>
                                </#list>
                               </tbody>

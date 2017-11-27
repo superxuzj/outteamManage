@@ -1,5 +1,6 @@
 package com.boliangshenghe.outteam.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
+import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Hbplan;
 import com.boliangshenghe.outteam.entity.HbplanDetail;
+import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.HbplanDetailService;
 import com.boliangshenghe.outteam.service.HbplanService;
 
@@ -29,6 +33,9 @@ public class HbplanController {
 	
 	@Autowired
 	private HbplanService hbplanService;
+	
+	@Autowired
+	private CompanyService companyService;
 	
 	@Autowired
 	private HbplanDetailService hbplanDetailService;
@@ -77,13 +84,29 @@ public class HbplanController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("save")
+	/*@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Hbplan hbplan,Model model){
 		
 		hbplanService.addDetail(hbplan);
 		
 		return "redirect:/hbplan/list";
+	}*/
+	
+	@RequestMapping("save")
+	@ResponseBody
+	public String save(HttpServletRequest request, 
+  			HttpServletResponse response,Hbplan hbplan,Model model){
+		
+		hbplan.setCreatetime(new Date());
+		if(hbplan.getId()==null){
+			hbplanService.insertSelective(hbplan);
+			String retu = hbplan.getId().toString();
+			return retu;
+		}else{
+			hbplanService.updateByPrimaryKeySelective(hbplan);
+			return hbplan.getId().toString();
+		}
 	}
 	
 	/**
@@ -108,8 +131,36 @@ public class HbplanController {
 			List<HbplanDetail> seconddetailList = hbplanDetailService.selectHbplanDetailList(hbplanDetail2);
 			model.addAttribute("seconddetailList", seconddetailList);
 		}
-		
-		
 		return "hbplan/addOrEdit";
+	}
+	
+	@RequestMapping("delHbplanDetail")
+	@ResponseBody
+	public String delHbplanDetail(HttpServletRequest request, 
+  			HttpServletResponse response,HbplanDetail hbplanDetail,Model model){
+		hbplanDetailService.deleteByHbplanDetail(hbplanDetail);//根据航班planid 先删除之前的配置
+		return "success";
+	}
+	
+	/**
+	 * 华北预案添加修改页面ajax添加单位
+	 * 
+	 * @param request
+	 * @param response
+	 * @param hbplanDetail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("addHbplanDetail")
+	@ResponseBody
+	public String addHbplanDetail(HttpServletRequest request, 
+  			HttpServletResponse response,HbplanDetail hbplanDetail,Model model){
+		//System.out.println(hbplanDetail.getHbplanid());
+		Company company = companyService.selectByPrimaryKey(hbplanDetail.getCid());
+		hbplanDetail.setCompany(company.getProvince());
+		hbplanDetail.setState("1");
+		hbplanDetail.setCreatetime(new Date());
+		hbplanDetailService.insertSelective(hbplanDetail);//
+		return "success";
 	}
 }

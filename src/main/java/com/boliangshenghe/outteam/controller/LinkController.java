@@ -1,5 +1,6 @@
 package com.boliangshenghe.outteam.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Company;
@@ -93,13 +95,33 @@ public class LinkController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("save")
+	/*@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Link link,Model model){
 		
 		linkService.addDetail(link);
 		
 		return "redirect:/link/list";
+	}*/
+	
+	@RequestMapping("save")
+	@ResponseBody
+	public String save(HttpServletRequest request, 
+  			HttpServletResponse response,Link link,Model model){
+		if(null!=link.getEqcid()){
+			Company company = companyService.selectByPrimaryKey(link.getEqcid());
+			link.setEqcompany(company.getProvince());
+		}
+		link.setState("1");
+		link.setCreatetime(new Date());
+		if(link.getId()==null){
+			linkService.insertSelective(link);
+			String retu = link.getId().toString();
+			return retu;
+		}else{
+			linkService.updateByPrimaryKeySelective(link);
+			return link.getId().toString();
+		}
 	}
 	
 	/**
@@ -128,6 +150,54 @@ public class LinkController {
 		return "link/addOrEdit";
 	}
 	
+	
+	/**
+	 *修改页面ajax添加单位
+	 * 
+	 * @param request
+	 * @param response
+	 * @param linkDetail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("addLinkDetail")
+	@ResponseBody
+	public String addLinkDetail(HttpServletRequest request, 
+  			HttpServletResponse response,LinkDetail linkDetail,Model model){
+		//System.out.println(hbplanDetail.getHbplanid());
+		Company company = companyService.selectByPrimaryKey(linkDetail.getCid());
+		linkDetail.setCompany(company.getProvince());
+		linkDetail.setState("1");
+		linkDetail.setCreatetime(new Date());
+		linkDetailService.insertSelective(linkDetail);//
+		return "success";
+	}
+	
+	/**
+	 *删除linkDetail
+	 * @param request
+	 * @param response
+	 * @param hbplanDetail
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("delyLinkDetail")
+	@ResponseBody
+	public String delyLinkDetail(HttpServletRequest request, 
+  			HttpServletResponse response,LinkDetail linkDetail,Model model){
+		linkDetailService.deleteByLinkDetail(linkDetail);//如果有修改，先删除之前的配置
+		
+		return "success";
+	}
+	
+	/**
+	 * 删除link
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("del")
 	public String del(HttpServletRequest request, 
   			HttpServletResponse response,Integer id,Model model){

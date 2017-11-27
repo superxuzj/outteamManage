@@ -17,15 +17,13 @@
 						<th>ID</th>
 						<th>单位简码</th>
 						<th>省份</th>
-						<th>人数</th>
 					</tr>
 					<#list list as company>
 					<tr>
 						<td><input class="allchoose" type="checkbox" value="${company.id }" /></td>
-						<td  class="test">${company.id }</td>
+						<td  class="test" cid="${company.id }">${company.id }</td>
 						<td>${company.code }</td>
 						<td class="test">${company.province }</td>
-						<td class="inputtd"><input class="inputvalu" type="text"/></td>
 					</tr>
 					</#list>
 				</tbody>
@@ -56,16 +54,14 @@
 	    	   		
 	    	        str+=$(e).prop("outerHTML");
 	    	    });
-				$(this).parent().parent().children("td.inputtd").children("input.inputvalu").each(function(i,e){
-					str+="<td class='test'>"+$(e).val()+"</td>";
-	    	    });
-	    	   	//str+="<td class='test'><input type='text' class='inputvale'/></td>";
+				
+	    	   	str+="<td class='test'><input type='text' class='inputvale'/></td>";
+	    	   	str+="<td class='test'><input type='button' value='删除' onclick='firstdel(this)'></td>";
 	    	   	str+="</tr>";
 		    });
-		    parent.$('#companytbody').html(str);
+		    console.log(str);
+		    parent.$('#companytbody').append(str);
 		    
-			var cids = chooseArr.join(',');//选择的人
-			parent.$('#cids').val(cids);
 				
 		    parent.layer.close(index);
 		});

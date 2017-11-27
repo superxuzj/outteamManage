@@ -30,7 +30,7 @@
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form" id="responseform"
                data-validator-option="{timely:2, theme:'yellow_top'}" action="/respond/save">                                                  
-                    <input type="hidden"  name="id" value="${response.id }">
+                    <input type="hidden"  name="id"  value="${response.id }">
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
@@ -42,7 +42,6 @@
                        <label class="col-lg-2 control-label">响应等级</label>
                        <div class="col-lg-6">
                           <select class="form-control m-bot15" name="grade">
-                          
                           	   <#if response??>
                                <option value="${response.grade }" >${response.name }</option>
                           	   <#else>
@@ -64,13 +63,17 @@
                               <tr>
                                   <th>单位id</th>
                                   <th>省份</th>
+                                  <th>人数</th>
+                                  <th>操作</th>
                               </tr>
                               </thead>
                               <tbody id="companytbody">
                                 <#list companyList as detail>
                               	 <tr>
-	                                  <td>${detail.cid }</td>
-	                                  <td>${detail.company }</td>
+	                                  <td class="test" cid="${detail.cid }">${detail.cid }</td>
+	                                  <td class="test">${detail.company }</td>
+	                                  <td class="test"><input type="text" class="inputvale" value="${detail.count }"/></td>
+	                                  <td class="test"><input type="button" value="删除" onclick="firstdel(this)"></td>
                              	 </tr>
                                </#list>
                               </tbody>
@@ -83,7 +86,7 @@
                    
                    <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
-                           <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+                           <button type="button" id="buttonsava" class="btn btn-primary" onclick="save()">保存</button>
                            <button type="button" class="btn btn-danger" onclick="gohistory()">返回</button>
                        </div>
                    </div>
@@ -95,9 +98,54 @@
 
 <script type="text/javascript">
 function save(){
-	$("#responseform").submit();
+	//数字验证
+	var val = "true";
+	$("#companytbody tr").each(function(){   
+		if($("td:eq(2)",this).children(".inputvale").val()==""){//非空判断
+			alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+		}
+       	if(isNaN($("td:eq(2)",this).children(".inputvale").val())){//必须是数字
+       		alert("人数只能填数字");
+       		val="fail";
+       	    return false;
+       	}
+   	});
+	if(val=="fail"){
+		return false;
+	}
+	$('#buttonsava').attr('disabled',"true");//添加disabled属性 
+	var data = '${response.id }';
+	$.ajax({
+		type : "post",
+		url : "/respond/delResponseCompany",
+		data : "rid=" +data,
+		dataType : 'text',
+		async:false,
+		success : function(data) {
+		}
+	});
+	//保存
+	$("#companytbody tr").each(function(){     	
+   		var count=$("td:eq(2)",this).children(".inputvale").val();
+   		var cid=$("td:eq(0)",this).attr("cid");
+			$.ajax({
+				type : "post",
+				url : "/respond/addResponseCompany",
+				data : "rid=" + data+"&cid="+cid+"&count="+count,
+				dataType : 'text',
+				async:false,
+				success : function(data) {
+				}
+			});
+	}); 
+	window.location.href="/respond/list";
+	//$("#responseform").submit();
 }
-
+function firstdel(me){
+	$(me).parent().parent().remove();
+}
 function addCompany(){
    	 layer.open({
 			type: 2,
@@ -105,7 +153,7 @@ function addCompany(){
 		    fix: false, //不固定
 		    title: "单位列表",
 		    maxmin: true,
-		    content: '/company/all'
+		    content: '/company/allhascount'
 		}); 
 }
 

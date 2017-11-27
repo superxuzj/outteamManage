@@ -62,13 +62,15 @@
                               <tr>
                                   <th>单位id</th>
                                   <th>省份</th>
+                                  <th>人数</th>
                               </tr>
                               </thead>
                               <tbody>
                                 <#list firstdetailList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th>${detail.company }</th>
+	                                  <td>${detail.cid }</td>
+	                                  <td>${detail.company }</td>
+	                                  <td>${detail.count }</td>
                              	 </tr>
                                </#list>
                               </tbody>
@@ -88,14 +90,16 @@
                               <thead>
                               <tr>
                                   <th>单位id</th>
-                                  <th class="secondtd">省份</th>
+                                  <th>省份</th>
+                                  <th>人数</th>
                               </tr>
                               </thead>
                               <tbody>
                                 <#list seconddetailList as detail>
                               	 <tr>
-	                                  <th>${detail.cid }</th>
-	                                  <th class="secondtd">${detail.company }</th>
+	                                  <td>${detail.cid }</td>
+	                                  <td>${detail.company }</td>
+	                                  <td>${detail.count }</td>
                              	 </tr>
                                </#list>
                               </tbody>

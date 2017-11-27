@@ -125,6 +125,7 @@
             AND linkid = #{linkid,jdbcType=INTEGER}
         </if>
     </where>
+    order by cid asc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>

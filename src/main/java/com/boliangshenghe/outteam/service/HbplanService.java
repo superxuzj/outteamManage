@@ -1,16 +1,12 @@
 package com.boliangshenghe.outteam.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boliangshenghe.outteam.common.PageBean;
-import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Hbplan;
-import com.boliangshenghe.outteam.entity.HbplanDetail;
-import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.repository.CompanyMapper;
 import com.boliangshenghe.outteam.repository.HbplanDetailMapper;
 import com.boliangshenghe.outteam.repository.HbplanMapper;
@@ -75,7 +71,7 @@ public class HbplanService {
         return new PageBean<Hbplan>(list);
     }
     
-    public void addDetail(Hbplan hbplan){
+   /* public void addDetail(Hbplan hbplan){
     	if(null == hbplan.getId()){
     		hbplan.setCreatetime(new Date());
     		hbplanMapper.insertSelective(hbplan);
@@ -122,6 +118,6 @@ public class HbplanService {
 				hbplanDetailMapper.insertSelective(temp);
 			}
 		}
-    }
+    }*/
     
 }
