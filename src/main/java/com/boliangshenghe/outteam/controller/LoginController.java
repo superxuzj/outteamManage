@@ -103,14 +103,19 @@ public class LoginController extends BaseCommonController{
  	@RequestMapping("/user/validate")
  	@ResponseBody
  	public String validateNameAndPassword(HttpServletRequest request, 
- 			HttpServletResponse response, String username,String password) {
+ 			HttpServletResponse response, String username,String password,String code) {
  		System.out.println(username+" "+password);
+ 		Map<String,String> map = new HashMap<String,String> ();
+ 		 if (!(code.equalsIgnoreCase(request.getSession().getAttribute("code").toString()))) {  //忽略验证码大小写  
+  			map.put("message", "验证码错误！");  
+  			return responseWrite(request, response, map);
+          }
 // 		HttpSession sesion = request.getSession();
  		User user = new User();
  		user.setUsername(username);
  		user.setPassword(password);
  		List<User> loginList = userService.selectUserList(user);
- 		Map<String,String> map = new HashMap<String,String> ();
+ 		
  		if(loginList!=null && loginList.size()>0){
  			HttpSession session = request.getSession();
  			User usermodel = loginList.get(0);

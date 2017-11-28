@@ -27,6 +27,12 @@
     <script src="<@ps.s/>/js/html5shiv.js"></script>
     <script src="<@ps.s/>/js/respond.min.js"></script>
     <![endif]-->
+     <style>
+    .captcha{
+    width:50% !important;
+    margin-right:20px;
+    }
+    </style>
 </head>
 
   <body class="login-img3-body">
@@ -44,6 +50,11 @@
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                 <input type="password" class="form-control" placeholder="Password" value="111111" name="password" id="password">
             </div>
+             <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control captcha" placeholder="验证码" name="code" id="code"/>
+                <img id="imgObj" alt="验证码" src="/code" width="100px" height="42px"/> 
+            </div>
             <button class="btn btn-primary btn-lg btn-block" type="button" onclick="login_val()">登录</button>
             <button class="btn btn-info btn-lg btn-block" type="reset">取消</button>
         </div>
@@ -52,25 +63,43 @@
     </div>
     
     <script type="text/javascript">
-$('#password').keydown(function(e){
-	if(e.keyCode==13){
-		login_val();
-	}
+    
+    $('#imgObj').click(function() {
+        $('#imgObj').attr("src", "/code?timestamp=" + (new Date()).valueOf());
+   	}); 
+    
+    $('#code').keydown(function(e){
+    	if(e.keyCode==13){
+    		login_val();
+    	}
+    });
+    
+	$('#password').keydown(function(e){
+		if(e.keyCode==13){
+			login_val();
+		}
 	});
-function cancel(){
-	$("#username").val("");
-	$("#password").val("")
-}
-function login_val(){
-	var username = $("#username").val();
-	var password = $("#password").val();
-	if(username=="" || password==""){
-		alert("用户名或密码不能为空！")
-			return false;
+	
+	function cancel(){
+		$("#username").val("");
+		$("#password").val("")
 	}
+	
+	function login_val(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var code = $("#code").val();
+		if(username=="" || password==""){
+			alert("用户名或密码不能为空！")
+				return false;
+		}
+		if(code==""){
+			alert("请输入验证码！")
+				return false;
+		}
 	$.ajax({
 		url: "/user/validate",
-		data: {"username":username,"password":password},
+		data: {"username":username,"password":password,"code":code},
 		async: true,
 		type: 'POST',
 		dataType: 'jsonp',
