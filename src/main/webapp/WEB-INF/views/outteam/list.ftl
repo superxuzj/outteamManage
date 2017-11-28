@@ -23,7 +23,7 @@ margin-bottom:1px !important;
    <div class="col-lg-12">
            <section class="panel">
                <div class="panel-body">
-                   <form class="form-horizontal" role="form" acation="/outteam/list">
+                   <form class="form-horizontal" role="form" acation="/outteam/list" method="get">
                        <div class="form-group col-lg-3">
                            <label for="inputPassword1" class="col-lg-3 control-label">名称</label>
                            <div class="col-lg-9">
