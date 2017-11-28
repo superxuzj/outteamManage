@@ -15,9 +15,9 @@ public class Hbplan {
     
     private String companys;
 
-    private String low;
+    private Double low;
 
-    private String high;
+    private Double high;
     
     private Integer limit;
     
@@ -107,19 +107,20 @@ public class Hbplan {
 		this.companys = companys;
 	}
 
-	public String getLow() {
+	public Double getLow() {
 		return low;
 	}
 
-	public void setLow(String low) {
+	public void setLow(Double low) {
 		this.low = low;
 	}
 
-	public String getHigh() {
+	public Double getHigh() {
 		return high;
 	}
 
-	public void setHigh(String high) {
+	public void setHigh(Double high) {
 		this.high = high;
 	}
+
 }

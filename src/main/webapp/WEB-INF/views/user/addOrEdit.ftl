@@ -7,6 +7,9 @@
 .aleft{
 	margin-left:780px;
 }
+.heightcol{
+	height:40px;
+}
 </style>
  </@override> <@override name="body">
 
@@ -34,18 +37,18 @@
 		<section class="panel">                                          
            <div class="panel-body bio-graph-info">
                <form class="form-horizontal" role="form" 
-               data-validator-option="{timely:2, theme:'yellow_top'}"
+               data-validator-option="{timely:2, theme:'yellow_right'}"
                 id="userform" action="/user/save">    
              	  <input type="hidden" name="id" value="${user.id }">                                              
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">姓名</label>
-                       <div class="col-lg-7">
-                           <input type="text" class="form-control" name="name" value="${user.name }">
+                       <div class="col-lg-7 heightcol">
+                           <input type="text" class="form-control" name="name" data-rule="required" value="${user.name }">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">性别</label>
-                       <div class="col-lg-7">
+                       <div class="col-lg-7 heightcol">
                            <select class="form-control m-bot15" name="sex">
                                 <option value="1" <#if user.sex==1>selected</#if>>男</option>
                                 <option value="2" <#if user.sex==2>selected</#if>>女</option>
@@ -55,14 +58,14 @@
                    
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">身份证号</label>
-                       <div class="col-lg-7">
+                       <div class="col-lg-7 heightcol">
                            <input type="text" class="form-control" name="idcard" 
                            value="${user.idcard }" data-rule="required IDcard">
                        </div>
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">单位</label>
-                       <div class="col-lg-7">
+                       <div class="col-lg-7 heightcol">
                           <select class="form-control m-bot15" name="cid">
                           <#if sessionroleid==1>
                              <#list companyList as company>
@@ -80,7 +83,7 @@
                    </div>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">联系电话</label>
-                       <div class="col-lg-7">
+                       <div class="col-lg-7 heightcol">
                            <input type="text" class="form-control" name="phone" value="${user.phone }" data-rule="required mobile">
                        </div>
                    </div>

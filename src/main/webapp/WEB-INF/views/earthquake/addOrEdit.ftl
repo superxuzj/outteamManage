@@ -28,13 +28,17 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">名称</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eqname" id="eqname" value="${earthquake.eqname}"/>
+                           <input type="text" class="form-control" name="eqname" id="eqname"
+                           placeholder="必填"
+                            value="${earthquake.eqname}"/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">地震唯一标识码</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eventid" value="${earthquake.eventid}" <#if earthquake??>readonly</#if> />
+                           <input type="text" class="form-control" name="eventid" 
+                            placeholder=" 例如：CC20171113105907 ，CD20171118141241"
+                           value="${earthquake.eventid}" <#if earthquake??>readonly</#if> />
                        </div>
                    </div>
                    <div class="form-group">
@@ -50,9 +54,9 @@
                        <label class="col-lg-2 control-label">受灾省份</label>
                        <div class="col-lg-6">
                        
-                       <select class="form-control m-bot15" name="province" id="province">
+                       <select class="form-control m-bot15" name="cid" id="cid">
                        		<#list companyList as company>
-                       			 <option value="${company.province }" >${company.province }</option>
+                       			 <option value="${company.id }" >${company.province }</option>
                        			 </#list>
                             </select>
                        </div>
@@ -66,7 +70,9 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">地震等级</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="magnitude" id="magnitude" value="${earthquake.magnitude}"/>
+                           <input type="text" class="form-control"
+                           placeholder="必填"
+                            name="magnitude" id="magnitude" value="${earthquake.magnitude}"/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -140,6 +146,10 @@ function save(){
 		alert("请输入地震等级！");
 		return false;
 	}
+	if(isNaN($("#magnitude").val())){//必须是数字
+   		alert("震级只能填数字");
+   	    return false;
+   	}
 	if($("#area").val()=="非华北" && $("#responseid").val()==""){
 		alert("请选择响应等级");
 		return false;

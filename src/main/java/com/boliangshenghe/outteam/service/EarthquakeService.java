@@ -112,7 +112,7 @@ public class EarthquakeService {
 			if(null!=earthquake.getMagnitude() && earthquake.getMagnitude().length()==1){
 				earthquake.setMagnitude(earthquake.getMagnitude()+".0");
 			}
-			hbplan.setHigh(earthquake.getMagnitude());//地震级数
+			hbplan.setHigh(Double.parseDouble(earthquake.getMagnitude()));//地震级数
 			Hbplan hbplantemp = hbplanService.selectHbplanByCompanys(hbplan);
 			if(null!=hbplantemp.getId()){//有对应的华预案
 				HbplanDetail hbplanDetail = new HbplanDetail();

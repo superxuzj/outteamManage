@@ -32,7 +32,7 @@
                        </div>
                    </div>
                    <div class="form-group">
-                       <label class="col-lg-2 control-label">省份</label>
+                       <label class="col-lg-2 control-label">省局单位</label>
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="province" value="${company.province }" disabled/>
                        </div>

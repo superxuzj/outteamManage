@@ -168,12 +168,17 @@ public class EarthquakeController extends BaseCommonController{
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator("管理员");
 			earthquake.setState("1");//1演练 2 eqim触发
+			
+			Company company = companyService.selectByPrimaryKey(earthquake.getCid());
+			earthquake.setProvince(company.getProvince());
 			earthquakeService.insertSelective(earthquake);
 			String retu = earthquake.getId().toString();
 			return retu;
 		}else{
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator("管理员");
+			Company company = companyService.selectByPrimaryKey(earthquake.getCid());
+			earthquake.setProvince(company.getProvince());
 			earthquakeService.updateByPrimaryKeySelective(earthquake);
 			return earthquake.getId().toString();
 		}
@@ -250,7 +255,8 @@ public class EarthquakeController extends BaseCommonController{
 			if(null!=earthquake.getMagnitude() && earthquake.getMagnitude().length()==1){
 				earthquake.setMagnitude(earthquake.getMagnitude()+".0");
 			}
-			hbplan.setHigh(earthquake.getMagnitude());//地震级数
+			
+			hbplan.setHigh(Double.parseDouble(earthquake.getMagnitude()));//地震级数
 			Hbplan hbplantemp = hbplanService.selectHbplanByCompanys(hbplan);
 			if(null!=hbplantemp.getId()){//有对应的华预案
 				HbplanDetail hbplanDetail = new HbplanDetail();

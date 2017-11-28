@@ -49,7 +49,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">对应震级</label>
                        <div class="col-lg-6">
-                           <input  type="text" name="low" value="${hbplan.low }"/>----<input  type="text" name="high" value="${hbplan.high }"/>
+                           <input  type="text" name="low" id="low" value="${hbplan.low }"/>----<input  type="text" name="high" id="high" value="${hbplan.high }"/>
                        </div>
                    </div>
                    
@@ -140,6 +140,23 @@ function firstdel(me){
 	$(me).parent().parent().remove();
 }
 function save(){
+	if($("#low").val()==""){
+		alert("请输入对应震级！");
+		return false;
+	}
+	if($("#high").val()==""){
+		alert("请输入对应震级！");
+		return false;
+	}
+	
+	if(isNaN($("#low").val())){//必须是数字
+   		alert("震级只能填数字");
+   	    return false;
+   	}
+	if(isNaN($("#high").val())){//必须是数字
+   		alert("震级只能填数字");
+   	    return false;
+   	}
 	
 	//数字验证
 	var val = "true";

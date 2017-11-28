@@ -5,8 +5,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="companys" property="companys" jdbcType="VARCHAR" />
-    <result column="low" property="low" jdbcType="VARCHAR" />
-    <result column="high" property="high" jdbcType="VARCHAR" />
+    <result column="low" property="low" jdbcType="DOUBLE" />
+    <result column="high" property="high" jdbcType="DOUBLE" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
@@ -29,13 +29,10 @@
       low, high, state, remark, 
       createtime)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{companys,jdbcType=VARCHAR}, 
-      #{low,jdbcType=VARCHAR}, #{high,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{low,jdbcType=DOUBLE}, #{high,jdbcType=DOUBLE}, #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Hbplan" >
-      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
     insert into t_hbplan
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -74,10 +71,10 @@
         #{companys,jdbcType=VARCHAR},
       </if>
       <if test="low != null" >
-        #{low,jdbcType=VARCHAR},
+        #{low,jdbcType=DOUBLE},
       </if>
       <if test="high != null" >
-        #{high,jdbcType=VARCHAR},
+        #{high,jdbcType=DOUBLE},
       </if>
       <if test="state != null" >
         #{state,jdbcType=VARCHAR},
@@ -100,10 +97,10 @@
         companys = #{companys,jdbcType=VARCHAR},
       </if>
       <if test="low != null" >
-        low = #{low,jdbcType=VARCHAR},
+        low = #{low,jdbcType=DOUBLE},
       </if>
       <if test="high != null" >
-        high = #{high,jdbcType=VARCHAR},
+        high = #{high,jdbcType=DOUBLE},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},
@@ -121,13 +118,14 @@
     update t_hbplan
     set name = #{name,jdbcType=VARCHAR},
       companys = #{companys,jdbcType=VARCHAR},
-      low = #{low,jdbcType=VARCHAR},
-      high = #{high,jdbcType=VARCHAR},
+      low = #{low,jdbcType=DOUBLE},
+      high = #{high,jdbcType=DOUBLE},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
   
    <!-- 新加   -->
    <select id="selectHbplanList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Hbplan">
@@ -149,8 +147,8 @@
     <include refid="Base_Column_List" />
     from t_hbplan
     <where>
-            AND companys LIKE '${companys}%'
-            AND low &lt;= #{high,jdbcType=VARCHAR} and high &gt;= #{high,jdbcType=VARCHAR}
+            AND companys LIKE '%${companys}%'
+            AND low &lt;= #{high,jdbcType=DOUBLE} and high &gt;= #{high,jdbcType=DOUBLE}
     </where>
    	</select>
 </mapper>
