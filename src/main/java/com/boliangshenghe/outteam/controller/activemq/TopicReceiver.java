@@ -1,6 +1,8 @@
 package com.boliangshenghe.outteam.controller.activemq;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Component;
 import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.pojo.Catalogcopy;
 import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.util.CommonUtils;
+import com.boliangshenghe.outteam.util.HttpClientUtil;
 import com.boliangshenghe.outteam.util.JsonUtils;
 
 @Component
@@ -26,6 +30,13 @@ public class TopicReceiver implements MessageListener {
 					+ ((TextMessage) message).getText());
 			String mes = ((TextMessage) message).getText();
 			Catalogcopy catalogcopy = JsonUtils.toBean(mes, Catalogcopy.class);//result对象
+			
+			
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("key", CommonUtils.GAODEKEY);
+			
+			String retu = HttpClientUtil.doGet("http://restapi.amap.com/v3/geocode/geo",map);
+			
 			
 			Earthquake earthquake = new Earthquake();
 			
