@@ -81,28 +81,60 @@ public class EarthquakeService {
         return new PageBean<Earthquake>(list);
     }
     
-    public void addoutteam(Integer eqid,String cids){
+    /**
+     * 查看该地震是够有出队单位
+     * @param eqid
+     * @return
+     */
+    public Set<String> getOutteamCompany(Integer eqid){
     	Set<String> set = new HashSet<String>();
+    	Outteam o = new Outteam();
+    	o.setEqid(eqid);
+    	List<Outteam> outtemlist = outteamMapper.selectOutteamList(o);
+    	if(null!=outtemlist && outtemlist.size()>0){
+    		for (Outteam outteam : outtemlist) {
+				set.add(outteam.getCompany());
+			}
+    		return set;
+    	}else{
+    		return set;
+    	}
+    }
+    
+    public void addoutteam(Integer eqid,String cids,Integer rid){
+    	
+    	Set<String> set = getOutteamCompany(eqid);
+    	Set<Integer> sendSet = new HashSet<Integer>();//出队单位短信通知
     	Earthquake earthquake = earthquakeMapper.selectByPrimaryKey(eqid);//地震事件
+    	
+    	if(null!=rid && rid>0){
+    		if(rid!=earthquake.getResponseid()){//发生修改响应等级
+    			earthquake.setResponseid(rid);
+    			earthquakeMapper.updateByPrimaryKey(earthquake);
+    			//
+    		}
+    	}
     	
     	//震源省份出队
     	Company company = new Company();
 		company.setProvince(earthquake.getProvince());
 		List<Company> comlist = companyMapper.selectCompanyList(company);
 		if(comlist!=null && comlist.size()>0){
-			Company temp =  comlist.get(0);
-			set.add(temp.getProvince());
-			Outteam source = new Outteam();
-			source.setCid(temp.getId());
-			source.setCompany(temp.getProvince());
-			source.setEqid(eqid);
-			source.setEqname(earthquake.getEqname());
-			source.setOuttype("1");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
-			source.setState("1");
-			source.setCreatetime(new Date());
-			source.setHit("1");
-			source.setCreator("管理员");
-			outteamMapper.insertSelective(source);
+			Company cp =  comlist.get(0);
+			if(set.add(cp.getProvince())){
+				Outteam source = new Outteam();
+				source.setCid(cp.getId());
+				source.setCompany(cp.getProvince());
+				source.setEqid(eqid);
+				source.setEqname(earthquake.getEqname());
+				source.setOuttype("1");//1 震源省份 2 响应等级 3 轮值 4 华北预案 5 联动 6管理员添加 7 自己申请
+				source.setState("1");
+				source.setCreatetime(new Date());
+				source.setHit("1");
+				source.setCreator("管理员");
+				outteamMapper.insertSelective(source);
+				sendSet.add(cp.getId());
+			}
 		}
 		
 		if(earthquake.getArea().equals("华北")){
@@ -133,6 +165,7 @@ public class EarthquakeService {
 							source.setCreatetime(new Date());
 							source.setCreator("管理员");
 							outteamMapper.insertSelective(source);	
+							sendSet.add(temp.getCid());
 						}
 					}
 				}
@@ -158,7 +191,8 @@ public class EarthquakeService {
 						source.setHit("2");
 						source.setCreatetime(new Date());
 						source.setCreator("管理员");
-						outteamMapper.insertSelective(source);	
+						outteamMapper.insertSelective(source);
+						sendSet.add(temp.getCid());
 					}
 				}
 			}
@@ -167,6 +201,7 @@ public class EarthquakeService {
 			Link link = new Link();
 			link.setRid(earthquake.getResponseid());
 			link.setEqcompany(earthquake.getProvince());
+			link.setState("1");
 			List<Link> linkList = linkMapper.selectLinkList(link);
 			if(null != linkList && linkList.size()>0){
 				Link linktemp = linkList.get(0);
@@ -188,12 +223,12 @@ public class EarthquakeService {
 							source.setCreatetime(new Date());
 							source.setCreator("管理员");
 							outteamMapper.insertSelective(source);	
+							sendSet.add(temp.getCid());
 						}
 					}
 				}
 			}
 		}
-		
 		
 		//轮值出队------
 		Onduty onduty = new Onduty();
@@ -213,6 +248,7 @@ public class EarthquakeService {
 					source.setCreatetime(new Date());
 					source.setCreator("管理员");
 					outteamMapper.insertSelective(source);	
+					sendSet.add(temp.getCid());
 				}
 			}
 		}
@@ -234,6 +270,7 @@ public class EarthquakeService {
 						source.setCreatetime(new Date());
 						source.setCreator("管理员");
 						outteamMapper.insertSelective(source);
+						sendSet.add(com.getId());
 					}
 					
 				}

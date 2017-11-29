@@ -30,7 +30,7 @@
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="eqname" id="eqname"
                            placeholder="必填"
-                            value="${earthquake.eqname}"/>
+                            value="${earthquake.eqname}" <#if earthquake??>readonly</#if> />
                        </div>
                    </div>
                    <div class="form-group">
@@ -44,7 +44,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">区域</label>
                        <div class="col-lg-6">
-                       		<select class="form-control m-bot15" name="area" id="area">
+                       		<select class="form-control m-bot15" name="area" id="area" >
                        			 <option value="非华北" <#if earthquake.area=='非华北' >selected</#if> >非华北</option>
                                  <option value="华北"  <#if earthquake.area=='华北' >selected</#if> >华北</option>
                             </select>
@@ -64,7 +64,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">位置</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="location" value="${earthquake.location}"/>
+                           <input type="text" class="form-control" name="location" value="${earthquake.location}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
@@ -72,37 +72,38 @@
                        <div class="col-lg-6">
                            <input type="text" class="form-control"
                            placeholder="必填"
-                            name="magnitude" id="magnitude" value="${earthquake.magnitude}"/>
+                            name="magnitude" id="magnitude" value="${earthquake.magnitude}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">经度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="longitude" value="${earthquake.longitude}"/>
+                           <input type="text" class="form-control" name="longitude" value="${earthquake.longitude}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">纬度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="latitude" value="${earthquake.latitude}"/>
+                           <input type="text" class="form-control" name="latitude" value="${earthquake.latitude}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震日期</label>
                        <div class="col-lg-6">
-                       	<input class="form-control Wdate" type="text" name="eqdate" id="eqdate" value="${earthquake.eqdate }" onclick="WdatePicker({maxDate:'%y-%M-%d'})"/>
+                       	<input class="form-control Wdate" type="text" name="eqdate" id="eqdate"
+                       	 value="${earthquake.eqdate }" onclick="WdatePicker({maxDate:'%y-%M-%d'})"/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震时刻</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eqtime" value="${earthquake.eqtime}"/>
+                           <input type="text" class="form-control" name="eqtime" value="${earthquake.eqtime}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">震源深度</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="depth" value="${earthquake.depth}">
+                           <input type="text" class="form-control" name="depth" value="${earthquake.depth}" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group"  id="responddiv">
@@ -176,7 +177,17 @@ function save(){
             }
 		});
 	}else{
-		$.ajax({  
+		
+		 layer.open({
+			type: 2,
+		    area: ['780px', '561px'],
+		    fix: false, //不固定
+		    title: "出队列表",
+		    maxmin: true,
+		    content: '/earthquake/ruleoutteam?id='+id+"&rid="+rid
+		}); 
+		
+		/* $.ajax({  
 	         type : "POST",  //提交方式  
 	         url : "/earthquake/valCompany",//判断是否已经安排了出队
 	         data:$('#earthquakeForm').serialize(),// 你的formid
@@ -195,7 +206,7 @@ function save(){
 	         		window.location.href="/earthquake/list";
 	         	}
 	         }
-	     });
+	     }); */
 	}
 	
 	// $("#earthquakeForm").submit();

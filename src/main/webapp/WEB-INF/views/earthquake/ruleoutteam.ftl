@@ -21,14 +21,14 @@
 						<div class="col-sm-11">
 							<section class="panel personpanel">
 								<header class="panel-heading">
-									${responseName }对应的出队单位
+									${resinfo.name}对应的出队单位
 								</header>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>单位id</th>
 											<th>单位名称</th>
-											<th>职责</th>
+											<!-- <th>职责</th> -->
 											<th>人数</th>
 										</tr>
 									</thead>
@@ -37,7 +37,7 @@
 										<tr>
 											<td>${responseCompany.cid }</td>
 											<td>${responseCompany.company }</td>
-											<td>
+											<!-- <td>
 											<a title="${responseCompany.duty}">
 											<#if responseCompany.duty?length gte 12 >
 												${responseCompany.duty?substring(0,12)}...
@@ -45,7 +45,7 @@
 												${responseCompany.duty}
 											</#if>
 											</a>
-											</td>
+											</td> -->
 											<td>${responseCompany.count }</td>
 										</tr>
 										</#list>
@@ -170,6 +170,12 @@
                               </tr>
                               </thead>
                               <tbody id="companytbody">
+                             	<#list outtemlist as outtem>
+									<tr>
+										<td>${outtem.cid }</td>
+										<td>${outtem.company }</td>
+									</tr>
+								</#list>
                               </tbody>
                           </table>
                       </section>
@@ -191,12 +197,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){ 
+		
+		var cids = '${cids}';
+		if(cids!=""){
+			$('#cids').val(cids);
+		}
+		
 		var index = parent.layer.getFrameIndex(window.name);
 		$('#confirm').on('click', function(){
 			
 			var cids = $("#cids").val();
-		
-			parent.location.href="/earthquake/addoutteam?eqid="+${earthquake.id}+"&cids="+cids;
+			var rid = '${resinfo.id}';
+			if(rid !=""){
+				parent.location.href="/earthquake/addoutteam?eqid="+${earthquake.id}+"&cids="+cids+"&rid="+rid;
+			}else{
+				parent.location.href="/earthquake/addoutteam?eqid="+${earthquake.id}+"&cids="+cids;
+			}
+			
 		    parent.layer.close(index);
 		});
 		
@@ -208,11 +225,11 @@
 	function addCompany(){
 	   	 layer.open({
 				type: 2,
-			    area: ['750px', '561px'],
-			    fix: false, //不固定
-			    title: "单位列表",
+			    area: ['740px', '520px'],
+			    fix: true, 
+			    title: false,
 			    maxmin: true,
-			    content: '/company/all'
+			    content: '/company/allappend'
 			}); 
 	}
 </script>

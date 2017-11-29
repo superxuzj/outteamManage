@@ -274,7 +274,8 @@ public class EarthquakeController extends BaseCommonController{
 			ResponseCompany responseCompany = new ResponseCompany();
 			responseCompany.setRid(resinfo.getId());//根据响应id查
 			List<ResponseCompany> rcList = responseCompanyService.selectResponseCompanyList(responseCompany);
-			model.addAttribute("responseName", resinfo.getName());
+			//model.addAttribute("responseName", resinfo.getName());
+			model.addAttribute("resinfo", resinfo);
 			model.addAttribute("rcList", rcList);//响应等级出队单位
 			
 			if(rcList!=null && rcList.size()>0){
@@ -287,6 +288,7 @@ public class EarthquakeController extends BaseCommonController{
 			Link link = new Link();
 			link.setRid(resinfo.getId());
 			link.setEqcompany(earthquake.getProvince());
+			link.setState("1");
 			List<Link> linkList = linkService.selectLinkList(link);
 			if(null != linkList && linkList.size()>0){
 				Link temp = linkList.get(0);
@@ -316,6 +318,28 @@ public class EarthquakeController extends BaseCommonController{
 				set.add(temp.getCompany());
 			}
 		}
+		
+		//手动出队
+		Outteam outteam = new Outteam();
+		outteam.setEqid(id);
+		outteam.setOuttype("6");
+		List<Outteam> outtemlist = outteamService.selectOutteamList(outteam);
+		if(null != outtemlist && outtemlist.size()>0){
+			String cids = "";
+			for (Outteam record : outtemlist) {
+				set.add(record.getCompany());
+				cids = cids+record.getCid()+",";
+			}
+			if(!cids.equals("")){
+				cids = cids.substring(0, cids.length()-1);
+				System.out.println(cids+" cidss");
+				model.addAttribute("cids", cids);//
+			}
+			model.addAttribute("outtemlist", outtemlist);//手动单位
+		}
+		
+		
+		
 		model.addAttribute("set", set);
 		
 		return "earthquake/ruleoutteam";
@@ -331,10 +355,10 @@ public class EarthquakeController extends BaseCommonController{
 	 */
 	@RequestMapping("addoutteam")
 	public String addoutteam(HttpServletRequest request, 
-  			HttpServletResponse response,Integer eqid,String cids,Model model){
+  			HttpServletResponse response,Integer eqid,String cids,Integer rid,Model model){
 		System.out.println(eqid);
 		
-		earthquakeService.addoutteam(eqid,cids);
+		earthquakeService.addoutteam(eqid,cids,rid);
 		
 		return "redirect:/earthquake/list";
 	}

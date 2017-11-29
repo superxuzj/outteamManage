@@ -138,6 +138,9 @@
         <if test="name != null">
             AND name = #{name,jdbcType=VARCHAR}
         </if>
+        <if test="state != null">
+            AND state = #{state,jdbcType=VARCHAR}
+        </if>
         <if test="eqcompany != null">
             AND eqcompany = #{eqcompany,jdbcType=VARCHAR}
         </if>

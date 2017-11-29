@@ -77,13 +77,35 @@ public class CompanyController {
 		model.addAttribute("list", list);
 		return "company/allhascount";
 	}
-	
+	/**
+	 * 单位直接替换
+	 * @param request
+	 * @param response
+	 * @param company
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("all")
 	public String all(HttpServletRequest request, 
   			HttpServletResponse response,Company company,Model model){
 		List<Company> list = companyService.selectCompanyList(company);
 		model.addAttribute("list", list);
 		return "company/all";
+	}
+	/**
+	 * 单位append后面
+	 * @param request
+	 * @param response
+	 * @param company
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("allappend")
+	public String allappend(HttpServletRequest request, 
+  			HttpServletResponse response,Company company,Model model){
+		List<Company> list = companyService.selectCompanyList(company);
+		model.addAttribute("list", list);
+		return "company/allappend";
 	}
 	//第二梯队
 	@RequestMapping("second")

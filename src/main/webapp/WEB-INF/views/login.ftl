@@ -53,7 +53,7 @@
              <div class="input-group">
                 <span class="input-group-addon"></span>
                 <input type="text" class="form-control captcha" placeholder="验证码" name="code" id="code"/>
-                <img id="imgObj" alt="验证码" src="/code" width="100px" height="42px"/> 
+                <img id="imgObj"  alt="验证码" src="/code" width="100px" height="42px"/> 
             </div>
             <button class="btn btn-primary btn-lg btn-block" type="button" onclick="login_val()">登录</button>
             <button class="btn btn-info btn-lg btn-block" type="reset">取消</button>
