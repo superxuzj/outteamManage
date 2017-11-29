@@ -34,8 +34,14 @@ public class TopicReceiver implements MessageListener {
 			
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("key", CommonUtils.GAODEKEY);
+			map.put("location",catalogcopy.getLon()+","+catalogcopy.getLat());
+			map.put("radius","1000");
+			map.put("extensions","all");
+			map.put("batch","false");
+			map.put("roadlevel","0");
+			String retu = HttpClientUtil.doGet("http://restapi.amap.com/v3/geocode/regeo",map);
 			
-			String retu = HttpClientUtil.doGet("http://restapi.amap.com/v3/geocode/geo",map);
+			String provice = retu.substring(retu.indexOf("province")+11, retu.indexOf("city")-3);
 			
 			
 			Earthquake earthquake = new Earthquake();
