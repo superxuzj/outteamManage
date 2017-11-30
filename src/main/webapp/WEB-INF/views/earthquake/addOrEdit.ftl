@@ -56,7 +56,7 @@
                        
                        <select class="form-control m-bot15" name="cid" id="cid">
                        		<#list companyList as company>
-                       			 <option value="${company.id }" >${company.province }</option>
+                       			 <option value="${company.id }" <#if earthquake.cid==company.id >selected</#if> >${company.province }</option>
                        			 </#list>
                             </select>
                        </div>
