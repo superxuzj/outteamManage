@@ -17,6 +17,8 @@ import com.boliangshenghe.outteam.entity.Link;
 import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.entity.Onduty;
 import com.boliangshenghe.outteam.entity.Outteam;
+import com.boliangshenghe.outteam.entity.Phone;
+import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 import com.boliangshenghe.outteam.repository.CompanyMapper;
 import com.boliangshenghe.outteam.repository.EarthquakeMapper;
@@ -25,9 +27,12 @@ import com.boliangshenghe.outteam.repository.LinkDetailMapper;
 import com.boliangshenghe.outteam.repository.LinkMapper;
 import com.boliangshenghe.outteam.repository.OndutyMapper;
 import com.boliangshenghe.outteam.repository.OutteamMapper;
+import com.boliangshenghe.outteam.repository.PhoneMapper;
 import com.boliangshenghe.outteam.repository.ResponseCompanyMapper;
+import com.boliangshenghe.outteam.repository.ResponseMapper;
 import com.boliangshenghe.outteam.util.CodeUtils;
 import com.boliangshenghe.outteam.util.CommonUtils;
+import com.boliangshenghe.outteam.util.SendMessageUtil;
 import com.github.pagehelper.PageHelper;
 
 @Service
@@ -44,6 +49,8 @@ public class EarthquakeService {
 	
 	@Autowired
 	ResponseCompanyMapper responseCompanyMapper;
+	@Autowired
+	ResponseMapper responseMapper;
 	
 	@Autowired
 	OndutyMapper ondutyMapper;
@@ -57,6 +64,9 @@ public class EarthquakeService {
 	
 	@Autowired
 	LinkDetailMapper linkDetailMapper;
+	
+	@Autowired
+	PhoneMapper phoneMapper;
 		
 	
 	public int insertSelective(Earthquake earthquake) {
@@ -106,14 +116,6 @@ public class EarthquakeService {
     	Set<String> set = getOutteamCompany(eqid);
     	Set<Integer> sendSet = new HashSet<Integer>();//出队单位短信通知
     	Earthquake earthquake = earthquakeMapper.selectByPrimaryKey(eqid);//地震事件
-    	
-    	if(null!=rid && rid>0){
-    		if(rid!=earthquake.getResponseid()){//发生修改响应等级
-    			earthquake.setResponseid(rid);
-    			earthquakeMapper.updateByPrimaryKey(earthquake);
-    			//
-    		}
-    	}
     	
     	//震源省份出队
     	Company company = new Company();
@@ -172,6 +174,17 @@ public class EarthquakeService {
 			}
 			
 		}else{
+			//发送响应等级变更
+			if(null!=rid && rid>0){
+	    		if(rid!=earthquake.getResponseid()){//发生修改响应等级
+	    			earthquake.setResponseid(rid);
+	    			earthquakeMapper.updateByPrimaryKey(earthquake);
+	    			//给所有单位发送升降级短信
+    				Response r = responseMapper.selectByPrimaryKey(earthquake.getResponseid());
+    				String message = earthquake.getEqname()+"的响应等级变更为："+r.getName();
+    				SendMessageUtil.sendMessage(getAllCompanyPhone(), message);
+	    		}
+	    	}
 			//响应等级出队
 			ResponseCompany responseCompany = new ResponseCompany();
 			responseCompany.setRid(earthquake.getResponseid());//根据响应id查
@@ -276,5 +289,56 @@ public class EarthquakeService {
 				}
 			}
 		}
+		
+		//给新增出队单位发送出队信息
+		if(sendSet.size()>0){
+			String tels = "tel:18611453795;";
+			for (Integer cid : sendSet) {
+				Phone p =  new Phone();
+				p.setCid(cid);
+				List<Phone> phonelist = phoneMapper.selectListByPhone(p);
+				if(null!=phonelist && phonelist.size()>0){
+					Phone phone = phonelist.get(0);
+					if(null!=phone.getPhoneone() 
+							&& !phone.getPhoneone().trim().equals("")
+							&&phone.getPhoneone().trim().length()==11){
+						tels = tels+ "tel:"+phone.getPhoneone()+";";
+					}
+					if(null!=phone.getPhonetwo() 
+							&& !phone.getPhonetwo().trim().equals("")
+							&&phone.getPhonetwo().trim().length()==11){
+						tels = tels+ "tel:"+phone.getPhonetwo()+";";
+					}
+				}
+			}
+			tels = tels.substring(0, tels.length()-1);
+			String message = earthquake.getEqname()+"地震，请到出队系统安排出队人员。";
+			SendMessageUtil.sendMessage(getAllCompanyPhone(), message);
+		}
+    }
+    
+    /**
+     *获得所有单位的电话 
+     * @return
+     */
+    public String getAllCompanyPhone(){
+    	List<Phone> phonelist = phoneMapper.selectListByPhone(new Phone());
+    	String tels = "tel:18611453795;";
+		if(null!=phonelist && phonelist.size()>0){
+			for (Phone phone : phonelist) {
+				if(null!=phone.getPhoneone() 
+						&& !phone.getPhoneone().trim().equals("")
+						&&phone.getPhoneone().trim().length()==11){
+					tels = tels+ "tel:"+phone.getPhoneone()+";";
+				}
+				if(null!=phone.getPhonetwo() 
+						&& !phone.getPhonetwo().trim().equals("")
+						&&phone.getPhonetwo().trim().length()==11){
+					tels = tels+ "tel:"+phone.getPhonetwo()+";";
+				}
+			}
+			tels = tels.substring(0, tels.length()-1);
+		}	
+		return tels;
     }
 }

@@ -11,7 +11,6 @@ public class CommonUtils {
 
 	//高德 key liang
 	public static final String GAODEKEY = "9380c464b9a4a9ecc686cd57ff994f0c";
-
 	
 	public static final String DEFAUTPWD = "qwe123!@#";//默认密码
 	
@@ -39,4 +38,6 @@ public class CommonUtils {
 		response.addHeader(CACHE_CONTROL, IE_HTTP_NO_CACHE); 
 		response.setHeader(PRAGMA, STANDARD_HTTP_NO_CACHE); 
     }
+    
+    
 }

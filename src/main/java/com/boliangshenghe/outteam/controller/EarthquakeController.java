@@ -38,6 +38,7 @@ import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.ResponseCompanyService;
 import com.boliangshenghe.outteam.service.ResponseService;
 import com.boliangshenghe.outteam.util.CodeUtils;
+import com.boliangshenghe.outteam.util.SendMessageUtil;
 /**
  * 地震事件管理
  2017
@@ -168,10 +169,17 @@ public class EarthquakeController extends BaseCommonController{
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator("管理员");
 			earthquake.setState("1");//1演练 2 eqim触发
-			
 			Company company = companyService.selectByPrimaryKey(earthquake.getCid());
 			earthquake.setProvince(company.getProvince());
 			earthquakeService.insertSelective(earthquake);
+			
+			if(null!=earthquake.getResponseid() && earthquake.getResponseid()>0){
+    			//给所有单位发送响应等级短信
+				Response r = responseService.selectByPrimaryKey(earthquake.getResponseid());
+				String message = earthquake.getEqname()+"的响应等级为："+r.getName();
+				SendMessageUtil.sendMessage(earthquakeService.getAllCompanyPhone(), message);
+	    	}
+			
 			String retu = earthquake.getId().toString();
 			return retu;
 		}else{

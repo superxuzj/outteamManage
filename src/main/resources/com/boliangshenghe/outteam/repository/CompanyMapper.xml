@@ -107,6 +107,7 @@
             AND type = #{type,jdbcType=VARCHAR} 
         </if>
     </where>
+    ORDER BY id ASC
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
