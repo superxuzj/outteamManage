@@ -28,10 +28,10 @@ public class TopicReceiver implements MessageListener {
 		try {
 			System.out.println("maven  ---TopicReceiver1接收到消息:"
 					+ ((TextMessage) message).getText());
-			String mes = ((TextMessage) message).getText();
+			/*String mes = ((TextMessage) message).getText();
 			Catalogcopy catalogcopy = JsonUtils.toBean(mes, Catalogcopy.class);//result对象
 			catalogcopy.setIsouttem("2");//默认不出队
-			catalogcopyService.insertSelective(catalogcopy);
+			catalogcopyService.insertSelective(catalogcopy);*/
 			/*Map<String,String> map = new HashMap<String,String>();
 			map.put("key", CommonUtils.GAODEKEY);
 			map.put("location",catalogcopy.getLon()+","+catalogcopy.getLat());
