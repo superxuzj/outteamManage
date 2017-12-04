@@ -1,0 +1,77 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+div.aside-box {
+	position: absolute;
+	z-index: 10;
+	top: 17%;
+	color: #fff;
+	width: 294px;
+}
+
+div.aside-box aside {
+	border-radius: 5px;
+	border: 1px solid rgba(0, 222, 255, .9);
+}
+
+div.aside-box aside dl {
+	height: 442px;
+	overflow: auto;
+}
+
+div.aside-right aside dl {
+	height: 264px;
+}
+
+div.aside-box aside h5 {
+	width: 100%;
+	background-color: #044ea3;
+	height: 44px;
+	padding-left: 15px;
+	line-height: 44px;
+	font-size: 16px;
+}
+
+div.aside-box dl dd {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	padding-left: 20px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+div.aside-box aside dl dd:hover {
+	color: #ff8400;
+}
+
+div.aside-box dl dd:nth-child(2n-1) {
+	background-color: #2a74ae;
+}
+
+div.aside-box dl dd:nth-child(2n) {
+	background-color: #1667a6;
+}
+
+div.aside-left {
+	left: 40px;
+}
+
+div.aside-right {
+	right: 40px;
+}
+
+div.aside-right .bottom {
+	margin-top: 30px;
+}
+
+div.aside-right .bottom dl dd {
+	display: flex;
+}
+
+div.aside-right .bottom dl dd span {
+	flex: 1;
+}

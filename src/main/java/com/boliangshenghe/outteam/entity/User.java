@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     private Integer id;
 
-    private Integer roleid;
+    private Integer roleid;//1 系统管理员 2 单位管理员 3 领导 4 队员
 
     private String name;
 

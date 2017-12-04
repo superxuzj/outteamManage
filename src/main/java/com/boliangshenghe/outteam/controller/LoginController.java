@@ -95,7 +95,13 @@ public class LoginController extends BaseCommonController{
 			return "redirect:/business";
 		}else if(usermodel.getType()!=null && usermodel.getType().equals("1")){*/
 		
-		return "redirect:/earthquake/list";
+		if(usermodel.getRoleid()!=null && usermodel.getRoleid().toString().equals("3")){
+			return "redirect:/leader";
+		}else{
+			return "redirect:/earthquake/list";
+		}
+		
+		
 	}
 	
 

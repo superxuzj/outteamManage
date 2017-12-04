@@ -72,6 +72,10 @@ public class Catalogcopy {
     private String locationCname;
 
     private String isouttem;
+    
+    private Integer start;
+    
+    private Integer limit;
 
     public String getCataId() {
         return cataId;
@@ -113,19 +117,19 @@ public class Catalogcopy {
         this.eqType = eqType == null ? null : eqType.trim();
     }
 
-    public Date getoTime() {
+    public Date getOTime() {
         return oTime;
     }
 
-    public void setoTime(Date oTime) {
+    public void setOTime(Date oTime) {
         this.oTime = oTime;
     }
 
-    public Integer getoTimeNs() {
+    public Integer getOTimeNs() {
         return oTimeNs;
     }
 
-    public void setoTimeNs(Integer oTimeNs) {
+    public void setOTimeNs(Integer oTimeNs) {
         this.oTimeNs = oTimeNs;
     }
 
@@ -352,4 +356,20 @@ public class Catalogcopy {
     public void setIsouttem(String isouttem) {
         this.isouttem = isouttem == null ? null : isouttem.trim();
     }
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
 }

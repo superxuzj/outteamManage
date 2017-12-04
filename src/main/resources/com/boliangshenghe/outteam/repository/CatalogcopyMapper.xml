@@ -6,7 +6,7 @@
     <result column="Event_id" property="eventId" jdbcType="VARCHAR" />
     <result column="Operator" property="operator" jdbcType="VARCHAR" />
     <result column="Save_time" property="saveTime" jdbcType="TIMESTAMP" />
-    <result column="Eq_type" property="eqType" jdbcType="CHAR" />
+    <result column="Eq_type" property="eqType" jdbcType="VARCHAR" />
     <result column="O_time" property="oTime" jdbcType="TIMESTAMP" />
     <result column="O_time_ns" property="oTimeNs" jdbcType="INTEGER" />
     <result column="Lat" property="lat" jdbcType="DOUBLE" />
@@ -67,7 +67,7 @@
       Source_id, Location_cname, isouttem
       )
     values (#{cataId,jdbcType=VARCHAR}, #{eventId,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
-      #{saveTime,jdbcType=TIMESTAMP}, #{eqType,jdbcType=CHAR}, #{oTime,jdbcType=TIMESTAMP}, 
+      #{saveTime,jdbcType=TIMESTAMP}, #{eqType,jdbcType=VARCHAR}, #{oTime,jdbcType=TIMESTAMP}, 
       #{oTimeNs,jdbcType=INTEGER}, #{lat,jdbcType=DOUBLE}, #{lon,jdbcType=DOUBLE}, #{depth,jdbcType=DOUBLE}, 
       #{ml,jdbcType=DOUBLE}, #{ms,jdbcType=DOUBLE}, #{md,jdbcType=DOUBLE}, #{mb,jdbcType=DOUBLE}, 
       #{mmb,jdbcType=DOUBLE}, #{mw,jdbcType=DOUBLE}, #{m,jdbcType=DOUBLE}, #{dmin,jdbcType=DOUBLE}, 
@@ -201,7 +201,7 @@
         #{saveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="eqType != null" >
-        #{eqType,jdbcType=CHAR},
+        #{eqType,jdbcType=VARCHAR},
       </if>
       <if test="oTime != null" >
         #{oTime,jdbcType=TIMESTAMP},
@@ -308,7 +308,7 @@
         Save_time = #{saveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="eqType != null" >
-        Eq_type = #{eqType,jdbcType=CHAR},
+        Eq_type = #{eqType,jdbcType=VARCHAR},
       </if>
       <if test="oTime != null" >
         O_time = #{oTime,jdbcType=TIMESTAMP},
@@ -408,7 +408,7 @@
     set Event_id = #{eventId,jdbcType=VARCHAR},
       Operator = #{operator,jdbcType=VARCHAR},
       Save_time = #{saveTime,jdbcType=TIMESTAMP},
-      Eq_type = #{eqType,jdbcType=CHAR},
+      Eq_type = #{eqType,jdbcType=VARCHAR},
       O_time = #{oTime,jdbcType=TIMESTAMP},
       O_time_ns = #{oTimeNs,jdbcType=INTEGER},
       Lat = #{lat,jdbcType=DOUBLE},
@@ -441,6 +441,7 @@
       isouttem = #{isouttem,jdbcType=VARCHAR}
     where Cata_id = #{cataId,jdbcType=VARCHAR}
   </update>
+  
   <!-- 新加   -->
    <select id="selectCatalogcopyList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Catalogcopy">
    	    select 
@@ -461,4 +462,5 @@
    Cata_id, Event_id
     from catalogcopy
    	</select>
+  
 </mapper>
