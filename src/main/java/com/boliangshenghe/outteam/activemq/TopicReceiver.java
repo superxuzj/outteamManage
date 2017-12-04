@@ -1,4 +1,4 @@
-package com.boliangshenghe.outteam.controller.activemq;
+package com.boliangshenghe.outteam.activemq;
 
 import java.util.Date;
 

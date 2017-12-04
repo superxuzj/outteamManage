@@ -23,6 +23,8 @@
         <property name="location" value="classpath:config/jdbc.properties" />  
     </bean>
     
+    <import resource="classpath:/config/spring-activemq.xml" />
+    
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 	init-method="init" destroy-method="close">
 		<!-- 基本属性 url、user、password -->
