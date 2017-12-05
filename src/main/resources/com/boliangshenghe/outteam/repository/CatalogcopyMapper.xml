@@ -37,12 +37,15 @@
     <result column="Source_id" property="sourceId" jdbcType="VARCHAR" />
     <result column="Location_cname" property="locationCname" jdbcType="VARCHAR" />
     <result column="isouttem" property="isouttem" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     Cata_id, Event_id, Operator, Save_time, Eq_type, O_time, O_time_ns, Lat, Lon, Depth, 
     Ml, Ms, Md, Mb, mmB, Mw, M, Dmin, Gap_azi, Rms, Erh, Erz, Qloc, Qnet, Qcom, Sum_stn, 
     Used_stn, Sum_pha, Used_pha, Explosion_flag, Epic_id, jsonstate, Source_id, Location_cname, 
-    isouttem
+    isouttem, province, area, cid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -64,7 +67,8 @@
       Qloc, Qnet, Qcom, Sum_stn, 
       Used_stn, Sum_pha, Used_pha, 
       Explosion_flag, Epic_id, jsonstate, 
-      Source_id, Location_cname, isouttem
+      Source_id, Location_cname, isouttem, 
+      province, area, cid
       )
     values (#{cataId,jdbcType=VARCHAR}, #{eventId,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
       #{saveTime,jdbcType=TIMESTAMP}, #{eqType,jdbcType=VARCHAR}, #{oTime,jdbcType=TIMESTAMP}, 
@@ -75,7 +79,8 @@
       #{qloc,jdbcType=VARCHAR}, #{qnet,jdbcType=VARCHAR}, #{qcom,jdbcType=VARCHAR}, #{sumStn,jdbcType=INTEGER}, 
       #{usedStn,jdbcType=INTEGER}, #{sumPha,jdbcType=INTEGER}, #{usedPha,jdbcType=INTEGER}, 
       #{explosionFlag,jdbcType=VARCHAR}, #{epicId,jdbcType=VARCHAR}, #{jsonstate,jdbcType=VARCHAR}, 
-      #{sourceId,jdbcType=VARCHAR}, #{locationCname,jdbcType=VARCHAR}, #{isouttem,jdbcType=VARCHAR}
+      #{sourceId,jdbcType=VARCHAR}, #{locationCname,jdbcType=VARCHAR}, #{isouttem,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Catalogcopy" >
@@ -186,6 +191,15 @@
       <if test="isouttem != null" >
         isouttem,
       </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cataId != null" >
@@ -292,6 +306,15 @@
       </if>
       <if test="isouttem != null" >
         #{isouttem,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -400,6 +423,15 @@
       <if test="isouttem != null" >
         isouttem = #{isouttem,jdbcType=VARCHAR},
       </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
     </set>
     where Cata_id = #{cataId,jdbcType=VARCHAR}
   </update>
@@ -438,9 +470,13 @@
       jsonstate = #{jsonstate,jdbcType=VARCHAR},
       Source_id = #{sourceId,jdbcType=VARCHAR},
       Location_cname = #{locationCname,jdbcType=VARCHAR},
-      isouttem = #{isouttem,jdbcType=VARCHAR}
+      isouttem = #{isouttem,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER}
     where Cata_id = #{cataId,jdbcType=VARCHAR}
   </update>
+  
   
   <!-- 新加   -->
    <select id="selectCatalogcopyList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Catalogcopy">
@@ -448,10 +484,12 @@
     <include refid="Base_Column_List" />
     from catalogcopy
     <where>
+        isouttem !='3'
         <if test="eventId != null">
             AND Event_id LIKE '%${eventId}%'
         </if>
     </where>
+    order by isouttem asc,Save_time desc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
@@ -462,5 +500,4 @@
    Cata_id, Event_id
     from catalogcopy
    	</select>
-  
 </mapper>

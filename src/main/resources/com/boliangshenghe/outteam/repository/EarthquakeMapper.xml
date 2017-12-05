@@ -244,6 +244,12 @@
         <if test="eqname != null">
             AND eqname like '%${eqname}%' 
         </if>
+        <if test="state != null">
+            AND state = #{state,jdbcType=VARCHAR}
+        </if>
+        <if test="eventid != null">
+            AND eventid = #{eventid,jdbcType=VARCHAR}
+        </if>
          <if test="province != null">
             AND province like '%${province}%' 
         </if>

@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.boliangshenghe.outteam.entity.Catalogcopy;
+import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.service.CatalogcopyService;
-import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.util.CommonUtils;
 import com.boliangshenghe.outteam.util.HttpClientUtil;
 import com.boliangshenghe.outteam.util.JsonUtils;
@@ -23,10 +24,11 @@ import com.boliangshenghe.outteam.util.JsonUtils;
 public class TopicReceiver implements MessageListener {
 
 	@Autowired
-	private EarthquakeService earthquakeService;
+	private CatalogcopyService catalogcopyService;
 	
 	@Autowired
-	private CatalogcopyService catalogcopyService;
+	private CompanyService companyService;
+	
 	public void onMessage(Message message) {
 		try {
 			System.out.println("maven  ---TopicReceiver1接收到消息:"
@@ -47,25 +49,30 @@ public class TopicReceiver implements MessageListener {
 					map.put("roadlevel","0");
 					String retu = HttpClientUtil.doGet("http://restapi.amap.com/v3/geocode/regeo",map);
 					
-					String provice = retu.substring(retu.indexOf("province")+11, retu.indexOf("city")-3);
-					System.out.println(provice+" 省份");
-					//if(!provice.trim().equals("")){//只要国内的数据
-						catalogcopy.setIsouttem("2");//默认不出队
-						try {
-							catalogcopyService.insertSelective(catalogcopy);
-						} catch (Exception c) {
-							// TODO: handle exception
-							c.printStackTrace();
-						}
-				}
-				
+					String province = retu.substring(retu.indexOf("province")+11, retu.indexOf("city")-3);
 					
-				//}
-				
+					if(!province.trim().equals("")){
+						String pro = province.substring(0, 2);
+						Company record = new Company();
+						record.setProvince(pro);
+						List<Company> companyList = companyService.selectCompanyList(record);
+						if(null!=companyList && companyList.size()>0){
+							Company company = companyList.get(0);
+							catalogcopy.setProvince(company.getProvince());
+							catalogcopy.setCid(company.getId());
+							catalogcopy.setArea(getArea(company.getProvince()));
+							System.out.println(company.getProvince()+" zhen省份");
+							catalogcopy.setIsouttem("2");//默认不出队
+							try {
+								catalogcopyService.insertSelective(catalogcopy);
+							} catch (Exception c) {
+								// TODO: handle exception
+								c.printStackTrace();
+							}
+						}
+					}
+				}
 			}
-			
-			
-			
 			
 			/*Earthquake earthquake = new Earthquake();
 			
@@ -81,5 +88,20 @@ public class TopicReceiver implements MessageListener {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * 根据省份判断 华北地区
+	 * @param provice
+	 * @return
+	 */
+	public String getArea(String provice){
+		if(provice.equals("北京")||provice.equals("天津")
+				||provice.equals("山西")||provice.equals("河北")
+				||provice.equals("内蒙古")||provice.equals("山东")
+				||provice.equals("河南")){
+			return "华北";
+		}else{
+			return "非华北";
+		}
+	}
 }

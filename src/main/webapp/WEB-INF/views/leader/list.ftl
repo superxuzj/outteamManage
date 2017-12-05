@@ -2,9 +2,6 @@
 <html style="height: 100%">
 <head>
     <meta charset="utf-8">
-    
-   
-    
     <link href="<@ps.s/>/echarts/echart.css" rel="stylesheet">
     <style>
         
@@ -15,19 +12,30 @@
         <div class="aside-box aside-left">
                 <aside>
                         <h5>震区列表</h5>
-                        <dl>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
-                            <dd>西藏拉萨</dd>
+                        <dl class="dlbottom">
+                        <#list list as record>
+                            <dd>
+                           		<a href="/leader/info?cataId=${record.cataId }" 
+                           		title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出对</#if>)">
+                                <span class="list-part">${record.locationCname }</span>
+                                </a>
+                                <a href="/leader/info?cataId=${record.cataId }" 
+                                title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出对</#if>)">
+                                <span class="list-part">(${record.m }级)(<#if record.isouttem==1>出队<#else>未出队</#if>)</span>
+                                </a>
+                                <#if record.isouttem==2>
+	                           		<div class="drop">
+	                                    <a href="#">操作</a>
+	                                    <ul>
+	                                        <li><a href="#" onclick="outteam('${record.cataId}')">出队</a></li>
+	                                        <li><a href="#" onclick="unoutteam('${record.cataId}')">不出队</a></li>
+	                                    </ul>
+	                                </div>
+                           		</#if>
+                                
+                            </dd>
+                           </#list>
+                            
                         </dl>
                 </aside>
         </div>
@@ -38,31 +46,30 @@
         <aside class="top">
                 <h5>出队单位</h5>
                 <dl>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-					<dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
-                    <dd>北京市地震局</dd>
+                <#if outteamlist??>
+               		<#list outteamlist as outteam>
+                    <dd onclick="getPersonnel('${outteam.id}')">${outteam.company }</dd>
+                    </#list>
+                 <#else>
+                  <dd>无</dd>
+                 </#if>
                 </dl>
         </aside>
         <aside class="bottom">
                 <h5>出队成员</h5>
-                <dl>
+                <dl id="personneldd">
+                <dd><span>无</span></dd>
+                    <!-- <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
                     <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
                     <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
                     <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
                     <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
                     <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
-                    <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
-                    <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd>
+                    <dd><span>徐志坚</span> <span>北京市</span><span>地震局</span></dd> -->
                 </dl>
         </aside>
     </div>
+   <script type="text/javascript" src="<@ps.s/>/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="<@ps.s/>/echarts/echarts-all-3.js"></script>
     <script type="text/javascript" src="<@ps.s/>/echarts/ecStat.min.js"></script>
     <script type="text/javascript" src="<@ps.s/>/echarts/dataTool.min.js"></script>
@@ -70,6 +77,39 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
     <script type="text/javascript" src="<@ps.s/>/echarts/bmap.min.js"></script>
     <script type="text/javascript">
+    function outteam(cataId){
+    	window.location.href = "/leader/outteam?cataId="+cataId;
+    }
+    function unoutteam(cataId){
+    	window.location.href = "/leader/unoutteam?cataId="+cataId;
+    }
+    
+    function getPersonnel(otid){
+    	$.ajax({ 
+            type: "POST",
+            url:"/leader/getPersonnel",
+            data:{  
+                "otid" : otid
+            },
+            success: function(data) {
+            	$("#personneldd").html(data);
+            }
+    	});
+    }
+    
+    </script>
+    <script type="text/javascript">
+        $(".aside-left aside .drop").click(function(e){
+            $(this).toggleClass("active").children("ul").stop().slideToggle();
+            $(this).parent().siblings().children(".drop").each(function(i,e){
+                $(e).removeClass("active").children("ul").stop().hide();
+            })
+            e.stopPropagation();
+        })
+        $(document).on("click",function(e){
+            $(".aside-left aside .drop").removeClass("active").children("ul").stop().slideUp();
+            e.stopPropagation();
+        })
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom);
         var app = {};
@@ -272,7 +312,7 @@
         option = {
             backgroundColor: '#003380',
             title: {
-                text: '${title}',
+                text: '模拟迁徙',
                 subtext: '数据纯属虚构',
                 left: 'center',
                 textStyle: {

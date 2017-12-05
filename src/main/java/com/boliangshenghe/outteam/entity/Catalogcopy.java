@@ -71,11 +71,17 @@ public class Catalogcopy {
 
     private String locationCname;
 
-    private String isouttem;
+    private String isouttem;//1 出队 2 默认不出队 3、领导说不要出队
+    
+    private String province;
+
+    private String area;
     
     private Integer start;
     
     private Integer limit;
+    
+    private Integer cid;
 
     public String getCataId() {
         return cataId;
@@ -371,5 +377,29 @@ public class Catalogcopy {
 
 	public void setLimit(Integer limit) {
 		this.limit = limit;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
 }
