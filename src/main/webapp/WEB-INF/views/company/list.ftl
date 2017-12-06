@@ -49,6 +49,7 @@
 					<tr>
 						<th>单位简码</th>
 						<th>单位名称</th>
+						<th>所在地</th>
 						<th>类型</th>
 						<th>操作</th>
 					</tr>
@@ -56,6 +57,7 @@
 					<tr>
 						<td>${company.code }</td>
 						<td>${company.province }</td>
+						<td>${company.location }</td>
 						<td>
 						<#if company.type==1>
 						省局

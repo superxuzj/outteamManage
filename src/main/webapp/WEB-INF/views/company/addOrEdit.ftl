@@ -51,6 +51,16 @@
                        </div>
                    </div>
                    <div class="form-group">
+                       <label class="col-lg-4 control-label">所在地</label>
+                       <div class="col-lg-3 heightcol">
+                          <select class="form-control m-bot15" name="location" id="location">
+                       		 <#list companyList as cl>
+                       			 <option value="${cl.province }" <#if company.location==cl.province>selected</#if> >${cl.province }</option>
+                       		 </#list>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group">
                        <label class="col-lg-4 control-label">类型</label>
                        <div class="col-lg-3 heightcol">
                            <select class="form-control m-bot15" name="type">

@@ -6,10 +6,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, code, province, type
+    id, name, code, province, location, type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,12 +24,14 @@
   </delete>
   <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.Company" >
     insert into t_company (id, name, code, 
-      province, type)
+      province, location, type
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{province,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+      #{province,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Company" >
-      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
   	  </selectKey>
     insert into t_company
@@ -44,6 +47,9 @@
       </if>
       <if test="province != null" >
         province,
+      </if>
+      <if test="location != null" >
+        location,
       </if>
       <if test="type != null" >
         type,
@@ -62,6 +68,9 @@
       <if test="province != null" >
         #{province,jdbcType=VARCHAR},
       </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
       </if>
@@ -79,6 +88,9 @@
       <if test="province != null" >
         province = #{province,jdbcType=VARCHAR},
       </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
@@ -90,11 +102,12 @@
     set name = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       province = #{province,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-    <!-- 新加   -->
+   <!-- 新加   -->
    <select id="selectCompanyList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Company">
    	    select 
     <include refid="Base_Column_List" />

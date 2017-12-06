@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.entity.Catalogcopy;
+import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.service.CatalogcopyService;
+import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
@@ -39,6 +41,9 @@ public class LeaderController {
 	@Autowired
 	private OutteamDetailService outteamDetailService;
 	
+	@Autowired
+	private CompanyService companyService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/leader/list";
@@ -48,14 +53,25 @@ public class LeaderController {
 	public String index(HttpServletRequest request, 
   			HttpServletResponse response,Catalogcopy record,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
-		
 		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(record);
 		model.addAttribute("list", list);
 		
 //		model.addAttribute("title", "四川地震");
+		String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
+		model.addAttribute("flights", flights);
+		model.addAttribute("text", "无");
+		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
 		return "leader/list";
 	}
 	
+	/**
+	 * 点出队
+	 * @param request
+	 * @param response
+	 * @param cataId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("outteam")
 	public String outteam(HttpServletRequest request, 
   			HttpServletResponse response,String cataId,Model model){
@@ -88,10 +104,20 @@ public class LeaderController {
 		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
 		model.addAttribute("list", list);
 		
-//		model.addAttribute("title", "四川地震");
+		String flights = "[[{ name: '"+catalogcopy.getProvince()+"', value: 100 }, { name: '"+catalogcopy.getProvince()+"' }]]";
+		model.addAttribute("flights", flights);
+		model.addAttribute("text", "无");
+		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
 		return "leader/list";
 	}
-	
+	/**
+	 * 点不出队
+	 * @param request
+	 * @param response
+	 * @param cataId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("unoutteam")
 	public String unoutteam(HttpServletRequest request, 
   			HttpServletResponse response,String cataId,Model model){
@@ -105,12 +131,17 @@ public class LeaderController {
 		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
 		model.addAttribute("list", list);
 		
+		String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
+		model.addAttribute("flights", flights);
+		model.addAttribute("text", "无");
+		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
 //		model.addAttribute("title", "四川地震");
 		return "leader/list";
 	}
 	
 	/**
-	 * 一个地震事件的出队单位
+	 * 一个地震事件的出队单位 
+	 * 单位的航班信息
 	 * @param request
 	 * @param response
 	 * @param cataId
@@ -131,12 +162,50 @@ public class LeaderController {
 			Outteam ot = new Outteam();
 			ot.setEqid(earthquake.getId());
 			List<Outteam> outteamlist = outteamService.selectOutteamList(ot);
-			
 			model.addAttribute("outteamlist", outteamlist);
+			int companycount = 0;
+			String flights = "[[{ name: '"+earthquake.getProvince()+"', value: 100 }, { name: '"+earthquake.getProvince()+"' }]";
+			if(null!=outteamlist && outteamlist.size()>0){
+				companycount = outteamlist.size();
+				flights = flights+",";
+				for (Outteam outteam : outteamlist) {
+					Company company = companyService.selectByPrimaryKey(outteam.getCid());
+					flights = flights + "[{ name: '"+company.getLocation()+"', value: 30 }, { name: '"+earthquake.getProvince()+"' }],";
+				}
+				flights = flights.substring(0, flights.length()-1);
+			}
+			flights = flights +"]";
+			model.addAttribute("flights", flights);
+			
+			model.addAttribute("text", earthquake.getEqname());
+			model.addAttribute("subtext", "现场工作队由"+companycount+"家单位组成，共计100人");
+			
+			
+		}else{
+			String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
+			model.addAttribute("flights", flights);
+			
+			model.addAttribute("text", "无");
+			model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
 		}
 		
 		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
 		model.addAttribute("list", list);
+		
+		
+		
+		/*[
+         [{ name: '上海', value: 30 }, { name: '北京' }],
+         [{ name: '广东', value: 30 }, { name: '北京' }],
+         [{ name: '广西', value: 30 }, { name: '北京' }],
+         [{ name: '江西', value: 30 }, { name: '北京' }],
+         [{ name: '西藏', value:  30}, { name: '北京' }],
+         [{ name: '吉林', value: 30 }, { name: '北京' }],
+         [{ name: '内蒙古', value: 30 }, { name: '北京' }],
+         [{ name: '四川', value: 30 }, { name: '北京' }],
+         [{ name: '北京', value: 100 }, { name: '北京' }]
+     ]*/
+    	
 		
 		return "leader/list";
 	}

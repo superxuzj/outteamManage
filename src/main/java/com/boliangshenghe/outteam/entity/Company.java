@@ -8,6 +8,8 @@ public class Company {
     private String code;
 
     private String province;
+    
+    private String location;
 
     private String type;
     
@@ -70,4 +72,12 @@ public class Company {
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
     }
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 }

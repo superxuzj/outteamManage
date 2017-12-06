@@ -135,6 +135,10 @@ public class CompanyController {
 			Company company = companyService.selectByPrimaryKey(id);
 			model.addAttribute("company", company);
 		}
+		Company company = new Company();
+		company.setType("1");
+		List<Company> companyList = companyService.selectCompanyList(company);
+		model.addAttribute("companyList", companyList);
 		return "company/addOrEdit";
 	}
 	

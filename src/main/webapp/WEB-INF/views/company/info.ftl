@@ -38,6 +38,12 @@
                        </div>
                    </div>
                    <div class="form-group">
+                       <label class="col-lg-2 control-label">所在地</label>
+                       <div class="col-lg-6">
+                           <input type="text" class="form-control" name="location" value="${company.location }" disabled/>
+                       </div>
+                   </div>
+                   <div class="form-group">
                        <label class="col-lg-2 control-label">类型</label>
                        <div class="col-lg-6">
                             <select class="form-control m-bot15" name="type">
