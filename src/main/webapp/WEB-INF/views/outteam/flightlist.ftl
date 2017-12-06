@@ -65,6 +65,9 @@ $(document).ready(function(){
 				parent.$("#depport").val('${result.depPort}');
 				parent.$("#arrport").val('${result.arrPort}');
 				parent.$("#flightstate").val('${result.flightState}');
+				
+				parent.$("#arrcode").val('${result.arrCode}');
+				parent.$("#depcode").val('${result.depCode}');
 			}
 	    </#list>
 		//parent.$('#leaders').val(leaders);

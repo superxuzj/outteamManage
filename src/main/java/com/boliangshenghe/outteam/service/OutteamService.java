@@ -124,6 +124,8 @@ public class OutteamService {
     	flight.setDepterminal(outteam.getDepterminal());
     	flight.setFlight(outteam.getFlight());
     	flight.setFlightstate(outteam.getFlightstate());
+    	flight.setArrcode(outteam.getArrcode());
+    	flight.setDepcode(outteam.getDepcode());
     	if(!outteam.getFlight().equals("")){//要是不要坐飞机，没有航班信息
     		List<Flight> flightlist = flightMapper.selectFlightByRecord(flight);
         	if(flightlist!=null && flightlist.size()>0){

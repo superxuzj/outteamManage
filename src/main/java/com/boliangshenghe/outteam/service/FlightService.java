@@ -39,4 +39,8 @@ public class FlightService {
     	return flightMapper.selectFlightByRecord(record);
     }
     
+    public void updateFlightStateBytask(){
+    	
+    }
+    
 }

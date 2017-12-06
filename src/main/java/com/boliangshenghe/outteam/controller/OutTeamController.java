@@ -209,7 +209,7 @@ public class OutTeamController extends BaseCommonController{
 		}
 		
 		JSONObject jsonObj = JSONObject.parseObject(content);
-//		System.out.println(jsonObj.toString());
+		System.out.println(jsonObj.toString());
 		JsonFlight jsonFlight = JSON.toJavaObject(jsonObj, JsonFlight.class);
 		List<Result> resultList = jsonFlight.getOutput().getResult();
 		
@@ -230,6 +230,9 @@ public class OutTeamController extends BaseCommonController{
 			retudate.put("arractual",result.getArrActual());
 			retudate.put("depport",result.getDepPort());
 			retudate.put("arrport",result.getArrPort());
+			
+			retudate.put("arrcode",result.getArrCode());
+			retudate.put("depcode",result.getDepCode());
 			
 			if(result.getDepActual().equals("0001-01-01T00:00:00Z")&&result.getArrActual().equals("0001-01-01T00:00:00Z")){
 				retudate.put("flightstate","计划");

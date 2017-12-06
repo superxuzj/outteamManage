@@ -89,6 +89,8 @@
                            <input type="text" class="form-control" name="depcity" id="depcity" value="${flight.depcity }"/>
                        </div>
                    </div>
+                   <input type="hidden"  name="arrcode" id="arrcode" value="${flight.arrcode }"/>
+                   <input type="hidden"  name="depcode" id="depcode" value="${flight.depcode }"/>
                    <div class="form-group col-lg-6">
                        <label class="col-lg-3 control-label">到达城市</label>
                        <div class="col-lg-9">
@@ -210,14 +212,14 @@ function gohistory(){
 }
 
 function save(){
-	if($("#depdate").val()==""){
+	/**if($("#depdate").val()==""){
 		alert("请选择出发日期！");
 		return false;
 	}
 	if($("#flight").val()==""){
 		alert("请输入航班号！");
 		return false;
-	}
+	}**/
 	$("#outteamform").submit();
 }
 
@@ -266,6 +268,9 @@ function getFliht(){
             		$("#depport").val(data.depport);
             		$("#arrport").val(data.arrport);
             		$("#flightstate").val(data.flightstate);
+            		$("#arrcode").val(data.arrcode);
+            		$("#depcode").val(data.depcode);
+            		
         		}
         		
         		
@@ -273,7 +278,6 @@ function getFliht(){
         	
         }
 	});
-	
 }
 function choosePerson(){
    	 layer.open({

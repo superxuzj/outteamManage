@@ -80,7 +80,27 @@ public class Outteam {
 	private String flightstate; //航班状态
 
     private String depdate;//出发日期
+    
+    private String arrcode;//到达机场码
 
+	private String depcode;//出发机场码
+
+	public String getArrcode() {
+		return arrcode;
+	}
+
+	public void setArrcode(String arrcode) {
+		this.arrcode = arrcode;
+	}
+
+	public String getDepcode() {
+		return depcode;
+	}
+
+	public void setDepcode(String depcode) {
+		this.depcode = depcode;
+	}
+		
     public String getEqcompany() {
   		return eqcompany;
   	}

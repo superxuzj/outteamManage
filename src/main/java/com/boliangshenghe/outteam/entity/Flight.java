@@ -30,6 +30,46 @@ public class Flight {
 
     private String depdate;//出发日期
     
+    private String arrprovice;//到达省
+
+	private String depprovice;//出发省
+
+    private String arrcode;//到达机场码
+
+    private String depcode;//出发机场码
+    
+    public String getArrprovice() {
+		return arrprovice;
+	}
+
+	public void setArrprovice(String arrprovice) {
+		this.arrprovice = arrprovice;
+	}
+
+	public String getDepprovice() {
+		return depprovice;
+	}
+
+	public void setDepprovice(String depprovice) {
+		this.depprovice = depprovice;
+	}
+
+	public String getArrcode() {
+		return arrcode;
+	}
+
+	public void setArrcode(String arrcode) {
+		this.arrcode = arrcode;
+	}
+
+	public String getDepcode() {
+		return depcode;
+	}
+
+	public void setDepcode(String depcode) {
+		this.depcode = depcode;
+	}
+    
     public String getFlightstate() {
 		return flightstate;
 	}
