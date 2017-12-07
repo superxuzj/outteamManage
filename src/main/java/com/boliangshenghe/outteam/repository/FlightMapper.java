@@ -18,4 +18,7 @@ public interface FlightMapper {
     int updateByPrimaryKey(Flight record);
     
     List<Flight> selectFlightByRecord(Flight record);
+    
+    List<Flight> selectFlightNoProvice(Flight record);
+    
 }

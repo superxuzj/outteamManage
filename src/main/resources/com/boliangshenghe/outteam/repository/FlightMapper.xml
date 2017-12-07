@@ -263,4 +263,11 @@
         </if>
     </where>
    	</select>
+   	
+   	<select id="selectFlightNoProvice" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Flight">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_flight
+     where arrProvice is null or depProvice is null
+   	</select>
 </mapper>

@@ -18,6 +18,10 @@ public class CommonUtils {
 	
 	public static final String REQUEST_KEY_REQUEST = "request";// 当前请求
 	
+	public static final String HEAD ="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
+	
+	public static final Integer TIMEOUT = 10000;
+	
 	public static final String USERID = "sessionuserid";
 	public static final String USERNAME = "sessionusername";
 	public static final String REALNAME = "sessionrealname";
