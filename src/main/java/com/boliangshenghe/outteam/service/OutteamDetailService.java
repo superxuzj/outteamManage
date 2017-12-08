@@ -41,6 +41,10 @@ public class OutteamDetailService {
     	return outteamDetailMapper.selectOutteamDetailList(record);
     }
     
+    public int getCountByOutteamId(Integer otid){
+    	return outteamDetailMapper.selectCountByEqid(otid);
+    }
+    
     public PageBean<OutteamDetail> getOutteamDetailByPage(OutteamDetail record,Integer pageNo) {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<OutteamDetail> list = this.outteamDetailMapper.selectOutteamDetailList(record);

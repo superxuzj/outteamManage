@@ -1,7 +1,9 @@
 package com.boliangshenghe.outteam.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,15 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.entity.Catalogcopy;
-import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
+import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.service.CatalogcopyService;
 import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
+import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
+import com.boliangshenghe.outteam.util.CommonUtils;
 import com.boliangshenghe.outteam.util.DateUtils;
 
 @Controller
@@ -44,6 +48,9 @@ public class LeaderController {
 	@Autowired
 	private CompanyService companyService;
 	
+	@Autowired
+	private FlightService flightService;
+	
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/leader/list";
@@ -57,10 +64,10 @@ public class LeaderController {
 		model.addAttribute("list", list);
 		
 //		model.addAttribute("title", "四川地震");
-		String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
-		model.addAttribute("flights", flights);
-		model.addAttribute("text", "无");
-		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
+		model.addAttribute("flights", CommonUtils.FLIGHTS);
+		model.addAttribute("text", CommonUtils.TEXT);
+		model.addAttribute("subtext", CommonUtils.SUBTEXT);
+		model.addAttribute("sucontent", CommonUtils.SUCONTENT);//悬浮内容
 		return "leader/list";
 	}
 	
@@ -101,14 +108,14 @@ public class LeaderController {
 		catalogcopy.setIsouttem("1");
 		catalogcopyService.updateByPrimaryKeySelective(catalogcopy);
 		
-		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
+		/*List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
 		model.addAttribute("list", list);
-		
-		String flights = "[[{ name: '"+catalogcopy.getProvince()+"', value: 100 }, { name: '"+catalogcopy.getProvince()+"' }]]";
+		String flights = "[[{ name: '"+earthquake.getProvince()+"', value: 100 }, { name: '"+earthquake.getProvince()+"' }]]";
 		model.addAttribute("flights", flights);
-		model.addAttribute("text", "无");
-		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
-		return "leader/list";
+		model.addAttribute("text", CommonUtils.TEXT);
+		model.addAttribute("subtext", CommonUtils.SUBTEXT);
+		model.addAttribute("sucontent", CommonUtils.SUCONTENT);//悬浮内容
+*/		return "redirect:/leader/info?cataId="+cataId;
 	}
 	/**
 	 * 点不出队
@@ -128,15 +135,8 @@ public class LeaderController {
 		catalogcopy.setIsouttem("3");//领导说不要出队
 		catalogcopyService.updateByPrimaryKeySelective(catalogcopy);
 		
-		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
-		model.addAttribute("list", list);
-		
-		String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
-		model.addAttribute("flights", flights);
-		model.addAttribute("text", "无");
-		model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
 //		model.addAttribute("title", "四川地震");
-		return "leader/list";
+		return "redirect:/leader/list";
 	}
 	
 	/**
@@ -165,47 +165,64 @@ public class LeaderController {
 			model.addAttribute("outteamlist", outteamlist);
 			int companycount = 0;
 			String flights = "[[{ name: '"+earthquake.getProvince()+"', value: 100 }, { name: '"+earthquake.getProvince()+"' }]";
+			/*[
+             { name: '北京', value: 'qweqweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' },
+           
+             { name: '山西', value: randomValue() },
+             { name: '内蒙古', value: 'qweqweeeeeeeeeee<br/>eeeeeeeeeeeeeeeeeeeeeeee' },
+             { name: '陕西', value: randomValue() },
+        
+             { name: '宁夏', value: randomValue() },
+             { name: '海南', value: randomValue() }
+         ]*/
+			String sucontent = "[";
+			//"{ name: '北京', value: '2222北京23222222222' },{ name: '内蒙古', value: '111内蒙古11111111' }]";
 			if(null!=outteamlist && outteamlist.size()>0){
 				companycount = outteamlist.size();
 				flights = flights+",";
 				for (Outteam outteam : outteamlist) {
-					Company company = companyService.selectByPrimaryKey(outteam.getCid());
-					flights = flights + "[{ name: '"+company.getLocation()+"', value: 30 }, { name: '"+earthquake.getProvince()+"' }],";
+					
+					sucontent = sucontent +"{name:'"+outteam.getCompany()+"',value:'"
+					+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人";
+					
+					if(null!=outteam.getFid() && !outteam.getFid().toString().equals("")){
+						Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
+						if(null !=flight.getDepprovice() && !flight.getDepprovice().equals("")){
+							flights = flights + "[{ name: '"+flight.getDepprovice()+"', value: 30 }, { name: '"+earthquake.getProvince()+"' }],";
+							sucontent = sucontent+"<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate();
+							
+							if(!outteam.getCompany().equals(flight.getDepprovice())){
+								sucontent = sucontent+"'},{ name: '"+flight.getDepprovice()+"', value:'"
+							+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人"
+							+"<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate();
+							}
+						}
+					}
+//					Company company = companyService.selectByPrimaryKey(outteam.getCid());
+					sucontent =sucontent+"'},";
 				}
+				sucontent = sucontent.substring(0, sucontent.length()-1);
 				flights = flights.substring(0, flights.length()-1);
 			}
 			flights = flights +"]";
-			model.addAttribute("flights", flights);
-			
+			sucontent =sucontent+"]";
+			model.addAttribute("flights", flights);//飞机效果
+			model.addAttribute("sucontent", sucontent);//悬浮内容
 			model.addAttribute("text", earthquake.getEqname());
 			model.addAttribute("subtext", "现场工作队由"+companycount+"家单位组成，共计100人");
 			
+			model.addAttribute("sourceprovice", earthquake.getProvince());//受灾省
+			
 			
 		}else{
-			String flights = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
-			model.addAttribute("flights", flights);
-			
-			model.addAttribute("text", "无");
-			model.addAttribute("subtext", "现场工作队由0家单位组成，共计0人");
+			model.addAttribute("flights", CommonUtils.FLIGHTS);
+			model.addAttribute("text", CommonUtils.TEXT);
+			model.addAttribute("subtext", CommonUtils.SUBTEXT);
+			model.addAttribute("sucontent", CommonUtils.SUCONTENT);//悬浮内容
 		}
 		
 		List<Catalogcopy> list = catalogcopyService.selectCatalogcopyList(new Catalogcopy());
 		model.addAttribute("list", list);
-		
-		
-		
-		/*[
-         [{ name: '上海', value: 30 }, { name: '北京' }],
-         [{ name: '广东', value: 30 }, { name: '北京' }],
-         [{ name: '广西', value: 30 }, { name: '北京' }],
-         [{ name: '江西', value: 30 }, { name: '北京' }],
-         [{ name: '西藏', value:  30}, { name: '北京' }],
-         [{ name: '吉林', value: 30 }, { name: '北京' }],
-         [{ name: '内蒙古', value: 30 }, { name: '北京' }],
-         [{ name: '四川', value: 30 }, { name: '北京' }],
-         [{ name: '北京', value: 100 }, { name: '北京' }]
-     ]*/
-    	
 		
 		return "leader/list";
 	}

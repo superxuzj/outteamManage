@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boliangshenghe.outteam.repository.ProviceMapper" >
+  <resultMap id="BaseResultMap" type="com.boliangshenghe.outteam.entity.Provice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+    <result column="parentname" property="parentname" jdbcType="VARCHAR" />
+    <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="depth" property="depth" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, parentid, parentname, areacode, zipcode, depth
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_provice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_provice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.boliangshenghe.outteam.entity.Provice" >
+    insert into t_provice (id, name, parentid, 
+      parentname, areacode, zipcode, 
+      depth)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{parentname,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, 
+      #{depth,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Provice" >
+    insert into t_provice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="parentname != null" >
+        parentname,
+      </if>
+      <if test="areacode != null" >
+        areacode,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="depth != null" >
+        depth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null" >
+        #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        #{depth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boliangshenghe.outteam.entity.Provice" >
+    update t_provice
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null" >
+        parentname = #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        areacode = #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        depth = #{depth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.outteam.entity.Provice" >
+    update t_provice
+    set name = #{name,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=INTEGER},
+      parentname = #{parentname,jdbcType=VARCHAR},
+      areacode = #{areacode,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      depth = #{depth,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 新加   -->
+   <select id="selectProviceByRecord" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Provice">
+   	    select 
+    <include refid="Base_Column_List" />
+    from t_provice
+    <where>
+        <if test="name != null">
+            AND name = #{name,jdbcType=VARCHAR}
+        </if>
+    </where>
+   	</select>
+</mapper>

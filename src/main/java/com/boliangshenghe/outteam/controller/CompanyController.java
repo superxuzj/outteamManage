@@ -17,6 +17,7 @@ import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.User;
+import com.boliangshenghe.outteam.repository.ProviceMapper;
 import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.UserService;
@@ -38,6 +39,9 @@ public class CompanyController {
 	private OutteamService  outteamService;
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public ProviceMapper proviceMapper;
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/company/list";
@@ -54,7 +58,7 @@ public class CompanyController {
 	 */
 	@RequestMapping("list")
 	public String index(HttpServletRequest request, 
-  			HttpServletResponse response,Company company,Model model,
+  			HttpServletResponse response2,Company company,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
 		PageBean<Company> page = companyService.getCompanyByPage(company, pageNo);
 		model.addAttribute("page", page);

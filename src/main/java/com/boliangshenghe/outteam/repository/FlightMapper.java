@@ -21,4 +21,7 @@ public interface FlightMapper {
     
     List<Flight> selectFlightNoProvice(Flight record);
     
+    List<Flight> selectFlightNoArrive(Flight record);
+    
+    
 }

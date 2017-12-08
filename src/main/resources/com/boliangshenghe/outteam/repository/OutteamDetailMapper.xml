@@ -263,4 +263,11 @@
        		AND eqid = #{eqid,jdbcType=INTEGER}
   </delete>
   
+   <select id="selectCountByEqid" resultType="java.lang.Integer"  parameterType="java.lang.Integer">
+   	    select 
+    count(1)
+    from t_outteam_detail
+    where eqid = #{eqid,jdbcType=INTEGER}
+   	</select>
+  
 </mapper>

@@ -26,6 +26,7 @@ public class MyTask {
 		// linksController.runTask();
 		System.out.println("MyTask start11" +new Date());
 		
+		flightService.updateFlightStateBytask();
 //		catalogcopyService.insertrecordByTask();
 		
 	}
@@ -38,7 +39,9 @@ public class MyTask {
 		// linksController.runTask();
 		System.out.println("updateFlightStateBytask " +new Date());
 		
-		flightService.updateFlightStateBytask();
+		flightService.updateProviceBytask();
+		
+		
 		
 	}
 }

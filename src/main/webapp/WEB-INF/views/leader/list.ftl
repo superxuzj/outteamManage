@@ -9,37 +9,35 @@
 </head>
 
 <body style="height: 100%; margin: 0">
-        <div class="aside-box aside-left">
-                <aside>
-                        <h5>震区列表</h5>
-                        <dl class="dlbottom">
-                        <#list list as record>
-                            <dd>
-                           		<a href="/leader/info?cataId=${record.cataId }" 
-                           		title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出对</#if>)">
-                                <span class="list-part">${record.locationCname }</span>
-                                </a>
-                                <a href="/leader/info?cataId=${record.cataId }" 
-                                title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出对</#if>)">
-                                <span class="list-part">(${record.m }级)(<#if record.isouttem==1>出队<#else>未出队</#if>)</span>
-                                </a>
-                                <#if record.isouttem==2>
-	                           		<div class="drop">
-	                                    <a href="#">操作</a>
-	                                    <ul>
-	                                        <li><a href="#" onclick="outteam('${record.cataId}')">出队</a></li>
-	                                        <li><a href="#" onclick="unoutteam('${record.cataId}')">不出队</a></li>
-	                                    </ul>
-	                                </div>
-                           		</#if>
-                                
-                            </dd>
-                           </#list>
-                            
-                        </dl>
-                </aside>
-        </div>
-   
+  <div class="aside-box aside-left">
+      <aside>
+           <h5>震区列表</h5>
+           <dl class="dlbottom">
+           <#list list as record>
+               <dd>
+              		<a href="/leader/info?cataId=${record.cataId }" 
+              		title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出队</#if>)">
+                   <span class="list-part">${record.locationCname }</span>
+                   </a>
+                   <a href="/leader/info?cataId=${record.cataId }" 
+                   title="${record.locationCname }(${record.m }级)(<#if record.isouttem==1>出队<#else>未出队</#if>)">
+                   <span class="list-part">(${record.m }级)(<#if record.isouttem==1>出队<#else>未出队</#if>)</span>
+                   </a>
+                   <#if record.isouttem==2>
+               		<div class="drop">
+                        <a href="#">操作</a>
+                        <ul>
+                            <li><a href="#" onclick="outteam('${record.cataId}')">出队</a></li>
+                            <li><a href="#" onclick="unoutteam('${record.cataId}')">不出队</a></li>
+                        </ul>
+                    </div>
+              		</#if>
+               </dd>
+              </#list>
+               
+           </dl>
+      </aside>
+  </div>
 
     <div id="container" style="height: 100%"></div>
     <div class="aside-right aside-box">
@@ -175,10 +173,10 @@
         };
 
         var series = [];
-        [['北京', BJData]].forEach(function (item, i) {
+        [['${sourceprovice}', BJData]].forEach(function (item, i) {
             series.push(
                 {
-                    name: 'categoryA',
+                    name: '',
                     type: 'map',
                     geoIndex: 0,
                     tooltip: {
@@ -188,42 +186,10 @@
                             color: '#fff'
                         }
                     },
-                    data: [
-                        { name: '北京', value: 'qweqweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' },
-                        { name: '天津', value: randomValue() },
-                        { name: '上海', value: randomValue() },
-                        { name: '重庆', value: randomValue() },
-                        { name: '河北', value: randomValue() },
-                        { name: '河南', value: randomValue() },
-                        { name: '云南', value: randomValue() },
-                        { name: '辽宁', value: randomValue() },
-                        { name: '黑龙江', value: randomValue() },
-                        { name: '湖南', value: randomValue() },
-                        { name: '安徽', value: randomValue() },
-                        { name: '山东', value: randomValue() },
-                        { name: '新疆', value: randomValue() },
-                        { name: '江苏', value: randomValue() },
-                        { name: '浙江', value: randomValue() },
-                        { name: '江西', value: randomValue() },
-                        { name: '湖北', value: randomValue() },
-                        { name: '广西', value: randomValue() },
-                        { name: '甘肃', value: randomValue() },
-                        { name: '山西', value: randomValue() },
-                        { name: '内蒙古', value: 'qweqweeeeeeeeeee<br/>eeeeeeeeeeeeeeeeeeeeeeee' },
-                        { name: '陕西', value: randomValue() },
-                        { name: '吉林', value: randomValue() },
-                        { name: '福建', value: randomValue() },
-                        { name: '贵州', value: randomValue() },
-                        { name: '广东', value: randomValue() },
-                        { name: '青海', value: randomValue() },
-                        { name: '西藏', value: randomValue() },
-                        { name: '四川', value: randomValue() },
-                        { name: '宁夏', value: randomValue() },
-                        { name: '海南', value: randomValue() }
-                    ]
+                    data: ${sucontent}
                 },
                 {
-                    name: item[0] + ' Top10',
+                    name: item[0] + '',
                     type: 'lines',
                     zlevel: 1,
                     effect: {
@@ -243,7 +209,7 @@
                     data: convertData(item[1])
                 },
                 {
-                    name: item[0] + '111',
+                    name: item[0] + '',
                     type: 'lines',
                     zlevel: 2,
                     symbol: ['none', 'arrow'],
@@ -266,7 +232,7 @@
                     data: convertData(item[1])
                 },
                 {
-                    name: item[0] + ' Top10123',
+                    name: item[0] + '',
                     type: 'effectScatter',
                     coordinateSystem: 'geo',
                     zlevel: 2,
@@ -314,13 +280,22 @@
                 formatter: function (params) {
                     var res = params.name + '<br/>';
                     var myseries = option.series;
-                    for (var i = 0; i < myseries.length; i++) {
+                    for (var j = 0; j < myseries[0].data.length; j++) {
+                        if (myseries[0].data[j].name == params.name) {
+                            res += myseries[0].data[j].value + '</br>';
+                        }
+                    }
+                    /* if (myseries[0].data[0].name == params.name) {
+                        res +=  myseries[0].data[0].value + '</br>';
+                    } */
+                    
+                     /* for (var i = 0; i < myseries.length; i++) {
                         for (var j = 0; j < myseries[i].data.length; j++) {
                             if (myseries[i].data[j].name == params.name) {
                                 res += myseries[i].name + ' : ' + myseries[i].data[j].value + '</br>';
                             }
                         }
-                    }
+                    }  */
                     return res;
                 }
             },

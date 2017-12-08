@@ -20,7 +20,13 @@ public class CommonUtils {
 	
 	public static final String HEAD ="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
 	
-	public static final Integer TIMEOUT = 10000;
+	public static final Integer TIMEOUT = 5000;
+	
+	public static final String SUCONTENT = "[]";
+	
+	public static final String SUBTEXT = "现场工作队由0家单位组成，共计0人";
+	public static final String TEXT = "无";
+	public static final String FLIGHTS = "[[{ name: '北京', value: 100 }, { name: '北京' }]]";
 	
 	public static final String USERID = "sessionuserid";
 	public static final String USERNAME = "sessionusername";

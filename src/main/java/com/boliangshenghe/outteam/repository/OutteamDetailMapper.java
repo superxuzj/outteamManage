@@ -20,4 +20,6 @@ public interface OutteamDetailMapper {
     List<OutteamDetail> selectOutteamDetailList(OutteamDetail record);
     
     int updateByOutteamDetail(OutteamDetail record);
+    
+    int selectCountByEqid(Integer id);
 }
