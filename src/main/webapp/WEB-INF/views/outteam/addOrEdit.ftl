@@ -80,7 +80,7 @@
                        <div class="col-lg-6">
                            <input type="text" class="form-control" id="flight" name="flight" value="${flight.flight }">
                        </div>
-                       <a class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
+                       <a id="agetflight" class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
                    </div>
                    
                    <div class="form-group col-lg-6">
@@ -223,6 +223,21 @@ function save(){
 	$("#outteamform").submit();
 }
 
+/*60s计时*/
+function settime(countdown) {
+	if (countdown == 0) {
+		$("#agetflight").text("获取航班信息");
+		$('#agetflight').attr('href','javascript:getFliht()'); 
+		return;
+	} else {
+		$("#agetflight").text(countdown+"s");
+		countdown--;
+	}
+	setTimeout(function() {
+		settime(countdown)
+	}, 1000)
+}
+
 function getFliht(){
 	var flight = $("#flight").val();
 	var depdate = $("#depdate").val();
@@ -235,6 +250,9 @@ function getFliht(){
 		return false;
 	}
 	
+	 $('#agetflight').attr('href','#'); 
+     settime(5);
+	
 	$.ajax({ 
         type: "POST",
         url:"/outteam/flight",
@@ -245,7 +263,7 @@ function getFliht(){
         scriptCharset: 'utf-8',
         success: function(data) {
         	if(data.depcity=="" || data.depcity==null){
-        		alert(data);
+        		alert(data.error);
         	}else{
         		if(data.size>1){
         			layer.open({

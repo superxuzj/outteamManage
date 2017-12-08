@@ -205,7 +205,9 @@ public class OutTeamController extends BaseCommonController{
 		System.out.println(depdate);
 		String content = FlightUtils.makeRequest(flight, depdate);
 		if(content.indexOf("output")==-1){//查询失败，返回失败信息
-			return content;
+			JSONObject reerror = new JSONObject();
+			reerror.put("error",content);
+			return reerror.toJSONString();
 		}
 		
 		JSONObject jsonObj = JSONObject.parseObject(content);

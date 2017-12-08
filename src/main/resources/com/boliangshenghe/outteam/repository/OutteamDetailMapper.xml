@@ -267,7 +267,7 @@
    	    select 
     count(1)
     from t_outteam_detail
-    where eqid = #{eqid,jdbcType=INTEGER}
+    where otid = #{otid,jdbcType=INTEGER}
    	</select>
   
 </mapper>

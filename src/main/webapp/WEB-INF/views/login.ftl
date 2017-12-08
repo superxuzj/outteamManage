@@ -44,11 +44,11 @@
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" class="form-control" name="username" id="username"  value="leader" placeholder="username" autofocus>
+              <input type="text" class="form-control" name="username" id="username"  value="" placeholder="username" autofocus>
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="Password" value="111111" name="password" id="password">
+                <input type="password" class="form-control" placeholder="Password" value="" name="password" id="password">
             </div>
              <div class="input-group">
                 <span class="input-group-addon"></span>

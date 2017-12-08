@@ -7,13 +7,13 @@ public class Message {
 
     private String phone;
 
+    private String content;
+
     private Date sendtime;
 
     private Integer eqid;
 
     private Integer otid;
-
-    private byte[] content;
 
     public Integer getId() {
         return id;
@@ -29,6 +29,14 @@ public class Message {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getSendtime() {
@@ -53,13 +61,5 @@ public class Message {
 
     public void setOtid(Integer otid) {
         this.otid = otid;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
     }
 }

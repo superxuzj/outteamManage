@@ -67,6 +67,9 @@ public class EarthquakeService {
 	
 	@Autowired
 	PhoneMapper phoneMapper;
+	
+	@Autowired
+	private PhoneService phoneService;
 		
 	
 	public int insertSelective(Earthquake earthquake) {
@@ -182,7 +185,7 @@ public class EarthquakeService {
 	    			//给所有单位发送升降级短信
     				Response r = responseMapper.selectByPrimaryKey(earthquake.getResponseid());
     				String message = earthquake.getEqname()+"的响应等级变更为："+r.getName();
-    				SendMessageUtil.sendMessage(getAllCompanyPhone(), message);
+    				SendMessageUtil.sendMessage(phoneService.getAllCompanyPhone(message), message);
 	    		}
 	    	}
 			//响应等级出队
@@ -313,32 +316,8 @@ public class EarthquakeService {
 			}
 			tels = tels.substring(0, tels.length()-1);
 			String message = earthquake.getEqname()+"地震，请到出队系统安排出队人员。";
-			SendMessageUtil.sendMessage(getAllCompanyPhone(), message);
+			SendMessageUtil.sendMessage(phoneService.getAllCompanyPhone(message), message);
 		}
     }
-    
-    /**
-     *获得所有单位的电话 
-     * @return
-     */
-    public String getAllCompanyPhone(){
-    	List<Phone> phonelist = phoneMapper.selectListByPhone(new Phone());
-    	String tels = "tel:18611453795;";
-		if(null!=phonelist && phonelist.size()>0){
-			for (Phone phone : phonelist) {
-				if(null!=phone.getPhoneone() 
-						&& !phone.getPhoneone().trim().equals("")
-						&&phone.getPhoneone().trim().length()==11){
-					tels = tels+ "tel:"+phone.getPhoneone()+";";
-				}
-				if(null!=phone.getPhonetwo() 
-						&& !phone.getPhonetwo().trim().equals("")
-						&&phone.getPhonetwo().trim().length()==11){
-					tels = tels+ "tel:"+phone.getPhonetwo()+";";
-				}
-			}
-			tels = tels.substring(0, tels.length()-1);
-		}	
-		return tels;
-    }
+   
 }

@@ -16,7 +16,7 @@
 }
 .class2{
 	width:36% !important;
-	margin-left:-14px;
+	margin-left:-5px;
 }
 </style>
  </@override> <@override name="body">
@@ -81,7 +81,7 @@
                        <div class="col-lg-6">
                            <input type="text" class="form-control" id="flight" name="flight" value="${flight.flight }">
                        </div>
-                       <a class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
+                       <a id="agetflight"  class="btn btn-primary btn-sm" href="javascript:getFliht()" title="获取航班信息">获取航班信息</a>
                    </div>
                    
                    <div class="form-group col-lg-6">
@@ -147,16 +147,16 @@
                            <input type="text" class="form-control" name="arractual" id="arractual" value="${flight.arractual}"/>
                        </div>
                    </div>
-                   <div class="form-group col-lg-12">
-                       <label class="col-lg-1 control-label class1">航班状态</label>
+                   <div class="form-group col-lg-11">
+                       <label class="col-lg-3 control-label class1">航班状态</label>
                        <div class="col-lg-6 class2">
                        <input type="text" class="form-control" name="flightstate" id="flightstate" value="${flight.flightstate}"/>
                        </div>
                    </div>
                   
-                   <div class="form-group col-lg-12">
-                       <label class="col-lg-1 control-label class1">撤离备注</label>
-                       <div>
+                   <div class="form-group col-lg-11">
+                       <label class="col-lg-3 control-label class1">撤离备注</label>
+                       <div  class="col-lg-7 class2">
                           <textarea name="remark" rows="5" cols="50" name="remark" <#if leave.state==2>readonly</#if>>${leave.remark }</textarea>
                        </div>
                    </div>
@@ -181,6 +181,22 @@
 function gohistory(){
 	window.history.go(-1);
 }
+
+/*60s计时*/
+function settime(countdown) {
+	if (countdown == 0) {
+		$("#agetflight").text("获取航班信息");
+		$('#agetflight').attr('href','javascript:getFliht()'); 
+		return;
+	} else {
+		$("#agetflight").text(countdown+"s");
+		countdown--;
+	}
+	setTimeout(function() {
+		settime(countdown)
+	}, 1000)
+}
+
 function getFliht(){
 	var flight = $("#flight").val();
 	var depdate = $("#depdate").val();
@@ -193,6 +209,9 @@ function getFliht(){
 		return false;
 	}
 	
+	 $('#agetflight').attr('href','#'); 
+     settime(5);
+	
 	$.ajax({ 
         type: "POST",
         url:"/outteam/flight",
@@ -203,7 +222,7 @@ function getFliht(){
         scriptCharset: 'utf-8',
         success: function(data) {
         	if(data.depcity=="" || data.depcity==null){
-        		alert(data);
+        		alert(data.error);
         	}else{
         		if(data.size>1){
         			layer.open({
