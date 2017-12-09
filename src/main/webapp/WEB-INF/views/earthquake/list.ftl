@@ -114,7 +114,7 @@ margin-bottom:1px !important;
                             <li class="divider"></li>
                             <li><a href="/earthquake/goadd?id=${earthquake.id }" title="修改">修改</a></li>
                             <li class="divider"></li>
-                            <li><a href="/earthquake/del?id=${earthquake.id }" title="结束">结束</a></li>
+                            <li><a href="javascript:void(0)" onclick="del(${earthquake.id })" title="结束">结束</a></li>
                             </#if>
                           </ul>
                       </div>
@@ -154,6 +154,15 @@ function appoutteam(eqid){
 }
 function add(){
 	window.location.href = "/earthquake/goadd";
+}
+function del(id){
+	if(window.confirm('你确定要结束吗？')){
+		window.location.href = "/earthquake/del?id="+id;
+     }else{
+        //alert("取消");
+        return false;
+    }
+	 
 }
 </script>
 </@override> <@extends name="/base/base.ftl"/>
