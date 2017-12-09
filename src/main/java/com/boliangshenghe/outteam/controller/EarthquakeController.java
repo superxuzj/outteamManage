@@ -92,7 +92,6 @@ public class EarthquakeController extends BaseCommonController{
 	public String index(HttpServletRequest request, 
   			HttpServletResponse response,Earthquake earthquake,Model model,
   			@RequestParam(defaultValue = "1", value = "pageNo") Integer pageNo){
-		
 		PageBean<Earthquake> page = earthquakeService.getEarthquakeByPage(earthquake, pageNo);
 		model.addAttribute("page", page);
 		model.addAttribute("earthquake", earthquake);
@@ -148,6 +147,7 @@ public class EarthquakeController extends BaseCommonController{
 			earthquakeService.updateByPrimaryKeySelective(earthquake);
 		}else{
 			earthquake.setState("1");//1演练 2 eqim触发
+			earthquake.setStatus("1");//1 开启 2 结束
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator(this.getName(request));
 			earthquakeService.insertSelective(earthquake);
@@ -173,6 +173,7 @@ public class EarthquakeController extends BaseCommonController{
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator("管理员");
 			earthquake.setState("1");//1演练 2 eqim触发
+			earthquake.setStatus("1");//1 开启 2 结束
 			Company company = companyService.selectByPrimaryKey(earthquake.getCid());
 			earthquake.setProvince(company.getProvince());
 			earthquakeService.insertSelective(earthquake);
@@ -371,6 +372,27 @@ public class EarthquakeController extends BaseCommonController{
 		System.out.println(eqid);
 		
 		earthquakeService.addoutteam(eqid,cids,rid);
+		
+		return "redirect:/earthquake/list";
+	}
+	
+	/**
+	 * 震源省份 响应等级 轮值单位这三个判断规则应该出队的单位
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("del")
+	public String del(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		System.out.println(id);
+		if(id!=null){
+			Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
+			earthquake.setStatus("2");
+			earthquakeService.updateByPrimaryKeySelective(earthquake);
+		}
 		
 		return "redirect:/earthquake/list";
 	}

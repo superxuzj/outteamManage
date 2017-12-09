@@ -44,7 +44,7 @@
                    <div class="form-group">
                        <label class="col-lg-2 control-label">区域</label>
                        <div class="col-lg-6">
-                       		<select class="form-control m-bot15" name="area" id="area" >
+                       		<select class="form-control m-bot15" name="area" id="area" <#if earthquake??>disabled</#if>>
                        			 <option value="非华北" <#if earthquake.area=='非华北' >selected</#if> >非华北</option>
                                  <option value="华北"  <#if earthquake.area=='华北' >selected</#if> >华北</option>
                             </select>
@@ -54,7 +54,7 @@
                        <label class="col-lg-2 control-label">受灾省份</label>
                        <div class="col-lg-6">
                        
-                       <select class="form-control m-bot15" name="cid" id="cid">
+                       <select class="form-control m-bot15" name="cid" id="cid" <#if earthquake??>disabled</#if>>
                        		<#list companyList as company>
                        			 <option value="${company.id }" <#if earthquake.cid==company.id >selected</#if> >${company.province }</option>
                        			 </#list>
@@ -91,13 +91,15 @@
                        <label class="col-lg-2 control-label">发震日期</label>
                        <div class="col-lg-6">
                        	<input class="form-control Wdate" type="text" name="eqdate" id="eqdate"
-                       	 value="${earthquake.eqdate }" onclick="WdatePicker({maxDate:'%y-%M-%d'})"/>
+                       	 value="${earthquake.eqdate }" onclick="WdatePicker({maxDate:'%y-%M-%d'})" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">
                        <label class="col-lg-2 control-label">发震时刻</label>
                        <div class="col-lg-6">
-                           <input type="text" class="form-control" name="eqtime" value="${earthquake.eqtime}" <#if earthquake??>readonly</#if>/>
+                       
+                       <input type="text" class="form-control Wdate" name="eqtime" id="eqtime" value="${earthquake.eqtime}" 
+                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" <#if earthquake??>readonly</#if>/>
                        </div>
                    </div>
                    <div class="form-group">

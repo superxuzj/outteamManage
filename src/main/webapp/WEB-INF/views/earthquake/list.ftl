@@ -56,7 +56,7 @@ margin-bottom:1px !important;
                 <table class="table table-striped table-advance table-hover">
                  <tbody>
                     <tr>
-                       <th>地震唯一标识码</th>
+                       <!--<th>地震唯一标识码</th>-->
                        <th>名称</th>
                        <th>区域</th>
                        <th>省份</th>
@@ -65,12 +65,13 @@ margin-bottom:1px !important;
                        <th>日期</th>
                        <th>响应等级</th>
                        <th>事件来源</th>
+                       <th>状态</th>
                        <th>操作</th>
                     </tr>
                     
                     <#list page.list as earthquake>
                     <tr>
-                       <td>${earthquake.eventid }</td>
+                     <!--<td>${earthquake.eventid }</td>-->
                      <td>${earthquake.eqname }</td>
                      <td>${earthquake.area }</td>
                      <td>${earthquake.province }</td>
@@ -94,19 +95,26 @@ margin-bottom:1px !important;
                      </#if>
                     	</td>
                      <td>
+                     <#if earthquake.status==2>
+                                                       结束
+                     <#else>
+                     	进行中
+                     </#if>
+                     </td>
+                     <td>
                       <div class="btn-group">
                           <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
                           	操作<span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="/earthquake/info?id=${earthquake.id }" title="详情">详情</a></li>
-                            <#if sessionroleid==2>
+                            <#if sessionroleid==2 && earthquake.status!=2>
                             <li><a href="javascript:appoutteam('${earthquake.id }');" title="申请出队">申请出队</a></li>
                            	</#if>
                            <#if sessionroleid==1>
                             <li class="divider"></li>
                             <li><a href="/earthquake/goadd?id=${earthquake.id }" title="修改">修改</a></li>
-                            <!-- <li class="divider"></li>
-                            <li><a href="" title="Bootstrap 3 themes generator">结束</a></li> -->
+                            <li class="divider"></li>
+                            <li><a href="/earthquake/del?id=${earthquake.id }" title="结束">结束</a></li>
                             </#if>
                           </ul>
                       </div>

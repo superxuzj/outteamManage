@@ -62,7 +62,7 @@
                    <tr>
                       <td>${outteam.eqname }</td>
                       <td>${outteam.company }</td>
-                      <td>${outteam.count }</td>
+                      <td>${outteam.count }${outteam.status }</td>
                       <td><@ps.outteamstate outteam.state/></td>
                       
                       <td>
@@ -74,14 +74,23 @@
                              	<#if outteam.state==4 || outteam.state==5>
                              	<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="详情">详情</a></li>
                              	<#else>
-                             	<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="审批">审批</a></li>
+                             	
+                             		<#if outteam.eqstatus==2> <!-- 地震事件被结束了 -->
+                             		<li><a href="javascript:void(0)" onclick="veteinfo('${outteam.lid }','${outteam.eqstatus }')" title="详情">详情</a></li>
+									<#else>
+									<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="审批">审批</a></li>
+									</#if>
                              	</#if>
                           	<#else>
                           	
                           		<#if outteam.state==4 || outteam.state==5>
-                             	<li><a href="/leave/ask?id=${outteam.id }" title="撤退详情">撤退详情</a></li>
+                             	<li><a href="/leave/askinfo?id=${outteam.id }" title="撤退详情">撤退详情</a></li>
                              	<#else>
-								<li><a href="/leave/ask?id=${outteam.id }" title="撤退申请">撤退申请</a></li>
+	                             	<#if outteam.eqstatus==2> <!-- 地震事件被结束了 -->
+	                             	<li><a href="/leave/askinfo?id=${outteam.id }" title="撤退详情">撤退详情</a></li>
+									<#else>
+									<li><a href="/leave/ask?id=${outteam.id }" title="撤退申请">撤退申请</a></li>
+									</#if>
                              	</#if>
                              
                           	</#if>
@@ -107,6 +116,13 @@
 		return;
 	}
 	window.location.href="/leave/info?id="+lid;
-}
+	}
+	function veteinfo(lid,status){
+		if(lid==""){
+			alert("该单位还未申请撤离，请等待！");
+			return;
+		}
+		window.location.href="/leave/veteinfo?id="+lid;
+	}
 </script>
 </@override> <@extends name="/base/base.ftl"/>

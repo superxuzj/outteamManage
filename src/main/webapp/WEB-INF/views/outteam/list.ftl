@@ -76,8 +76,10 @@ margin-bottom:1px !important;
                            	操作<span class="caret"></span></a>
                            <ul class="dropdown-menu">
                              <li><a href="/outteam/info?id=${outteam.id }" title="详情">详情</a></li>
+                             <#if outteam.eqstatus==1>
                              <li class="divider"></li>
                              <li><a href="/outteam/goadd?id=${outteam.id }" title="修改">修改</a></li>
+                             </#if>
                              <!-- <li class="divider"></li>
                              <li><a href="/outteam/del?id=${outteam.id }" title="结束">撤退</a></li> -->
                            </ul>

@@ -30,18 +30,12 @@ public class Earthquake {
     private String depth;
 
     private String state;
+    
+    private String status;
 
-    private Integer responseid;
+	private Integer responseid;
     
     private String responseName;//这个属性还没做处理 等待完成
-
-    public String getResponseName() {
-		return responseName;
-	}
-
-	public void setResponseName(String responseName) {
-		this.responseName = responseName;
-	}
 
 	private Date createtime;
 
@@ -59,6 +53,21 @@ public class Earthquake {
         this.id = id;
     }
 
+    public String getResponseName() {
+		return responseName;
+	}
+
+	public void setResponseName(String responseName) {
+		this.responseName = responseName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
     public String getEqname() {
         return eqname;
     }

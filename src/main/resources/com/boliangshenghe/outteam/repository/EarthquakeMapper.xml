@@ -15,6 +15,7 @@
     <result column="eqdate" property="eqdate" jdbcType="VARCHAR" />
     <result column="eqtime" property="eqtime" jdbcType="VARCHAR" />
     <result column="depth" property="depth" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="responseid" property="responseid" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
@@ -22,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     ID, eqname, eventid, cid, province, area, location, magnitude, longitude, latitude, 
-    eqdate, eqtime, depth, state, responseid, createtime, creator
+    eqdate, eqtime, depth, status, state, responseid, createtime, creator
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,14 +40,16 @@
       cid, province, area, 
       location, magnitude, longitude, 
       latitude, eqdate, eqtime, 
-      depth, state, responseid, 
-      createtime, creator)
+      depth, status, state, 
+      responseid, createtime, creator
+      )
     values (#{id,jdbcType=INTEGER}, #{eqname,jdbcType=VARCHAR}, #{eventid,jdbcType=VARCHAR}, 
       #{cid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{magnitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
       #{latitude,jdbcType=VARCHAR}, #{eqdate,jdbcType=VARCHAR}, #{eqtime,jdbcType=VARCHAR}, 
-      #{depth,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{responseid,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR})
+      #{depth,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{responseid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.boliangshenghe.outteam.entity.Earthquake" >
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
@@ -92,6 +95,9 @@
       </if>
       <if test="depth != null" >
         depth,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="state != null" >
         state,
@@ -146,6 +152,9 @@
       <if test="depth != null" >
         #{depth,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
       <if test="state != null" >
         #{state,jdbcType=VARCHAR},
       </if>
@@ -199,6 +208,9 @@
       <if test="depth != null" >
         depth = #{depth,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},
       </if>
@@ -228,6 +240,7 @@
       eqdate = #{eqdate,jdbcType=VARCHAR},
       eqtime = #{eqtime,jdbcType=VARCHAR},
       depth = #{depth,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       responseid = #{responseid,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -235,7 +248,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-   <!-- 新加   -->
+  <!-- 新加   -->
    <select id="selectEarthquakeList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.outteam.entity.Earthquake">
    	    select 
     <include refid="Base_Column_List" />
@@ -254,10 +267,9 @@
             AND province like '%${province}%' 
         </if>
     </where>
-    order by createtime desc
+    order by status asc, createtime desc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
    	</select>
-  
 </mapper>

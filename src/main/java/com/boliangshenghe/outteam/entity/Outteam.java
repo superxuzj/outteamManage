@@ -17,7 +17,10 @@ public class Outteam {
 
     private String state;//状态 1 通知 2 出队 3撤退申请 4撤退同意  5结束  写总结
 
-    private Integer count;
+    private String eqstatus;
+    
+
+	private Integer count;
 
     private Integer fid;
     
@@ -85,6 +88,14 @@ public class Outteam {
 
 	private String depcode;//出发机场码
 
+	public String getEqstatus() {
+		return eqstatus;
+	}
+
+	public void setEqstatus(String eqstatus) {
+		this.eqstatus = eqstatus;
+	}
+	
 	public String getArrcode() {
 		return arrcode;
 	}

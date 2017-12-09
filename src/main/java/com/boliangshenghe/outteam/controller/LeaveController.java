@@ -90,6 +90,22 @@ public class LeaveController extends BaseCommonController{
 		return "leave/info";
 	}
 	
+	/**
+	 * 审批看到详情
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("veteinfo")
+	public String veteinfo(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		Leave leave = leaveService.selectByPrimaryKey(id);
+		model.addAttribute("leave", leave);
+		return "leave/veteinfo";
+	}
+	
 	@RequestMapping("save")
 	public String save(HttpServletRequest request, 
   			HttpServletResponse response,Leave leave,Model model){
@@ -185,4 +201,30 @@ public class LeaveController extends BaseCommonController{
 		}
 		return "leave/ask";
 	}
+	
+	/**
+	 * 申请页面
+	 * @return
+	 */
+	@RequestMapping("askinfo")
+	public String askinfo(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(id!=null){
+			Outteam outteam = outteamService.selectByPrimaryKey(id);
+			model.addAttribute("outteam", outteam);
+			if(outteam.getLid()!=null){
+				Leave leave = leaveService.selectByPrimaryKey(outteam.getLid());
+				model.addAttribute("leave", leave);
+				if(null!=leave.getFid()){
+					Flight flight = flightService.selectByPrimaryKey(leave.getFid());
+					model.addAttribute("flight", flight);
+				}
+			}
+		}
+		return "leave/askinfo";
+	}
+	
+	
+	
+	
 }

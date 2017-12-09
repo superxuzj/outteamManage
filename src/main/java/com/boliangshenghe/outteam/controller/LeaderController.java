@@ -102,7 +102,7 @@ public class LeaderController {
 		earthquake.setMagnitude(catalogcopy.getM().toString());
 		earthquake.setResponseid(1);
 		earthquake.setState("2");//地震事件为eqim触发
-		
+		earthquake.setStatus("1");//1 开启 2 结束
 		earthquakeService.insertSelective(earthquake);
 		
 		catalogcopy.setIsouttem("1");

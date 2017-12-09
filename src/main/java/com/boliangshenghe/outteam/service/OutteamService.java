@@ -72,6 +72,8 @@ public class OutteamService {
         List<Outteam> list = this.outteamMapper.selectOutteamList(record);
         if(null!=list && list.size()>0){
         	for (Outteam outteam : list) {
+        		Earthquake eq = earthquakeMapper.selectByPrimaryKey(outteam.getEqid());
+        		outteam.setEqstatus(eq.getStatus());
         		if(null != outteam.getFid()){
         			Flight f = flightMapper.selectByPrimaryKey(outteam.getFid());
             		outteam.setFlight(f.getFlight());
@@ -101,6 +103,7 @@ public class OutteamService {
         	for (Outteam outteam : list) {
         		Earthquake earthquake = earthquakeMapper.selectByPrimaryKey(outteam.getEqid());
         		outteam.setEqcompany(earthquake.getProvince());//获取受灾省份
+        		outteam.setEqstatus(earthquake.getStatus());
 			}
         }
         return new PageBean<Outteam>(list);
