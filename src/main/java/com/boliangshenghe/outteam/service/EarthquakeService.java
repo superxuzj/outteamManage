@@ -142,7 +142,7 @@ public class EarthquakeService {
 			}
 		}
 		
-		if(earthquake.getArea().equals("华北")){
+		if(earthquake.getArea().equals(CommonUtils.HUABEI)){
 			//华北地区 通过t_hbplan 来判断
 			Hbplan hbplan = new Hbplan();
 			hbplan.setCompanys(earthquake.getProvince());//发震省份

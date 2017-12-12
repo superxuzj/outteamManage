@@ -40,7 +40,7 @@ public class LoginFilter implements Filter{
 		// TODO Auto-generated method stub
 		boolean isExcludedPage = false;
 		//静态资源请求直接放行
-		if(httpRequest.getRequestURI().indexOf("/outteamstatic")!=-1){
+		if(httpRequest.getRequestURI().indexOf(CommonUtils.STATIC_URI)!=-1){
 			 chain.doFilter(request, response);
 	          return ;
     	}

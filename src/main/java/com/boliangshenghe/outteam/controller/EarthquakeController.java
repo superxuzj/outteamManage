@@ -39,6 +39,7 @@ import com.boliangshenghe.outteam.service.PhoneService;
 import com.boliangshenghe.outteam.service.ResponseCompanyService;
 import com.boliangshenghe.outteam.service.ResponseService;
 import com.boliangshenghe.outteam.util.CodeUtils;
+import com.boliangshenghe.outteam.util.CommonUtils;
 import com.boliangshenghe.outteam.util.SendMessageUtil;
 /**
  * 地震事件管理
@@ -261,7 +262,7 @@ public class EarthquakeController extends BaseCommonController{
 			set.add(comlist.get(0).getProvince());
 		}
 		
-		if(earthquake.getArea().equals("华北")){//华北地区的出队判断
+		if(earthquake.getArea().equals(CommonUtils.HUABEI)){//华北地区的出队判断
 			//华北地区 通过t_hbplan 来判断
 			Hbplan hbplan = new Hbplan();
 			hbplan.setCompanys(earthquake.getProvince());//发震省份

@@ -1,9 +1,7 @@
 package com.boliangshenghe.outteam.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +19,6 @@ import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.service.CatalogcopyService;
-import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
 import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
@@ -44,9 +41,7 @@ public class LeaderController {
 	
 	@Autowired
 	private OutteamDetailService outteamDetailService;
-	
-	@Autowired
-	private CompanyService companyService;
+
 	
 	@Autowired
 	private FlightService flightService;
@@ -175,37 +170,40 @@ public class LeaderController {
              { name: '宁夏', value: randomValue() },
              { name: '海南', value: randomValue() }
          ]*/
-			String sucontent = "[";
+			StringBuilder sucontent =new StringBuilder();
+			sucontent.append("[");
 			//"{ name: '北京', value: '2222北京23222222222' },{ name: '内蒙古', value: '111内蒙古11111111' }]";
 			if(null!=outteamlist && outteamlist.size()>0){
 				companycount = outteamlist.size();
 				flights = flights+",";
 				for (Outteam outteam : outteamlist) {
 					
-					sucontent = sucontent +"{name:'"+outteam.getCompany()+"',value:'"
-					+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人";
+					sucontent.append("{name:'"+outteam.getCompany()+"',value:'"
+					+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人");
 					
 					if(null!=outteam.getFid() && !outteam.getFid().toString().equals("")){
 						Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
 						if(null !=flight.getDepprovice() && !flight.getDepprovice().equals("")){
 							flights = flights + "[{ name: '"+flight.getDepprovice()+"', value: 30 }, { name: '"+earthquake.getProvince()+"' }],";
-							sucontent = sucontent+"<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate();
+							sucontent.append("<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate());
 							
 							if(!outteam.getCompany().equals(flight.getDepprovice())){
-								sucontent = sucontent+"'},{ name: '"+flight.getDepprovice()+"', value:'"
+								sucontent.append("'},{ name: '"+flight.getDepprovice()+"', value:'"
 							+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人"
-							+"<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate();
+							+"<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate());
 							}
 						}
 					}
 //					Company company = companyService.selectByPrimaryKey(outteam.getCid());
-					sucontent =sucontent+"'},";
+					sucontent.append("'},");
 				}
-				sucontent = sucontent.substring(0, sucontent.length()-1);
+				
+//				sucontent = new StringBuilder(sucontent.substring(0, sucontent.length()-1));
+				sucontent.deleteCharAt(sucontent.length()-1);  
 				flights = flights.substring(0, flights.length()-1);
 			}
 			flights = flights +"]";
-			sucontent =sucontent+"]";
+			sucontent.append("]");
 			model.addAttribute("flights", flights);//飞机效果
 			model.addAttribute("sucontent", sucontent);//悬浮内容
 			model.addAttribute("text", earthquake.getEqname());

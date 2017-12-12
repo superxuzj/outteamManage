@@ -48,6 +48,11 @@ public class CommonUtils {
 		response.addHeader(CACHE_CONTROL, IE_HTTP_NO_CACHE); 
 		response.setHeader(PRAGMA, STANDARD_HTTP_NO_CACHE); 
     }
-    
+
+	public static final Integer HTTP_OK = 200;
+
+	public static final String STATIC_URI = "/outteamstatic";
+	
+	public static final String HUABEI = "华北";
     
 }
