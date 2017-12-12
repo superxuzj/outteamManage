@@ -179,7 +179,7 @@ public class EarthquakeService {
 		}else{
 			//发送响应等级变更
 			if(null!=rid && rid>0){
-	    		if(rid!=earthquake.getResponseid()){//发生修改响应等级
+	    		if(rid.toString().equals(earthquake.getResponseid().toString())){//发生修改响应等级
 	    			earthquake.setResponseid(rid);
 	    			earthquakeMapper.updateByPrimaryKey(earthquake);
 	    			//给所有单位发送升降级短信

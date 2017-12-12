@@ -167,16 +167,16 @@ public class OutTeamController extends BaseCommonController{
 		if(otdetailList!=null && otdetailList.size()>0){
 			for (OutteamDetail detail : otdetailList) {
 				for (User u : userlist) {
-					if(detail.getUserid()==u.getId()){
+					if(detail.getUserid().toString().equals(u.getId().toString())){
 						u.setIschoose("1");
 					}
-					if(detail.getIslead()!=null && detail.getIslead().equals("1") && detail.getUserid()==u.getId()){
+					if(detail.getIslead()!=null && detail.getIslead().equals("1") && detail.getUserid().toString().equals(u.getId().toString())){
 						u.setIslead("1");
 					}
-					if(detail.getIscontact()!=null && detail.getIscontact().equals("1") && detail.getUserid()==u.getId()){
+					if(detail.getIscontact()!=null && detail.getIscontact().equals("1") && detail.getUserid().toString().equals(u.getId().toString())){
 						u.setIscontact("1");
 					}
-					if(detail.getIsmeet()!=null && detail.getIsmeet().equals("1") && detail.getUserid()==u.getId()){
+					if(detail.getIsmeet()!=null && detail.getIsmeet().equals("1") && detail.getUserid().toString().equals(u.getId().toString())){
 						u.setIsmeet("1");
 					}
 				}
