@@ -25,6 +25,7 @@ import com.boliangshenghe.outteam.entity.Link;
 import com.boliangshenghe.outteam.entity.LinkDetail;
 import com.boliangshenghe.outteam.entity.Onduty;
 import com.boliangshenghe.outteam.entity.Outteam;
+import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
 import com.boliangshenghe.outteam.service.CompanyService;
@@ -34,6 +35,7 @@ import com.boliangshenghe.outteam.service.HbplanService;
 import com.boliangshenghe.outteam.service.LinkDetailService;
 import com.boliangshenghe.outteam.service.LinkService;
 import com.boliangshenghe.outteam.service.OndutyService;
+import com.boliangshenghe.outteam.service.OutteamDetailService;
 import com.boliangshenghe.outteam.service.OutteamService;
 import com.boliangshenghe.outteam.service.PhoneService;
 import com.boliangshenghe.outteam.service.ResponseCompanyService;
@@ -59,6 +61,9 @@ public class EarthquakeController extends BaseCommonController{
 	
 	@Autowired
 	private OutteamService outteamService;
+	
+	@Autowired
+	private OutteamDetailService outteamDetailService;
 	
 	@Autowired
 	private OndutyService ondutyService;
@@ -397,4 +402,27 @@ public class EarthquakeController extends BaseCommonController{
 		
 		return "redirect:/earthquake/list";
 	}
+	
+	/**
+	 * 出队详情
+	 * @param request
+	 * @sadparam response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	/*@RequestMapping("outteandetail")
+	public String outteandetail(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		if(id!=null){
+			OutteamDetail record = new OutteamDetail();
+			record.setEqid(id);
+			List<OutteamDetail> details = outteamDetailService.selectOutteamDetailList(record);
+			model.addAttribute("details", details);
+			Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
+			model.addAttribute("earthquake", earthquake);
+		}
+		//return "earthquake/detail";
+		return "redirect:/earthquake/list";
+	}*/
 }
