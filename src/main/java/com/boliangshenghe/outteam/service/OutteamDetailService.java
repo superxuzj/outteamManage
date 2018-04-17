@@ -37,6 +37,7 @@ public class OutteamDetailService {
     public int deleteByPrimaryKey(Integer id){
     	return outteamDetailMapper.deleteByPrimaryKey(id);
     }
+    
     public List<OutteamDetail> selectOutteamDetailList(OutteamDetail record){
     	return outteamDetailMapper.selectOutteamDetailList(record);
     }
@@ -49,6 +50,10 @@ public class OutteamDetailService {
         PageHelper.startPage(pageNo,CommonUtils.PAGESIZE);
         List<OutteamDetail> list = this.outteamDetailMapper.selectOutteamDetailList(record);
         return new PageBean<OutteamDetail>(list);
+    }
+    
+    public List<OutteamDetail> selectOutteamDetailGroupByEqid(Integer eqid){
+    	return outteamDetailMapper.selectOutteamDetailGroupByEqid(eqid);
     }
     
 }

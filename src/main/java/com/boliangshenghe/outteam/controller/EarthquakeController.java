@@ -1,10 +1,18 @@
 package com.boliangshenghe.outteam.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,6 +51,7 @@ import com.boliangshenghe.outteam.service.ResponseService;
 import com.boliangshenghe.outteam.util.CodeUtils;
 import com.boliangshenghe.outteam.util.CommonUtils;
 import com.boliangshenghe.outteam.util.SendMessageUtil;
+import com.boliangshenghe.outteam.util.WordGenerator;
 /**
  * 地震事件管理
  2017
@@ -411,18 +420,80 @@ public class EarthquakeController extends BaseCommonController{
 	 * @param model
 	 * @return
 	 */
-	/*@RequestMapping("outteandetail")
+	@RequestMapping("outteamdetail")
 	public String outteandetail(HttpServletRequest request, 
   			HttpServletResponse response,Integer id,Model model){
 		if(id!=null){
-			OutteamDetail record = new OutteamDetail();
-			record.setEqid(id);
-			List<OutteamDetail> details = outteamDetailService.selectOutteamDetailList(record);
+			List<OutteamDetail> details = outteamDetailService.selectOutteamDetailGroupByEqid(id);
 			model.addAttribute("details", details);
 			Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
 			model.addAttribute("earthquake", earthquake);
 		}
-		//return "earthquake/detail";
-		return "redirect:/earthquake/list";
-	}*/
+		return "earthquake/outteamdetail";
+	}
+	
+	/**
+	 * 导出
+	 * @param request
+	 * @sadparam response
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("export")
+	@ResponseBody
+	public void export(HttpServletRequest request, 
+  			HttpServletResponse response,Integer id,Model model){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException c1) {
+			// TODO Auto-generated catch block
+			c1.printStackTrace();
+		}
+		List<OutteamDetail> details = outteamDetailService.selectOutteamDetailGroupByEqid(id);
+		Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
+		model.addAttribute("earthquake", earthquake);
+		// 构造数据
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+
+		dataMap.put("details", details);
+		dataMap.put("eqname", earthquake.getEqname());
+		// 提示：在调用工具类生成Word文档之前应当检查所有字段是否完整
+		// 否则Freemarker的模板殷勤在处理时可能会因为找不到值而报错 这里暂时忽略这个步骤了
+		File file = null;
+		InputStream fin = null;
+		ServletOutputStream out = null;
+		try {
+			// 调用工具类WordGenerator的createDoc方法生成Word文档
+			file = WordGenerator.createDoc(dataMap, "report");
+			fin = new FileInputStream(file);
+
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/msword");
+			// 设置浏览器以下载的方式处理该文件默认名为resume.doc
+			response.addHeader("Content-Disposition",
+					"attachment;filename=report.doc");
+
+			out = response.getOutputStream();
+			byte[] buffer = new byte[512]; // 缓冲区
+			int bytesToRead = -1;
+			// 通过循环将读入的Word文件的内容输出到浏览器中
+			while ((bytesToRead = fin.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesToRead);
+			}
+		} catch (Exception c) {
+			// TODO: handle exception
+		} finally {
+			try {
+				if (fin != null)
+					fin.close();
+				if (out != null)
+					out.close();
+				if (file != null)
+					file.delete(); // 删除临时文件
+			} catch (Exception c) {
+				// TODO: handle exception
+			}
+		}
+	}
 }

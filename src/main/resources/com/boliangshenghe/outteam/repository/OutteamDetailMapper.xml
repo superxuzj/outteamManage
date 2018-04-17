@@ -267,7 +267,15 @@
    	    select 
     count(1)
     from t_outteam_detail
-    where otid = #{otid,jdbcType=INTEGER}
+    where otid = #{otid,jdbcType=INTEGER} and isdel is NULL
    	</select>
-  
+   	
+   	<select id="selectOutteamDetailGroupByEqid" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+   	    select 
+   company,count(1) as userid,group_concat(name) as name
+    from t_outteam_detail
+  	where  eqid = #{otid,jdbcType=INTEGER} and isdel is NULL
+    GROUP BY cid
+   	</select>
+   	
 </mapper>

@@ -40,7 +40,10 @@
                           <span>预案管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
+                      <ul class="sub" <#if request.requestURI?index_of("/hbplan")!=-1 
+                    		  || request.requestURI?index_of("/onduty")!=-1 
+                    		  || request.requestURI?index_of("/respond")!=-1
+                    		  || request.requestURI?index_of("/link")!=-1>style="overflow: hidden;display: block;"</#if>>
                           <li><a class="" href="/hbplan">华北预案管理</a></li>
                           <li><a class="" href="/onduty">轮值管理 </a></li> 
                           <li><a class="" href="/respond">响应等级</a></li>
@@ -53,7 +56,8 @@
                           <span>用户管理</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
+                      <ul class="sub" <#if request.requestURI?index_of("user")!=-1 
+                    		  || request.requestURI?index_of("/role")!=-1 >style="overflow: hidden;display: block;"</#if>>
                           <li><a class="" href="/user">用户管理</a></li>                          
                           <li><a class="" href="/role">角色管理</a></li>
                       </ul>
@@ -64,7 +68,7 @@
                           <span>个人信息</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
+                      <ul class="sub" <#if request.requestURI?index_of("person")!=-1>style="overflow: hidden;display: block;"</#if>>
                           <li><a class="" href="/person">我的信息</a></li>                          
                          
                           <!-- <li><a class="" href="/personteam">我的出队</a></li> -->

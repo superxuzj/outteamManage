@@ -117,7 +117,7 @@ margin-bottom:1px !important;
                             <li><a href="javascript:void(0)" onclick="del(${earthquake.id })" title="结束">结束</a></li>
                             <li class="divider"></li>
                             <!--  从t_outteam_detail 表中查 https://blog.csdn.net/cntcaptain/article/details/77942653-->
-                            <li><a href="/earthquake/outteandetail?id=${earthquake.id }" title="出队名单">出队名单</a></li>
+                            <li><a href="/earthquake/outteamdetail?id=${earthquake.id }" title="出队名单">出队名单</a></li>
                             </#if>
                           </ul>
                       </div>

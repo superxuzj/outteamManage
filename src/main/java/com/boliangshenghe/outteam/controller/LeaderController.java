@@ -159,6 +159,7 @@ public class LeaderController {
 			List<Outteam> outteamlist = outteamService.selectOutteamList(ot);
 			model.addAttribute("outteamlist", outteamlist);
 			int companycount = 0;
+			Integer personcount = 0;
 			String flights = "[[{ name: '"+earthquake.getProvince()+"', value: 100 }, { name: '"+earthquake.getProvince()+"' }]";
 			/*[
              { name: '北京', value: 'qweqweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' },
@@ -180,7 +181,7 @@ public class LeaderController {
 					
 					sucontent.append("{name:'"+outteam.getCompany()+"',value:'"
 					+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人");
-					
+					personcount = personcount + outteamDetailService.getCountByOutteamId(outteam.getId());
 					if(null!=outteam.getFid() && !outteam.getFid().toString().equals("")){
 						Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
 						if(null !=flight.getDepprovice() && !flight.getDepprovice().equals("")){
@@ -207,7 +208,7 @@ public class LeaderController {
 			model.addAttribute("flights", flights);//飞机效果
 			model.addAttribute("sucontent", sucontent);//悬浮内容
 			model.addAttribute("text", earthquake.getEqname());
-			model.addAttribute("subtext", "现场工作队由"+companycount+"家单位组成，共计100人");
+			model.addAttribute("subtext", "现场工作队由"+companycount+"家单位组成，共计"+personcount+"人");
 			
 			model.addAttribute("sourceprovice", earthquake.getProvince());//受灾省
 			

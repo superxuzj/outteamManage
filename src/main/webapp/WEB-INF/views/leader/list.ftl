@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <link href="<@ps.s/>/echarts/echart.css" rel="stylesheet">
     <style>
-        
+    .loginout {
+    	padding-left: 250px !important;
+    	margin-bottom: 3px !important;
+    }
+    .loginout a{
+    	color:white;
+    }
     </style>
 </head>
 
@@ -34,13 +40,12 @@
               		</#if>
                </dd>
               </#list>
-               
            </dl>
       </aside>
   </div>
-
     <div id="container" style="height: 100%"></div>
     <div class="aside-right aside-box">
+    <div class="loginout"><a href="/loginout">退出</a></div>
         <aside class="top">
                 <h5>出队单位</h5>
                 <dl>
