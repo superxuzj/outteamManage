@@ -103,6 +103,7 @@ public class OutteamService {
         	for (Outteam outteam : list) {
         		Earthquake earthquake = earthquakeMapper.selectByPrimaryKey(outteam.getEqid());
         		outteam.setEqcompany(earthquake.getProvince());//获取受灾省份
+        		outteam.setEqcid(earthquake.getCid());
         		outteam.setEqstatus(earthquake.getStatus());
 			}
         }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,6 +15,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.common.PageBean;
 import com.boliangshenghe.outteam.controller.base.BaseCommonController;
+import com.boliangshenghe.outteam.entity.Catalogcopy;
 import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Hbplan;
@@ -36,6 +37,7 @@ import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.entity.Response;
 import com.boliangshenghe.outteam.entity.ResponseCompany;
+import com.boliangshenghe.outteam.service.CatalogcopyService;
 import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
 import com.boliangshenghe.outteam.service.HbplanDetailService;
@@ -98,6 +100,8 @@ public class EarthquakeController extends BaseCommonController{
 	@Autowired
 	private PhoneService phoneService;
 	
+	@Autowired
+	private CatalogcopyService catalogcopyService;
 	@RequestMapping
 	public String defaultIndex(){
 		return "redirect:/earthquake/list";
@@ -146,6 +150,7 @@ public class EarthquakeController extends BaseCommonController{
 	}
 	/**
 	 * 添加到数据库
+	 * 不用了
 	 * @param request
 	 * @param response
 	 * @param earthquake
@@ -166,6 +171,25 @@ public class EarthquakeController extends BaseCommonController{
 			earthquake.setCreatetime(new Date());
 			earthquake.setCreator(this.getName(request));
 			earthquakeService.insertSelective(earthquake);
+			
+			Catalogcopy catalogcopy = new Catalogcopy();
+			catalogcopy.setArea(earthquake.getArea());
+			catalogcopy.setCataId(earthquake.getId()+"");
+			catalogcopy.setCid(earthquake.getCid());
+			catalogcopy.setProvince(earthquake.getProvince());
+			catalogcopy.setLocationCname(earthquake.getEqname());
+			String mag = earthquake.getMagnitude();
+			if(StringUtils.isNotBlank(mag)) {
+				catalogcopy.setM(Double.parseDouble(mag));
+			}else {
+				catalogcopy.setM(0d);
+			}
+			
+			catalogcopy.setOTime(earthquake.getCreatetime());
+			catalogcopy.setEventId(earthquake.getEventid());
+			catalogcopy.setCataId(earthquake.getEventid());
+			catalogcopy.setIsouttem("1");
+			catalogcopyService.insertSelective(catalogcopy);
 		}
 		
 		return "redirect:/earthquake/list";
@@ -192,6 +216,24 @@ public class EarthquakeController extends BaseCommonController{
 			Company company = companyService.selectByPrimaryKey(earthquake.getCid());
 			earthquake.setProvince(company.getProvince());
 			earthquakeService.insertSelective(earthquake);
+			
+			Catalogcopy catalogcopy = new Catalogcopy();
+			catalogcopy.setArea(earthquake.getArea());
+			catalogcopy.setCataId(earthquake.getId()+"");
+			catalogcopy.setCid(earthquake.getCid());
+			catalogcopy.setLocationCname(earthquake.getEqname());
+			String mag = earthquake.getMagnitude();
+			if(StringUtils.isNotBlank(mag)) {
+				catalogcopy.setM(Double.parseDouble(mag));
+			}else {
+				catalogcopy.setM(0d);
+			}
+			
+			catalogcopy.setOTime(earthquake.getCreatetime());
+			catalogcopy.setEventId(earthquake.getEventid());
+			catalogcopy.setCataId(earthquake.getEventid());
+			catalogcopy.setIsouttem("1");
+			catalogcopyService.insertSelective(catalogcopy);
 			
 			if(null!=earthquake.getResponseid() && earthquake.getResponseid()>0){
     			//给所有单位发送响应等级短信
@@ -452,6 +494,7 @@ public class EarthquakeController extends BaseCommonController{
 		}
 		List<OutteamDetail> details = outteamDetailService.selectOutteamDetailGroupByEqid(id);
 		Earthquake earthquake = earthquakeService.selectByPrimaryKey(id);
+		if(earthquake==null) return;
 		model.addAttribute("earthquake", earthquake);
 		// 构造数据
 		Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -496,4 +539,6 @@ public class EarthquakeController extends BaseCommonController{
 			}
 		}
 	}
+	
+	
 }

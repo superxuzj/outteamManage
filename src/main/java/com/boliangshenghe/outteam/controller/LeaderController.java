@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boliangshenghe.outteam.entity.Catalogcopy;
+import com.boliangshenghe.outteam.entity.Company;
 import com.boliangshenghe.outteam.entity.Earthquake;
 import com.boliangshenghe.outteam.entity.Flight;
 import com.boliangshenghe.outteam.entity.Outteam;
 import com.boliangshenghe.outteam.entity.OutteamDetail;
 import com.boliangshenghe.outteam.service.CatalogcopyService;
+import com.boliangshenghe.outteam.service.CompanyService;
 import com.boliangshenghe.outteam.service.EarthquakeService;
 import com.boliangshenghe.outteam.service.FlightService;
 import com.boliangshenghe.outteam.service.OutteamDetailService;
@@ -42,6 +44,8 @@ public class LeaderController {
 	@Autowired
 	private OutteamDetailService outteamDetailService;
 
+	@Autowired
+	private CompanyService companyService;
 	
 	@Autowired
 	private FlightService flightService;
@@ -125,8 +129,6 @@ public class LeaderController {
   			HttpServletResponse response,String cataId,Model model){
 		
 		Catalogcopy catalogcopy = catalogcopyService.selectByPrimaryKey(cataId);
-		
-		
 		catalogcopy.setIsouttem("3");//领导说不要出队
 		catalogcopyService.updateByPrimaryKeySelective(catalogcopy);
 		
@@ -149,18 +151,20 @@ public class LeaderController {
 		
 		Earthquake record = new Earthquake();
 		record.setEventid(cataId);
-		record.setState("2");
+		//record.setState("2");
 		List<Earthquake> earthquakeList =  earthquakeService.selectEarthquakeList(record);
 		if(null !=earthquakeList && earthquakeList.size()>0){
 			Earthquake earthquake = earthquakeList.get(0);
-			
+			model.addAttribute("earthquakeid", earthquake.getId());
 			Outteam ot = new Outteam();
 			ot.setEqid(earthquake.getId());
 			List<Outteam> outteamlist = outteamService.selectOutteamList(ot);
 			model.addAttribute("outteamlist", outteamlist);
 			int companycount = 0;
 			Integer personcount = 0;
-			String flights = "[[{ name: '"+earthquake.getProvince()+"', value: 100 }, { name: '"+earthquake.getProvince()+"' }]";
+			String flights = "[[{ name: '"+getLocationById(earthquake.getCid())+"', value: 100 }, { name: '"+getLocationById(earthquake.getCid())+"' }]";
+//			getLocationById(earthquake.getCid())
+			//getLocationById(outteam.getCid())
 			/*[
              { name: '北京', value: 'qweqweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' },
            
@@ -178,14 +182,18 @@ public class LeaderController {
 				companycount = outteamlist.size();
 				flights = flights+",";
 				for (Outteam outteam : outteamlist) {
-					
+					/*if(outteam.getCompany().indexOf("地震局")==-1) {
+						continue;
+					}*/
 					sucontent.append("{name:'"+outteam.getCompany()+"',value:'"
 					+outteam.getCompany()+"出队"+outteamDetailService.getCountByOutteamId(outteam.getId())+"人");
+					
 					personcount = personcount + outteamDetailService.getCountByOutteamId(outteam.getId());
+					
 					if(null!=outteam.getFid() && !outteam.getFid().toString().equals("")){
 						Flight flight = flightService.selectByPrimaryKey(outteam.getFid());
 						if(null !=flight.getDepprovice() && !flight.getDepprovice().equals("")){
-							flights = flights + "[{ name: '"+flight.getDepprovice()+"', value: 30 }, { name: '"+earthquake.getProvince()+"' }],";
+							flights = flights + "[{ name: '"+flight.getDepprovice()+"', value: 30 }, { name: '"+getLocationById(earthquake.getCid())+"' }],";
 							sucontent.append("<br/>"+"航班信息："+flight.getFlight()+"  "+flight.getFlightstate());
 							
 							if(!outteam.getCompany().equals(flight.getDepprovice())){
@@ -199,7 +207,6 @@ public class LeaderController {
 					sucontent.append("'},");
 				}
 				
-//				sucontent = new StringBuilder(sucontent.substring(0, sucontent.length()-1));
 				sucontent.deleteCharAt(sucontent.length()-1);  
 				flights = flights.substring(0, flights.length()-1);
 			}
@@ -224,6 +231,11 @@ public class LeaderController {
 		model.addAttribute("list", list);
 		
 		return "leader/list";
+	}
+	
+	public String getLocationById(Integer cid) {
+		Company c = companyService.selectByPrimaryKey(cid);
+		return c.getLocation();
 	}
 	
 	/**

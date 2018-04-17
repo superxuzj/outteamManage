@@ -58,8 +58,18 @@ public class Outteam {
     
     private String eqcompany;
     
+    private Integer eqcid;
+    
     //航班信息
     
+	public Integer getEqcid() {
+		return eqcid;
+	}
+
+	public void setEqcid(Integer eqcid) {
+		this.eqcid = eqcid;
+	}
+
 	private String depcity;//出发城市
 
     private String arrcity;//到达城市

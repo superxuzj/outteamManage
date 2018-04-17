@@ -37,7 +37,7 @@
                        <label class="col-lg-2 control-label">地震唯一标识码</label>
                        <div class="col-lg-6">
                            <input type="text" class="form-control" name="eventid" 
-                            placeholder=" 例如：CC20171113105907 ，CD20171118141241"
+                            placeholder="必填 例如：CC20171113105907 ，CD20171118141241"
                            value="${earthquake.eventid}" <#if earthquake??>readonly</#if> />
                        </div>
                    </div>
@@ -145,6 +145,11 @@ function save(){
 		alert("请输入地震名称！");
 		return false;
 	}
+	if($("#eventid").val()==""){
+		alert("请输入地震标识码！");
+		return false;
+	}
+	
 	if($("#magnitude").val()==""){
 		alert("请输入地震等级！");
 		return false;

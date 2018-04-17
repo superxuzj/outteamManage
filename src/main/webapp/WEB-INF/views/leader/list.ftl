@@ -8,8 +8,15 @@
     	padding-left: 250px !important;
     	margin-bottom: 3px !important;
     }
-    .loginout a{
+    .exportclass {
+    	padding-left: 200px !important;
+    	margin-bottom: -20px !important;
+    }
+    .twobutton a{
     	color:white;
+    }
+    .twobutton{
+    	display:inline
     }
     </style>
 </head>
@@ -45,7 +52,12 @@
   </div>
     <div id="container" style="height: 100%"></div>
     <div class="aside-right aside-box">
-    <div class="loginout"><a href="/loginout">退出</a></div>
+	    <div class="twobutton">
+	    	<#if earthquakeid??>
+		    <div class="exportclass"><a href="/earthquake/export?id=${earthquakeid}">导出</a></div>
+		    </#if>
+		    <div class="loginout"><a href="/loginout">退出</a></div>
+	    </div>
         <aside class="top">
                 <h5>出队单位</h5>
                 <dl>

@@ -67,10 +67,10 @@
                       
                       <td>
                        <div class="btn-group">
-                           <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator">
+                           <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="操作">
                            	操作<span class="caret"></span></a>
                            <ul class="dropdown-menu">
-                             <#if outteam.eqcompany==sessioncompany>
+                             <#if outteam.eqcid==sessioncid>
                              	<#if outteam.state==4 || outteam.state==5>
                              	<li><a href="javascript:void(0)" onclick="vete('${outteam.lid }')" title="详情">详情</a></li>
                              	<#else>
