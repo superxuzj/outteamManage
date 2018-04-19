@@ -252,6 +252,7 @@
             AND eqid = #{eqid,jdbcType=INTEGER}
         </if>
     </where>
+    order by islead desc,iscontact desc,ismeet desc,CONVERT(name USING gbk) asc
    	    <if test="start != null and limit != null"> 
 			LIMIT #{start} ,#{limit}
 		</if>
@@ -272,7 +273,7 @@
    	
    	<select id="selectOutteamDetailGroupByEqid" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
    	    select 
-   company,count(1) as userid,group_concat(name) as name
+   company,count(1) as userid,group_concat(name order by islead desc,iscontact desc,ismeet desc,CONVERT(name USING gbk) asc) as name
     from t_outteam_detail
   	where  eqid = #{otid,jdbcType=INTEGER} and isdel is NULL
     GROUP BY cid

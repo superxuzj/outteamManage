@@ -25,10 +25,12 @@ public class CodeController {
     private int xx = 15;  
     private int fontHeight = 18;  
     private int codeY = 16;  
-    char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  
+    /*char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',  
-            'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };  
-  
+            'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };*/  
+    char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  
+            'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',  
+            'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     @RequestMapping("/code")  
     public void getCode(HttpServletRequest req, HttpServletResponse resp)  
             throws IOException {  
